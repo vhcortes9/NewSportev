@@ -142,7 +142,11 @@
                             </f:facet>
                             <h:commandButton  class="btn btn-default" value="Editar" id="btnIngresar" action="#{controladorPerfil.asignareditar(per)}"/>
                             <h:commandButton  class="btn btn-default" rendered="#{controladorForms.seleccion eq 'estadoUsuario1' }" value="Hablitar" id="estadoUsuario" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.habilitarUsuario(per.id)}"/>
+<<<<<<< HEAD
                             <h:commandButton  class="btn btn-default" rendered="truehl" value="Desabilitar" id="estadoUsuario1" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.desabilitarUsuario(per.id)}"/>
+=======
+                            <h:commandButton  class="btn btn-default" rendered="true" value="Desabilitar" id="estadoUsuario1" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.desabilitarUsuario(per.id)}"/>
+>>>>>>> origin/master
                         </h:column>
                     </h:dataTable>
                 </h:panelGrid>
