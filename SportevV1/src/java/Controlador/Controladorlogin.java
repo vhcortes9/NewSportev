@@ -69,7 +69,7 @@ public class Controladorlogin {
                 }
 
                 if (nombreRol != null && nombreRol.equals("Jugador")) {
-                    retorno = "rolJugadorIni";
+                    retorno = "MensajeJugador";
                 }
                 Conexion.desconectarBD(c);
                 return retorno;

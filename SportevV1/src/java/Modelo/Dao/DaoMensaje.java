@@ -73,10 +73,10 @@ public boolean elimanar(Object obj) throws SQLException{
         List<BeanMensaje> vermensaje = new ArrayList();
         try {
             puente = obtenerConexion().createStatement();
-            rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, m.id\n"
-                    + "FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r on"
-                    + " r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario "
-                    + "WHERE u.Usuario ='" + BLog.getUsuarioNombre() + "'and m.desantendido = 0;");
+            rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, "
+                    + "m.id FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r "
+                    + "on r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario WHERE u.Usuario = '"+BLog.getUsuarioNombre()+"'"
+                    + "and m.desatendido = 0;");
             while (rs.next()) {
                 BeanMensaje BeaMess = new BeanMensaje();
 
