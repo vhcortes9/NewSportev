@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h:form>
+            <h:dataTable value="#{controladorEntrenador.BEqu}" var="conEq" border="1">
+                <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Equipo"/>
+                </f:facet>
+                    <h:outputText value="#{conEq.nombreEquipo}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Categoria"/>
+                    </f:facet>
+                        <h:outputText value="#{conEq.categoria}"/>                    
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Uniforme"/>
+                    </f:facet>
+                    <h:outputText value="#{conEq.uniforme}"/>   
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Ver" action="RegistrarJugador.xhtml" actionListener="#{controladorJugador.consultarjug(conEq.idEquipo)}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </body>
+</html>

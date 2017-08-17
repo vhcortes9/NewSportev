@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="titulopagina">Campeonato</ui:define>
+        <ui:define name="CuerpoPagina">
+
+            <h:form>
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel value="IdCampeonato" />
+                    <h:inputText value="#{campeonatoBean.usuarioSeleccionado.idCampeonato}" id="idcampeonato" required="true" label="idorganizador"/>
+                    <h:outputLabel value="Organizador" />
+                    <h:inputText value="#{campeonatoBean.usuarioSeleccionado.organizador}" id="organizador" required="true" label="idorganizador"/>
+                    <h:outputLabel value="Categoria" />
+                    <h:selectOneMenu id="categoria" value="#{campeonatoBean.usuarioSeleccionado.categoria}">
+                        <f:selectItems value="#{campeonatoBean.listaCategoria()}"></f:selectItems> 
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Nombre" />
+                    <h:inputText value="#{campeonatoBean.usuarioSeleccionado.nombre}" id="nombrecategoria" required="true" label="nombre"/>
+                    <h:outputLabel value="FechaInicio" />
+                    <h:inputText value="#{campeonatoBean.usuarioSeleccionado.fechaInicio}" id="fechainicio" required="true" label="fechainicio">
+                        <f:convertDateTime pattern="dd/MM/YYYY"></f:convertDateTime>
+                    </h:inputText>
+                    <h:outputLabel value="FechaFin" />
+                    <h:inputText value="#{campeonatoBean.usuarioSeleccionado.fechaFin}" id="fechafin" required="true" label="fechafin">
+                        <f:convertDateTime pattern="dd/MM/YYYY" />
+                    </h:inputText>
+                    <h:commandButton value="Insertar" id="btnAgregar" action="#{campeonatoBean.agregarUsuario()}" rendered="#{campeonatoBean.deshabilitarBotonEditar}"/>
+                    <h:commandButton value="Editar" id="btnEditar" action="#{campeonatoBean.editarUsuario()}" disabled="#{campeonatoBean.deshabilitarBotonEditar}"/>
+                </h:panelGrid>
+
+            </h:form>
+
+            <h:form>
+                <h:dataTable value="#{campeonatoBean.listaUsuarios}" var="usu" class="tablaUsuario" columnClasses="columna1,columna2">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID organizador"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{usu.organizador}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID categoria"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{usu.categoria}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{usu.nombre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Inicio"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{usu.fechaInicio}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Fin"></h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{usu.fechaFin}"/>
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">
+                            Acciones Registro
+                        </f:facet>
+                        <h:commandButton value="Editar" id="btnEditar" action="#{campeonatoBean.asignarEditar(usu)}"/>
+                        <h:commandButton value="Eliminar" id="btnEliminar" action="#{campeonatoBean.eliminar(usu)}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+
+
+
+
+
+
+        </ui:define>
+    </ui:composition>
+
+
+
+
+</html>

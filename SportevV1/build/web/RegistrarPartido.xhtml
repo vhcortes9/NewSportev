@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:body>
+           <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'crearpartidos' || controladorForms.seleccion eq 'btnEditar'}">
+            <h:form class="form-horizontal form-label-left">
+                <h:panelGroup layout="block" class="item form-group">
+                    <h:outputLabel value="Campeonato" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                    <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                        <h:selectOneMenu class="form-control col-md-7 col-xs-12" value="#{controladorPartido.bpar.idCampeonato}" required="true">
+                            <f:selectItems value="#{controladorPartido.consultarCamponatos()}"/>
+                        </h:selectOneMenu>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="item form-group">
+                    <h:outputLabel value="Equipo 1" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                    <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                        <h:selectOneMenu class="form-control col-md-7 col-xs-12" value="#{controladorPartido.bpar.equipo1}">
+                            <f:selectItems value="#{controladorPartido.consultarPartido()}"/>
+                        </h:selectOneMenu>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="item form-group">
+                    <h:outputLabel value="Equipo 2" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                    <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                        <h:selectOneMenu class="form-control col-md-7 col-xs-12" value="#{controladorPartido.bpar.equipo2}">
+                            <f:selectItems value="#{controladorPartido.consultarPartido()}"/>
+                        </h:selectOneMenu>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="item form-group">
+                    <h:outputLabel value="Lugar" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                    <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorPartido.bpar.lugar}"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="item form-group">
+                    <h:outputLabel value="Hora" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                    <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorPartido.bpar.hora}"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="item form-group">
+                    <h:outputLabel value="Numero De Fecha" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                    <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorPartido.bpar.numeroFecha}"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="item form-group">
+                    <h:outputLabel value="Fecha" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                    <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorPartido.bpar.fecha}"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                    <h:inputHidden value="#{controladorPartido.bpar.idPartido}"/>
+
+                    <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'crearpartidos'}">
+                        <h:panelGroup layout="block" class="col-md-6 col-md-offset-3">
+                            <h:commandButton class="btn btn-success" value="Registrar" action="#{controladorPartido.registrarPart()}"/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'btnEditar'}">
+                        <h:panelGroup layout="block" class="col-md-6 col-md-offset-3">
+                            <h:commandButton class="btn btn-success" value="Modificar"   actionListener="#{controladorPartido.modificar()}"/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    
+                    
+            </h:form>
+        </h:panelGroup>
+
+        <h:panelGroup class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'RegEstadisticas' || controladorForms.seleccion eq 'verpart'}">
+            <h:form>
+                <h:dataTable class="table table-striped table-bordered" value="#{controladorPartido.consPar}" var="cp" border="1">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Equipo 1"/>
+                        </f:facet>
+                        <h:outputText value="#{cp.equipo1}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Equipo 2"/>
+                        </f:facet>
+                        <h:outputText value="#{cp.equipo2}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Lugar"/>
+                        </f:facet>
+                        <h:outputText value="#{cp.lugar}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Hora"/>
+                        </f:facet>
+                        <h:outputText value="#{cp.hora}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Numero De Fecha"/>
+                        </f:facet>
+                        <h:outputText value="#{cp.numeroFecha}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha"/>
+                        </f:facet>
+                        <h:outputText value="#{cp.fecha}"/>
+                    </h:column>
+
+                    <h:inputHidden value="#{cp.idPartido}"></h:inputHidden>
+
+                    <h:column rendered="#{controladorForms.seleccion eq 'verpart'}">
+                        <f:facet name="header">
+                            Acciones Registro
+                        </f:facet>
+                        <center>
+                            <h:commandLink class="btn btn-primary" id="btnEditar" action="#{controladorPartido.asignarEditar(cp)}" actionListener="#{controladorForms.cambiarForm}"><i class="glyphicon glyphicon-pencil"></i></h:commandLink>
+                            <h:commandLink class="btn btn-danger" id="btnEliminar" action="#{controladorPartido.eliminar(cp.idPartido)}"><i class="glyphicon glyphicon-trash"></i></h:commandLink>
+                        </center>
+                    </h:column>
+
+                    <h:column rendered="#{controladorForms.seleccion eq 'RegEstadisticas'}">
+                        <f:facet name="header">
+                            <h:outputText value="Ver Jugadores"/>
+                        </f:facet>
+                        <h:commandButton id="equiXPart" value="Ver Equipos" action="#{controladorPartido.listarPorPart(cp.equipo1, cp.equipo2)}" actionListener="#{controladorForms.cambiarForm}" class="btn btn-primary">
+
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </h:panelGroup>
+
+
+        <h:panelGroup rendered="#{controladorForms.seleccion eq 'formPrincipal'}">
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{controladorForms.seleccion eq 'equiXPart' || controladorForms.seleccion eq 'volver'}">
+            <h:form>
+                <h:dataTable value="#{controladorPartido.consEqui}" var="consEqui" class="data table table-striped no-margin">
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="id"/>
+                        </f:facet>
+                        <h:outputText value="#{consEqui.idEquipo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Equipo"/>
+                        </f:facet>
+                        <h:outputText value="#{consEqui.equipos}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton class="btn btn-primary" id="JugsEquipo" value="Registrar Acciones" action="#{controladorJugador.consultarjug(consEqui.idEquipo)}" actionListener="#{controladorForms.cambiarForm}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </h:panelGroup>
+
+    </h:body>
+</html>

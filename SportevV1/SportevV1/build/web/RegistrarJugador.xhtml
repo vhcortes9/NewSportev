@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Crud</title>
+        <script src="resources/js/ValNum.js" type="text/javascript"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="resources/css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/js/jquery.js" type="text/javascript"></script>
+        <script src="resources/js/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="resources/js/datepicker-es.js" type="text/javascript"></script>
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <script>
+            $( function() {
+                $("#datepicker").datepicker( $.datepicker.regional[ "es" ]{
+                    changeMonth:true,
+                    changeYear:true,
+                });
+            });
+        </script>
+        <center>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText  value="Tipo Documento"/>
+                    <h:selectOneMenu class="form-control" value="#{controladorJugador.BJug.idTipoDoc}" required="true" id="tipodoc">
+                        <f:selectItems value="#{controladorListas.consultarTipoDoc()}"/>
+                    </h:selectOneMenu>
+                    <h:outputText value="Rh"/>
+                    <h:selectOneMenu value="#{controladorJugador.BJug.idRh}">
+                        <f:selectItems value="#{controladorListas.consRh()}"/>
+                    </h:selectOneMenu>
+                    <h:outputText value="Eps"/>
+                    <h:selectOneMenu value="#{controladorJugador.BJug.idEps}">
+                        <f:selectItems value="#{controladorListas.consEps()}"/>
+                    </h:selectOneMenu>
+                    <h:outputText value="Fecha de Nacimiento"/>
+                    <h:inputText value="#{controladorJugador.BJug.fechaNac}" id="datepicker" required="true" label="Ingrese su Fecha de Nacimiento" />
+                    <h:outputText value="Nombre Jugador"/>
+                    <h:inputText value="#{controladorJugador.BJug.nombreJugador}" required="true" label="Ingrese su Nombre" onkeydown="return validarLetras(event)"/>
+                    <h:outputText value="Apellidos"/>
+                    <h:inputText value="#{controladorJugador.BJug.apellidosJugador}" required="true" label="Ingrese su Apellido" onkeydown="return validarLetras(event)"/>
+                    <h:outputText value="Numero Documento"/>
+                    <h:inputText value="#{controladorJugador.BJug.numDoc}" id="nDoc"  label="Introduzca valores validos" required="true" onkeydown="return validarNumeros(event)">
+                        <f:validateLength for="nDoc" minimum="4" maximum="11" ></f:validateLength>
+                    </h:inputText>
+
+                    <h:outputText value="Genero"/>
+                    <h:selectOneMenu value="#{controladorJugador.BJug.idGenero}">
+                        <f:selectItems value="#{controladorListas.consultarGenero()}"/>
+                    </h:selectOneMenu>
+                    <h:outputText value="Direccion"/>
+                    <h:inputText value="#{controladorJugador.BJug.direccion}"/>
+
+
+                    <h:outputText value="Telefono"/>
+                    <h:inputText value="#{controladorJugador.BJug.telefono}" required="true" id="telefono" label="Introduzca Valores Validos" onkeydown="return validarNumeros(event)">
+                        <f:validateLength for="telefono" minimum="7" maximum="10" />
+                    </h:inputText>
+                    <h:outputText value="Correo"/>
+                    <h:inputText value="#{controladorJugador.BJug.correoElec}"/>
+
+                    <h:inputHidden value="#{controladorJugador.BJug.idParticipante}"/>
+                    <h:commandButton value="Registrar" action="#{controladorJugador.regJugador()}"/>
+                    <h:commandButton value="Modificar" action="RegistrarJugador.xhtml" actionListener="#{controladorJugador.modificar()}"/>
+
+                </h:panelGrid>
+            </h:form>
+
+            <h:form>
+                <h:dataTable value="#{controladorJugador.consJug}" var="cj" border="1">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.nombreJugador}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellido"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.apellidosJugador}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo Documento"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.tipoDoc}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Genero"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.genero}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Identificacion"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.numDoc}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Rh"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.RH}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="E_Mail"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.correoElec}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Telefono"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.telefono}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Eps"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.eps}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Edad"/>
+                        </f:facet>
+                        <h:outputText value="#{cj.fechaNac}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Delete"/>
+                        </f:facet>
+                        <h:commandButton value="Delete" actionListener="#{controladorJugador.eliminar(cj.idParticipante)}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Modificar"/>
+                        </f:facet>
+                        <h:commandButton value="Modificar" action="RegistrarJugador.xhtml" actionListener="#{controladorJugador.consultar(cj.idParticipante)}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </center>
+    </h:body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <link rel="icon" type="image/png" href="resources/img/Logo_S.png"></link>
+        <title>Sportev | Iniciar Sesión</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"></meta>
+        <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans'></link>
+        <link rel="stylesheet" href="resources/login/css/style.css"></link>
+    </h:head>
+    <h:body>
+        <div class="cont">
+            <div class="demo">
+                <div class="login">
+                    <div class="login__check"></div>
+                    <div class="login__form">
+                        <h:form>
+                        <div class="login__row">
+                            <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
+                                <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+                            </svg>
+                            <h:inputText value="#{controladorlogin.usuario.usuarioNombre}" pt:placeholder="Usuario" class="login__input name" required="true" requiredMessage="Se necesita un Usuario!" />
+                        </div>
+                        <div class="login__row">
+                            <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
+                                <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+                            </svg>
+                            <h:inputSecret value="#{controladorlogin.usuario.contrasenia}" pt:placeholder="Contraseña" class="login__input name" required="true" requiredMessage="Se necesita una Contraseña!"/>
+                        </div>
+                        <h:commandButton value="Ingresar" class="login__submit" action="#{controladorlogin.validarUsuario()}" actionListener="#{controladorForms.cambiarForm}"/>
+                        </h:form>
+                        <h:form>
+                        <p class="login__signup">Quieres registrarte? &nbsp;<h:commandLink action="registroLogin.xhtml">Registrate</h:commandLink></p>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src='resources/login/js/jquery.min.js'></script>
+        <script src="resources/login/js/index.js"></script>
+    </h:body>
+</html>
+

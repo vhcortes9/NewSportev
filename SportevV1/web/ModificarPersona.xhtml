@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/js/ValNum.js" type="text/javascript"></script>
+        <link href="resources/css/estilosJSF.css" rel="stylesheet" type="text/css"/>
+       
+    </h:head>
+    <h:body>
+        <center>
+            <div id="mensajes">
+                <h:messages infoStyle="color:blue;" errorStyle="color:red;" fatalStyle="color:green;"/>
+            </div>
+            <h:form>
+                <h:panelGrid columns="2" >
+
+                    <h:outputLabel value="Nombres" />
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.nombre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeydown="return validarLetras(event)"/>
+
+                    <h:outputLabel value="Apellidos" />
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.apellido}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeydown="return validarLetras(event)"/>
+                    <h:outputLabel value="Fecha Nacimiento" />
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.fechaNacimiento}" id="fechanac" required="true" label="FechaNac"/>
+                    
+
+                    <h:outputLabel value="Numero de Documento" />
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.identificacion}" id="numDoc" required="true" label="Se requiere Este Campo" onkeydown="return validarNumeros(event)">
+                        <f:validateLength for="numDoc" minimum="4" maximum="11"></f:validateLength>
+                    </h:inputText>
+
+
+                    <h:outputLabel value="Direccion" />
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.direccion}" id="direccion" required="true" label="Direccion"/>
+                    <h:outputLabel value="Telefono" />
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.telefono}" id="telefono" required="true" requiredMessage="Se Requiere un Telefono" onkeydown="return validarNumeros(event)">
+                        <f:validateLength for="telefono" minimum="7" maximum="10"></f:validateLength>
+                    </h:inputText>
+
+                    <h:outputLabel value="E-Mail" />
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.email}" id="correoElec" required="true" label="CorreoElec" onkeydown="return validarEmail(event)"/>
+
+                 
+                    <h:outputLabel value="Tipo Documento" />
+                    <h:selectOneMenu class="form-control" id="idg" value="#{controladorPerfil.personaselecionada.tipoIdentificacion}">
+                        <f:selectItems value="#{controladorListas.consultarTipoDoc()}"/>
+                    </h:selectOneMenu>                    
+                    <h:outputLabel value="Genero" />
+                    <h:selectOneMenu class="form-control" id="idgen" value="#{controladorPerfil.personaselecionada.genero}">
+                        <f:selectItems value="#{controladorListas.consultarGenero()}"/>
+                    </h:selectOneMenu>                    
+                    <h:outputLabel  value="Rh" />
+                    <h:selectOneMenu class="form-control" id="id" value="#{controladorPerfil.personaselecionada.idRH}">
+                        <f:selectItems value="#{controladorListas.consRh()}"/>
+                    </h:selectOneMenu> 
+                    <h:outputLabel value="Eps" />
+                    <h:selectOneMenu class="form-control" id="idge" value="#{controladorPerfil.personaselecionada.idEps}">
+                        <f:selectItems value="#{controladorListas.consEps()}"/>
+                    </h:selectOneMenu> 
+                    <h:inputHidden value="#{controladorPerfil.personaselecionada.id}"></h:inputHidden>
+                    <h:commandButton  class="btn btn-default" value="Modificar" id="btnIngresar" action="#{controladorPerfil.modificarpersona()}"/>
+
+
+                </h:panelGrid>
+            </h:form>
+            <h:form>
+                <h:panelGrid border="1">
+
+                    <h:dataTable value="#{controladorPerfil.personas}" var="per" border="1">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.nombre}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Apellido"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.apellido}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo Documento"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.tipoIdentificacion}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Documento"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.identificacion}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de nacimiento"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.fechaNacimiento}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Correo"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.email}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Telefono"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.telefono}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Direccion"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.direccion}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Genero"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.genero}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Eps"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.idEps}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo de sangre"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{per.idRH}"></h:outputText>
+                        </h:column>
+                        <h:column>
+                            <h:inputHidden value="#{per.id}"></h:inputHidden>
+                            <f:facet name="header">f
+                                <h:outputText value="Herramientas"></h:outputText>
+                            </f:facet>
+                            <h:commandButton  class="btn btn-default" value="Editar" id="btnIngresar" action="#{controladorPerfil.asignareditar(per)}"/>
+                            <h:commandButton  class="btn btn-default" rendered="#{controladorForms.seleccion eq 'estadoUsuario1' }" value="Hablitar" id="estadoUsuario" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.habilitarUsuario(per.id)}"/>
+                            <h:commandButton  class="btn btn-default" rendered="true" value="Desabilitar" id="estadoUsuario1" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.desabilitarUsuario(per.id)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGrid>
+            </h:form>
+        </center>
+    </h:body>
+</html>
