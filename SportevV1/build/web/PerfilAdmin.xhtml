@@ -31,17 +31,20 @@
                         <div class="profile_img">
                             <div id="crop-avatar">
                                 <!-- Current avatar -->
-                                <img class="img-responsive avatar-view" src="resources/images/yonier.jpg" alt="Avatar" title="Change the avatar"></img>
+                                <img class="img-responsive avatar-view" src="#{request.contextPath}/Imagenes/#{controladorPerfil.usuario.imagen}" alt="Avatar" title="Change the avatar"></img>
                             </div>
                         </div>
-                        <h3><h:outputText value="#{controladorPerfil.mostrarperfil.nombre}"/></h3>
+                        <h3><h:outputText value="#{controladorPerfil.usuar.nombre} #{controladorPerfil.usuar.apellido}"/></h3>
 
                         <ul class="list-unstyled user_data">
-                            <li><i class="fa fa-map-marker user-profile-icon"></i> <h:outputText value="#{controladorPerfil.mostrarperfil.direccion}"/>
+                            <li><i class="fa fa-map-marker user-profile-icon"></i> <h:outputText value="#{controladorPerfil.usuar.direccion}"/>
                             </li>
 
                             <li>
-                                <i class="fa fa-briefcase user-profile-icon"></i><h:outputText value="#{controladorPerfil.mostrarperfil.telefono}"/>
+                                <i class="fa fa-briefcase user-profile-icon"></i><h:outputText value="#{controladorPerfil.usuar.telefono}"/>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope"></i><h:outputText value="#{controladorPerfil.usuar.email}"/>
                             </li>
                         </ul>
 

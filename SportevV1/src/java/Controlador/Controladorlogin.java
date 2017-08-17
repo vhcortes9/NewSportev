@@ -61,7 +61,7 @@ public class Controladorlogin {
                 String nombreRol = control.consultarRol(this.usuario);
                 String retorno = "";
                 if (nombreRol != null && nombreRol.equals("Administrador")) {
-                    retorno = "ModificarPersona";
+                    retorno = "rolAdministradorIni";
                 }
 
                 if (nombreRol != null && nombreRol.equals("Entrenador")) {
