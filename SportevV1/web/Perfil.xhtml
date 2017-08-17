@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <body>
+        <h:panelGrid border="1">
+            <h:form>
+                <h:inputSecret value="#{controladorPerfil.usuarioPerfil.contraseña}"></h:inputSecret>
+
+                <h:commandButton value="Validar" action="#{controladorPerfil.validarPerfil()}"></h:commandButton>
+            </h:form>
+        </h:panelGrid><br></br>
+        <h:form>
+            <h:panelGrid border="1">
+            <h:outputLabel value="Nombre"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.nombre}"></h:outputLabel>
+            <h:outputLabel value="Apellido"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.apellido}"></h:outputLabel>
+            <h:outputLabel value="Tipo Documento"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.tipoIdentificacion}"></h:outputLabel>
+            <h:outputLabel value="Documento"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.identificacion}"></h:outputLabel>
+            <h:outputLabel value="Telefono"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.telefono}"></h:outputLabel>
+            <h:outputLabel value="Email"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.email}"></h:outputLabel>
+            <h:outputLabel value="Fecha De Nacimiento"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.fechaNacimiento}"></h:outputLabel>
+            <h:outputLabel value="Direccion"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.direccion}"></h:outputLabel>
+            <h:outputLabel value="Eps"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.idEps}"></h:outputLabel>
+            <h:outputLabel value="Tipo De Sangre"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.idRH}"></h:outputLabel>
+            <h:outputLabel value="Genero"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.genero}"></h:outputLabel>
+            <h:outputLabel value="id"></h:outputLabel>
+            <h:outputLabel value="#{controladorPerfil.usuar.id}"></h:outputLabel>
+            </h:panelGrid>
+        </h:form>
+    </body>
+</html>
+
+
+

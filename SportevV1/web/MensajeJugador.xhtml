@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <h:panelGroup rendered="#{controladorForms.seleccion eq 'formRedactar'}">
+    
+              <h:form>
+        <!-- Mostrar Mensaje-->
+        
+            <h:outputLabel value="Para"></h:outputLabel>
+            <h:inputText value="#{controladorMensaje.mesanje.idReceptor}"></h:inputText><br></br>
+            <h:outputLabel value="Asunto"></h:outputLabel>
+            <h:inputText value="#{controladorMensaje.mesanje.asunto}"></h:inputText><br></br>
+            <h:outputLabel value="Texto"></h:outputLabel>
+            <h:inputTextarea value="#{controladorMensaje.mesanje.texto}"></h:inputTextarea><br></br>
+            <h:commandButton value="Enviar" action="#{controladorMensaje.enviarMensaje()}"></h:commandButton>
+        </h:form>
+        
+        </h:panelGroup>
+            <h:form>
+                <label> Contactos Disponibles</label>
+                <h:dataTable value="#{controladorMensaje.us}" var="ju" border="1">
+                   <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombre"></h:outputText>
+                    </f:facet>
+                       <h:outputText value="#{ju.usuarioNombre}"></h:outputText>
+                </h:column>
+                   <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Usuario"></h:outputText>
+                    </f:facet>
+                       <h:outputText value="#{ju.nombreRol}"></h:outputText>
+                </h:column>
+                   <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Campeonato"></h:outputText>
+                    </f:facet>
+                       <h:outputText value="#{ju.nombrecampeonato}"></h:outputText>
+                </h:column>
+            </h:dataTable>
+            </h:form>
+</html>

@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="/plantilla.xhtml">
+        <ui:define name="titulopagina">Partido</ui:define>
+        <ui:define name="CuerpoPagina">
+
+            <h:form>
+                <h:panelGrid columns="2">
+
+
+                    <h:outputLabel value="Campeonato" />
+                    <h:inputText value="#{partidoBean.usuarioSeleccionado.idCampeonato}" id="campeonato" required="true" label="campeonato"/>
+                    <h:outputLabel value="Equipo 1" />
+                    <h:selectOneMenu id="categoria" value="#{partidoBean.usuarioSeleccionado.idPartido}">
+                        <f:selectItems value="#{partidoBean.listaEquipo()}"></f:selectItems> 
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Equipo 2" />
+                    <h:selectOneMenu id="categoria1" value="#{partidoBean.usuarioSeleccionado.idPartido}">
+                        <f:selectItems value="#{partidoBean.listaEquipo()}"></f:selectItems> 
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Lugar" />
+                    <h:inputText value="#{partidoBean.usuarioSeleccionado.lugar}" id="lugar" required="true" label="lugar"/>
+                    <h:outputLabel value="Hora" />
+                    <h:inputText value="#{partidoBean.usuarioSeleccionado.hora}" id="hora" required="true" label="hora"/>
+                    <h:outputLabel value="Numero De Fecha" />
+                    <h:inputText value="#{partidoBean.usuarioSeleccionado.numeroFecha}" id="numerofecha" required="true" label="numerofecha"/>
+                    <h:outputLabel value="Fecha" />
+                    <h:inputText value="#{partidoBean.usuarioSeleccionado.fecha}" id="fecha" required="true" label="fecha"/>
+
+                    <h:commandButton value="Insertar" id="btnAgregar" action="#{partidoBean.agregarPartido()}" rendered="#{partidoBean.deshabilitarBotonEditar}"/>
+                    <h:commandButton value="Editar" id="btnEditar" action="#{partidoBean.editarPartido()}" disabled="#{partidoBean.deshabilitarBotonEditar}"/>
+                </h:panelGrid>
+            </h:form>
+
+
+            <div>
+                <h:form>
+                    <h:dataTable value="#{partidoBean.listaPartidos}" var="usu" class="tablaUsuario" columnClasses="columna1,columna2">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Campeonato"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{usu.idCampeonato}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Equipo 1"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{usu.equipo1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Equipo 2"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{usu.equipo2}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Lugar"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{usu.lugar}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Hora"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{usu.hora}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Numero De Fecha"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{usu.numeroFecha}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha"></h:outputText>
+                            </f:facet>
+                            <h:outputText value="#{usu.fecha}"/>
+                        </h:column>
+                        <h:column >
+                            <f:facet name="header">
+                                Acciones Registro
+                            </f:facet>
+                            <h:commandButton value="Editar" id="btnEditar" action="#{partidoBean.asignarEditar(usu)}"/>
+                            <h:commandButton value="Eliminar" id="btnEliminar" action="#{partidoBean.eliminar(usu)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+
+
+
+
+
+        </ui:define>
+    </ui:composition>
+
+
+
+
+</html>
+

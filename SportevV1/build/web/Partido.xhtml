@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+         
+        <h:panelGroup class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'formPartidos'}">
+         <h:form>
+            <h:dataTable value="#{controladorPartido.consPar}" var="cp" border="1">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nombre De Campeonato"/>
+                    </f:facet>
+                    <h:outputText value="#{cp.idCampeonato}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Equipo 1"/>
+                    </f:facet>
+                    <h:outputText value="#{cp.equipo1}"/>
+                </h:column>
+                <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Equipo 2"/>
+                    </f:facet>
+                    <h:outputText value="#{cp.equipo2}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Lugar"/>
+                    </f:facet>
+                    <h:outputText value="#{cp.lugar}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Hora"/>
+                    </f:facet>
+                    <h:outputText value="#{cp.hora}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Numero De Fecha"/>
+                    </f:facet>
+                    <h:outputText value="#{cp.numeroFecha}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha"/>
+                    </f:facet>
+                    <h:outputText value="#{cp.fecha}"/>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        </h:panelGroup>
+    </body>
+</html>
+
+
+
+
+

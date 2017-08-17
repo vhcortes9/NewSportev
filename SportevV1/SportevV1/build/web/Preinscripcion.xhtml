@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/js/ValNum.js" type="text/javascript"></script>
+        <link href="resources/css/estilosJSF.css" rel="stylesheet" type="text/css"/>
+        <title>PreInscripcion</title>
+    </h:head>
+    <h:body>
+        <center>
+            <div id="mensajes">
+                <h:messages infoStyle="color:blue;" errorStyle="color:red;" fatalStyle="color:green;"/>
+            </div>
+            <h:form>
+                <h:panelGrid columns="2" >
+
+                    <h:outputLabel value="Nombre Entrenador" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.nombreEntre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeydown="return validarLetras(event)"/>
+
+                    <h:outputLabel value="Apellidos" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.apellidosEntre}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeydown="return validarLetras(event)"/>
+                    <h:outputLabel value="Fecha Nacimiento" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.fechaNac}" id="fechanac" required="true" label="FechaNac"/>
+
+                    <h:outputLabel value="Tipo Documento" />
+                    <h:selectOneMenu class="form-control" id="tipodoc" value="#{controladorPreinscripcion.preinscripcion.idTipoDoc}">
+                        <f:selectItems value="#{controladorListas.consultarTipoDoc()}"/>
+                    </h:selectOneMenu>
+
+                    <h:outputLabel value="Numero de Documento" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.numDoc}" id="numDoc" required="true" label="Se requiere Este Campo" onkeydown="return validarNumeros(event)">
+                        <f:validateLength for="numDoc" minimum="4" maximum="11"></f:validateLength>
+                    </h:inputText>
+
+
+                    <h:outputLabel value="Direccion" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.direccion}" id="direccion" required="true" label="Direccion"/>
+                    <h:outputLabel value="Telefono" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.telefono}" id="telefono" required="true" requiredMessage="Se Requiere un Telefono" onkeydown="return validarNumeros(event)">
+                        <f:validateLength for="telefono" minimum="7" maximum="10"></f:validateLength>
+                    </h:inputText>
+
+                    <h:outputLabel value="E-Mail" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.correoElec}" id="correoElec" required="true" label="CorreoElec" onkeydown="return validarEmail(event)"/>
+
+                    <h:outputLabel value="Confirmar E-Mail" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.confirCorreoElec}" id="confirCorreoElec" required="true" label="ConfirCorreoElec" onkeydown="return validarEmail(event)"/>
+
+                    <h:outputLabel value="Genero" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.genero}" id="genero" required="true" label="Genero"/>
+
+                    <h:outputLabel  value="Rh" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.RH}" id="rh" required="true" label="Genero"/>
+
+                    <h:outputLabel value="Eps" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.eps}" id="eps" required="true" label="Eps"/>
+
+                    <h:outputLabel value="Categoria" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.categoria}" id="categoria" required="true" label="Categoria"/>
+
+                    <h:outputLabel value="Nombre Equipo" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.nombreEquipo}" id="nombreEquipo" required="true" label="NombreEquipo"/>
+                    <h:outputLabel value="Color Uniforme" />
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.colorUni}" id="colorUni" required="true" label="ColorUni"/>
+                    <h:outputLabel value="Campeonato"/>
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.idCampeonato}"/>
+                    <h:commandButton  class="btn btn-default" value="Ingresar" id="btnIngresar" action="#{controladorPreinscripcion.preinscribir()}"/>
+
+
+                </h:panelGrid>
+            </h:form>
+            <h:form>
+                <h:dataTable value="#{controladorPreinscripcion.consPreins}" border="1" class="table table-hover" var="preins">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{preins.nombreEntre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellidos"/>
+                        </f:facet>
+                        <h:outputText value="#{preins.apellidosEntre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre Equipo"/>
+                        </f:facet>
+                        <h:outputText value="#{preins.nombreEquipo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo Documento"/>
+                        </f:facet>
+                        <h:outputText value="#{preins.tipoDoc}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Numero Documento"/>
+                        </f:facet>
+                        <h:outputText value="#{preins.numDoc}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Telefono"/>
+                        </f:facet>
+                        <h:outputText value="#{preins.telefono}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Correo Electronico"/>
+                        </f:facet>
+                        <h:outputText value="#{preins.correoElec}"/>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton value="Inscribir" action="CrudCampeonato.xhtml" class="btn btn-primary"/>
+                    </h:column>
+
+                </h:dataTable>
+
+        </h:form>
+        </center>
+    </h:body>
+</html>

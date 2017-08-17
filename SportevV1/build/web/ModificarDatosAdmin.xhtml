@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:form>
+        <h:panelGrid columns="2" >
+
+            <h:outputLabel value="Nombres" />
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.nombre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeydown="return validarLetras(event)"/>
+
+            <h:outputLabel value="Apellidos" />
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.apellido}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeydown="return validarLetras(event)"/>
+            <h:outputLabel value="Fecha Nacimiento" />
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.fechaNacimiento}" id="fechanac" required="true" label="FechaNac"/>
+
+
+            <h:outputLabel value="Numero de Documento" />
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.identificacion}" id="numDoc" required="true" label="Se requiere Este Campo" onkeydown="return validarNumeros(event)">
+                <f:validateLength for="numDoc" minimum="4" maximum="11"></f:validateLength>
+            </h:inputText>
+
+
+            <h:outputLabel value="Direccion" />
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.direccion}" id="direccion" required="true" label="Direccion"/>
+            <h:outputLabel value="Telefono" />
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.telefono}" id="telefono" required="true" requiredMessage="Se Requiere un Telefono" onkeydown="return validarNumeros(event)">
+                <f:validateLength for="telefono" minimum="7" maximum="10"></f:validateLength>
+            </h:inputText>
+
+            <h:outputLabel value="E-Mail" />
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.email}" id="correoElec" required="true" label="CorreoElec" onkeydown="return validarEmail(event)"/>
+
+
+            <h:outputLabel value="Tipo Documento" />
+            <h:selectOneMenu class="form-control" id="idg" value="#{controladorPerfil.administradoreditar.tipoIdentificacion}">
+                <f:selectItems value="#{controladorListas.consultarTipoDoc()}"/>
+            </h:selectOneMenu>                    
+            <h:outputLabel value="Genero" />
+            <h:selectOneMenu class="form-control" id="idgen" value="#{controladorPerfil.administradoreditar.genero}">
+                <f:selectItems value="#{controladorListas.consultarGenero()}"/>
+            </h:selectOneMenu>                    
+            <h:outputLabel  value="Rh" />
+            <h:selectOneMenu class="form-control" id="id" value="#{controladorPerfil.administradoreditar.idRH}">
+                <f:selectItems value="#{controladorListas.consRh()}"/>
+            </h:selectOneMenu> 
+            <h:outputLabel value="Eps" />
+            <h:selectOneMenu class="form-control" id="idge" value="#{controladorPerfil.administradoreditar.idEps}">
+                <f:selectItems value="#{controladorListas.consEps()}"/>
+            </h:selectOneMenu> 
+            <h:inputHidden value="#{controladorPerfil.personaselecionada.id}"></h:inputHidden>
+            <h:commandButton  class="btn btn-default" value="Modificar" id="btnIngresar" action="#{controladorPerfil.modificarpersona()}"/>
+
+
+        </h:panelGrid>
+    </h:form><br></br>
+    <body>
+        <h:form>
+            <h:panelGrid border="1">
+                <h:outputLabel value="Nombre"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.nombre}"></h:outputLabel>
+                <h:outputLabel value="Apellido"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.apellido}"></h:outputLabel>
+                <h:outputLabel value="Tipo Documento"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.tipoIdentificacion}"></h:outputLabel>
+                <h:outputLabel value="Documento"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.identificacion}"></h:outputLabel>
+                <h:outputLabel value="Telefono"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.telefono}"></h:outputLabel>
+                <h:outputLabel value="Email"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.email}"></h:outputLabel>
+                <h:outputLabel value="Fecha De Nacimiento"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.fechaNacimiento}"></h:outputLabel>
+                <h:outputLabel value="Direccion"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.direccion}"></h:outputLabel>
+                <h:outputLabel value="Eps"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.idEps}"></h:outputLabel>
+                <h:outputLabel value="Tipo De Sangre"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.idRH}"></h:outputLabel>
+                <h:outputLabel value="Genero"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.genero}"></h:outputLabel>
+                <h:outputLabel value="id"></h:outputLabel>
+                <h:outputLabel value="#{controladorPerfil.usuar.id}"></h:outputLabel>
+            </h:panelGrid>
+            <h:commandButton value="Modificar" action="#{controladorPerfil.asignareditar(usuar)}"></h:commandButton>
+        </h:form>
+    </body>
+</html>
+
+
+
+

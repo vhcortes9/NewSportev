@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+
+        <!--<h:outputStylesheet library="css" name="estilosJSF.css"></h:outputStylesheet>-->
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" type="image/png" href="resources/images/Logo_S.png"/>
+
+        <title>Sportev | Gestion de Campeonatos Deportivos</title>
+
+        <!-- Bootstrap -->
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Font Awesome -->
+        <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <!-- NProgress -->
+        <link href="resources/css/nprogress.css" rel="stylesheet" type="text/css"/>
+        <!-- iCheck -->
+        <link href="resources/css/green.css" rel="stylesheet" type="text/css"/>
+
+        <!-- bootstrap-progressbar -->
+        <link href="resources/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" type="text/css"/>
+        <!-- JQVMap -->
+        <link href="resources/css/jqvmap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- bootstrap-daterangepicker -->
+        <link href="resources/css/daterangepicker.css" rel="stylesheet" type="text/css"/>
+        <!-- Custom Theme Style -->
+        <link href="resources/css/custom.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/LogoMenu.css" rel="stylesheet" type="text/css"/>
+        <!--Tablas-->
+        <link href="../resources/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="../resources/css/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+        <link href="../resources/css/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../resources/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+        <h:outputStylesheet library="css" name="responsive.bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="fixedHeader.bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="buttons.bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="dataTables.bootstrap.min.css"/>
+        <h:outputStylesheet library="css" name="LogoMenu.css"/>
+
+    </h:head>
+    <h:body class="nav-md">
+        <div class="container body">
+            <div class="main_container">
+                <div class="col-md-3 left_col">
+                    <div class="left_col scroll-view">
+                        <div class="navbar nav_title" style="border: 0;">
+                            <div></div>
+                            <a href="index.html" class="site_title"><i id="logoSportev"></i><span>portev</span> </a>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <!-- menu profile quick info -->
+                        <div class="profile clearfix">
+                            <div class="profile_pic">
+                                <img src="resources/images/yonier.jpg" alt="LA IMAGEN NO SE ENCUENTRA" class="img-circle profile_img"></img>
+                            </div>
+                            <div class="profile_info">
+                                <span>Bienvenido Juga,</span>
+
+                                <h2><h:outputText value="#{controladorlogin.usuario.usuarioNombre}"/></h2>
+                            </div>
+                        </div>
+                        <!-- /menu profile quick info -->
+
+                        <br />
+
+                        <!-- sidebar menu -->
+                        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                            <div class="menu_section">
+                                <h3>General</h3>
+                                <ul class="nav side-menu">
+                                    <li><a><i class="fa fa-home"></i> Principal <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a id="iniAdmin" href="iniAdmin">Inicio</a></li>
+                                        </ul>
+                                    </li>
+                                    <!--===================== CAMPEONATOS ======================-->
+                                    <li><a><i class="fa fa-edit"></i> Novedad <span class="fa fa-chevron-down"></span></a>
+                                        <h:form>
+                                            <ul class="nav child_menu">
+                                                <li><h:commandLink id="formRecibido" value="Recibidos" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
+                                                <li><h:commandLink id="formRedactar" value="Redactar" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
+                                            </ul>
+                                        </h:form>
+                                    </li>
+                                    
+                                    <!--===================== ENTRENADORES ======================-->
+                                    <li><a><i class="fa fa-table"></i> Calendario <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="tables.html">Tables</a></li>
+                                            <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                                        </ul>
+                                    </li>
+                                    <!--===================== JUGADORES ======================-->
+                                    <li><a><i class="fa fa-bar-chart-o"></i> Estadisticas <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="chartjs.html">Chart JS</a></li>
+                                            <li><a href="chartjs2.html">Chart JS2</a></li>
+                                            <li><a href="morisjs.html">Moris JS</a></li>
+                                            <li><a href="echarts.html">ECharts</a></li>
+                                            <li><a href="other_charts.html">Other Charts</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /sidebar menu -->
+
+                        <!-- /menu footer buttons -->
+
+                        <!-- /menu footer buttons -->
+                    </div>
+                </div>
+
+                <!-- top navigation -->
+                <div class="top_nav">
+                    <div class="nav_menu">
+                        <nav>
+                            <div class="nav toggle">
+                                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                            </div>
+                            <h:form>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="">
+                                        <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <img src="resources/images/yonier.jpg" alt=""></img><h:outputText value="#{controladorlogin.usuario.usuarioNombre}"/>
+                                            <span class=" fa fa-angle-down"></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                            <li><h:commandLink id="formPerfilAdmin" actionListener="#{controladorCampeonato.cambiarForm}">Perfil</h:commandLink></li>
+                                            <li>
+                                                <a href="javascript:;">
+                                                    <span class="badge bg-red pull-right">50%</span>
+                                                    <span>Settings</span>
+                                                </a>
+                                            </li>
+                                            <li><a href="javascript:;">Help</a></li>
+                                            <li><h:commandLink  action="index.xhtml" actionListener="#{controladorlogin.cerrarSession()}">Cerrar Session <i class="fa fa-sign-out pull-right"></i></h:commandLink></li>
+                                        </ul>
+                                    </li>
+
+                                    <li role="presentation" class="dropdown">
+                                        <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa fa-envelope-o"></i>
+                                            <span class="badge bg-green">6</span>
+                                        </a>
+                                        <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                            <li>
+                                                <a>
+                                                    <span class="image"><img src="resources/images/img.jpg" alt="Profile Image" /></span>
+                                                    <span>
+                                                        <span></span>
+                                                        <span class="time">3 mins ago</span>
+                                                    </span>John Smith
+                                                    <span class="message">
+                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a>
+                                                    <span class="image"><img src="resources/images/img.jpg" alt="Profile Image" /></span>
+                                                    <span>
+                                                        <span>John Smith</span>
+                                                        <span class="time">3 mins ago</span>
+                                                    </span>
+                                                    <span class="message">
+                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a>
+                                                    <span class="image"><img src="resources/images/img.jpg" alt="Profile Image" /></span>
+                                                    <span>
+                                                        <span>John Smith</span>
+                                                        <span class="time">3 mins ago</span>
+                                                    </span>
+                                                    <span class="message">
+                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a>
+                                                    <span class="image"><img src="resources/images/img.jpg" alt="Profile Image" /></span>
+                                                    <span>
+                                                        <span>John Smith</span>
+                                                        <span class="time">3 mins ago</span>
+                                                    </span>
+                                                    <span class="message">
+                                                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="text-center">
+                                                    <a>
+                                                        <strong>See All Alerts</strong>
+                                                        <i class="fa fa-angle-right"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </h:form>
+                        </nav>
+                    </div>
+                </div>
+                <!-- /top navigation -->
+
+                <!-- ===========page content=========== -->
+                <div class="right_col" role="main">
+
+                    <ui:insert name="CuerpoPagina" >Default Body</ui:insert>
+                </div>
+
+                <!-- ===========/page content=========== -->
+
+                <!-- footer content -->
+                <footer>
+                    <div class="pull-right">
+                        <p>&copy;Sportev - Derechos reservadeos de autor</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </footer>
+                <!-- /footer content -->
+            </div>
+        </div>
+
+        <!-- jQuery -->
+        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
+        <!-- Bootstrap -->
+        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- FastClick -->
+        <script src="resources/js/fastclick.js" type="text/javascript"></script>
+        <!-- NProgress -->
+        <script src="resources/js/nprogress.js" type="text/javascript"></script>
+        <!-- Chart.js -->
+        <script src="resources/js/Chart.min.js" type="text/javascript"></script>
+        <!-- gauge.js -->
+        <script src="resources/js/gauge.min.js" type="text/javascript"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="resources/js/bootstrap-progressbar.min.js" type="text/javascript"></script>
+        <!-- iCheck -->
+        <script src="resources/js/icheck.min.js" type="text/javascript"></script>
+        <!-- Skycons -->
+        <script src="resources/js/skycons.js" type="text/javascript"></script>
+        <!-- Flot -->
+        <script src="resources/js/jquery.flot.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.flot.pie.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.flot.time.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.flot.stack.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.flot.resize.js" type="text/javascript"></script>
+        <!-- Flot plugins -->
+        <script src="resources/js/jquery.flot.orderBars.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.flot.spline.min.js" type="text/javascript"></script>
+        <script src="resources/js/curvedLines.js" type="text/javascript"></script>
+        <!-- DateJS -->
+        <script src="resources/js/date.js" type="text/javascript"></script>
+        <!-- JQVMap -->
+        <script src="resources/js/jquery.vmap.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.vmap.world.js" type="text/javascript"></script>
+        <script src="resources/js/jquery.vmap.sampledata.js" type="text/javascript"></script>
+        <!-- bootstrap-daterangepicker -->
+        <script src="resources/js/moment.min.js" type="text/javascript"></script>
+        <script src="resources/js/daterangepicker.js" type="text/javascript"></script>
+        <!-- Custom Theme Scripts -->
+        <script src="resources/js/custom.min.js" type="text/javascript"></script>
+        <!--tablas-->
+        <script src="../resources/js/dataTables.buttons.min.js" type="text/javascript"></script>
+        <script src="../resources/js/dataTables.fixedHeader.min.js" type="text/javascript"></script>
+        <script src="../resources/js/dataTables.keyTable.min.js" type="text/javascript"></script>
+        <script src="../resources/js/dataTables.responsive.min.js" type="text/javascript"></script>
+        <script src="../resources/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+        <!-- <script src="../resources/js/dataTables.scroller.min.js" type="text/javascript"></script>-->
+        <script src="../resources/js/buttons.print.min.js" type="text/javascript"></script>
+        <script src="../resources/js/buttons.html5.min.js" type="text/javascript"></script>
+        <script src="../resources/js/buttons.flash.min.js" type="text/javascript"></script>
+        <script src="../resources/js/buttons.bootstrap.min.js" type="text/javascript"></script>
+        <script src="../resources/js/pdfmake.min.js" type="text/javascript"></script>
+        <script src="../resources/js/jszip.min.js" type="text/javascript"></script>
+        <script src="../resources/js/vfs_fonts.js" type="text/javascript"></script>
+        <script src="../resources/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="../resources/js/responsive.bootstrap.js" type="text/javascript"></script>
+    </h:body>
+</html>
+

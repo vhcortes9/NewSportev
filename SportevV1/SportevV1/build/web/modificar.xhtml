@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h:form>
+            <h:panelGrid columns="2" >
+                <h:outputLabel value="Organizador"/>
+                <h:inputText value="#{controladorCampeonato.BCamp.organizador}" id="idorganizador" required="true" label="idorganizador" />
+
+                <h:outputLabel value="Categoria"/>
+                <h:selectOneMenu id="categoria" value="#{controladorCampeonato.BCamp.idCategoria}" required="true">
+                    <f:selectItems value="#{controladorListas.consultarCat()}"/>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Nombre Campeonato"/>
+                <h:inputText value="#{controladorCampeonato.BCamp.nombre}" id="NomCamp" required="true" label="NomCamp" />
+
+                <h:outputLabel value="Fecha Inicio"/>
+                <h:inputText value="#{controladorCampeonato.BCamp.fechaInicio}" id="FechIni" required="true" label="FechIni" />
+
+
+                <h:outputLabel value="Fecha Fin"/>
+                <h:inputText value="#{controladorCampeonato.BCamp.fechaFin}" id="FechFin" required="true" label="FechFin" />
+                <h:inputHidden value="#{controladorCampeonato.BCamp.idCampeonato}"/>
+
+                <h:commandButton value="Registrar" action="#{controladorCampeonato.modificar()}" id="btnRegistrar" />
+            </h:panelGrid>
+        </h:form>
+    </body>
+</html>

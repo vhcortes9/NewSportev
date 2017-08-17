@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <body>
+        <h:outputText value="#{controladorCampeonato.usuario.nombreRol}"></h:outputText>
+        <h:outputText value="#{controladorCampeonato.usuario.usuarioNombre}"></h:outputText>
+        <h:form>
+            <h:dataTable class="table table-hover" value="#{controladorCampeonato.consCamp}" var="camp" border="1">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{camp.idCampeonato}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Categoria"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{camp.categoria}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Campeonato"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{camp.nombre}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        
+                        <h:outputText value="Fecha Inicio"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{camp.fechaInicio}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Fecha Fin"></h:outputText>
+                    </f:facet>
+                    <h:outputText value="#{camp.fechaFin}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Eliminar" action="#{controladorCampeonato.eliminar()}" class="btn btn-danger">
+                        <f:setPropertyActionListener target="#{controladorCampeonato.BCamp.idCampeonato}" value="#{camp.idCampeonato}"/>
+                    </h:commandButton>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Modificar" action="modificar.xhtml" actionListener="#{controladorCampeonato.editar(camp.idCampeonato)}">
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </body>
+</html>
