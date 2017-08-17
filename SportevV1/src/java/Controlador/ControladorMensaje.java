@@ -5,18 +5,15 @@
  */
 package Controlador;
 
-import Conexion.Conexion;
+
 import Modelo.Bean.BeanMensaje;
 import Modelo.Bean.BeanUsuariosLogin;
 import Modelo.Dao.DaoMensaje;
-import Modelo.Dao.DaoUsuarioLogin;
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -30,7 +27,8 @@ public class ControladorMensaje {
     /**
      * Creates a new instance of ControladorMensaje
      */
-    private List<BeanMensaje> Menn;
+       private List<BeanMensaje> Menn;
+    private List<BeanMensaje> atendido;
     private BeanMensaje mesanje = new BeanMensaje();
 
     private BeanUsuariosLogin usuario;
@@ -51,6 +49,7 @@ public class ControladorMensaje {
         try {
             DaoMensaje menss = new DaoMensaje();
             Menn = menss.verMensje();
+            atendido = menss.verMensjeAtendidos();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -67,15 +66,33 @@ public class ControladorMensaje {
         }
 
     }
-    public void eliminar(int id){
+
+    public void atender(int id) {
+        DaoMensaje Dmjs = new DaoMensaje();
+        if (Dmjs.atender(id)) {
+            DaoMensaje mens = new DaoMensaje();
+            Menn = mens.verMensje();
+            DaoMensaje menss = new DaoMensaje();
+           atendido = menss.verMensjeAtendidos();
+        } else {
+            FacesMessage mensaje = new FacesMessage("No Se pudo Atender");
+            mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
+            FacesContext.getCurrentInstance().addMessage(null, mensaje);
+            DaoMensaje menss = new DaoMensaje();
+            atendido = menss.verMensjeAtendidos();
+           
+
+        }
+    }
+
+    public void eliminar(int id) {
         String respuesta = "";
         DaoMensaje de = new DaoMensaje();
         if (de.eliminar(id)) {
-          Menn = de.verMensje();
-        }     
+            Menn = de.verMensje();
+        }
     }
-  
-    
+
     public String enviarMensaje() {
         String respuesta = "";
 
@@ -90,7 +107,7 @@ public class ControladorMensaje {
 
         return respuesta;
     }
-   
+
     public List<BeanMensaje> getMenn() {
         return Menn;
     }
@@ -146,5 +163,12 @@ public class ControladorMensaje {
     public void setEntrnador(List<BeanUsuariosLogin> entrnador) {
         this.entrnador = entrnador;
     }
-    
+
+    public List<BeanMensaje> getAtendido() {
+        return atendido;
+    }
+
+    public void setAtendido(List<BeanMensaje> atendido) {
+        this.atendido = atendido;
+    }
 }

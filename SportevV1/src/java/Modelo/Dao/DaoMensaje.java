@@ -6,6 +6,9 @@
 package Modelo.Dao;
 
 import Conexion.Conexion;
+import static Conexion.Conexion.desconectarBD;
+import static Conexion.Conexion.obtenerConexion;
+import static Conexion.Conexion.reversarBD;
 import Modelo.Bean.BeanMensaje;
 import Modelo.Bean.BeanUsuariosLogin;
 import java.sql.Connection;
@@ -15,6 +18,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +29,7 @@ import javax.servlet.http.HttpSession;
  */
 public class DaoMensaje extends Conexion {
 
+   
     private Statement puente = null;
     private ResultSet rs = null;
     private Connection conn = null;
@@ -70,7 +76,7 @@ public boolean elimanar(Object obj) throws SQLException{
             rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, m.id\n"
                     + "FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r on"
                     + " r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario "
-                    + "WHERE u.Usuario ='" + BLog.getUsuarioNombre() + "';");
+                    + "WHERE u.Usuario ='" + BLog.getUsuarioNombre() + "'and m.desantendido = 0;");
             while (rs.next()) {
                 BeanMensaje BeaMess = new BeanMensaje();
 
@@ -89,7 +95,52 @@ public boolean elimanar(Object obj) throws SQLException{
         }
         return vermensaje;
     }
+    public List<BeanMensaje> verMensjeAtendidos() {
+        List<BeanMensaje> vermensaje = new ArrayList();
+        try {
+            puente = obtenerConexion().createStatement();
+            rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, m.id\n"
+                    + "FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r on"
+                    + " r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario "
+                    + "WHERE u.Usuario ='" + BLog.getUsuarioNombre() + "' and m.desantendido = 1;");
+            while (rs.next()) {
+                BeanMensaje BeaMess = new BeanMensaje();
 
+                BeaMess.setNombrerol(rs.getString("NombreRol"));
+                BeaMess.setIdEmisor(rs.getString("emisor"));
+                BeaMess.setAsunto(rs.getString("asunto"));
+                BeaMess.setTexto(rs.getString("texto"));
+                BeaMess.setFechaHora(rs.getString("FechaHora"));
+                BeaMess.setIdMensaje(rs.getString("id"));
+
+                vermensaje.add(BeaMess);
+            }
+            desconectarBD(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return vermensaje;
+    }
+    int a = 1;
+     public boolean atender(int id) {
+        try {
+            conn = obtenerConexion();
+            puente = conn.createStatement();
+            puente.executeUpdate(" UPDATE `mensaje` set `desantendido` = '"+a+"' where id = '"+id+"' ;");
+
+            desconectarBD(conn);
+            listo = true;
+
+        } catch (Exception e) {
+            try {
+                reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoMensaje.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            e.printStackTrace();
+        }
+        return listo;
+    }
     public List<BeanUsuariosLogin> listaJugador() {
         List<BeanUsuariosLogin> verJugador = new ArrayList();
         try {
@@ -98,12 +149,13 @@ public boolean elimanar(Object obj) throws SQLException{
                     + "usuario u on pe.idJParticipante = u.Idpersona INNER JOIN rolusuario ru ON "
                     + "ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol WHERE pe.idEquipo in "
                     + "(SELECT pe.idEquipo FROM participantes_has_equipo pe INNER JOIN "
-                    + "usuario u on pe.idJParticipante = u.Idpersona WHERE u.Idpersona = " + BLog.getIdparticipante() + ");");
+                    + "usuario u on pe.idJParticipante = u.Idpersona WHERE u.Idpersona = " + BLog.getIdparticipante()+ ");");
             while (rs.next()) {
                 BeanUsuariosLogin Bequipo = new BeanUsuariosLogin();
 
                 Bequipo.setUsuarioNombre(rs.getString("Usuario"));
                 Bequipo.setNombreRol(rs.getString("NombreRol"));
+                
 
                 verJugador.add(Bequipo);
             }

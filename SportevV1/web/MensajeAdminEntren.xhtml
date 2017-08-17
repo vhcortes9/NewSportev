@@ -13,12 +13,27 @@ and open the template in the editor.
 
 
     <h:form>
-        <h:dataTable>
+        <!--mostrar Mensaje-->
+   <h5>Novedades sin Atender</h5>
+        <h:dataTable value="#{controladorMensaje.menn}" var="car">
             <h:column>
-                
+                <pre>#{car.idEmisor}</pre>
+            <pre>#{car.asunto}</pre>
+            <pre>#{car.texto}"</pre>
+            <pre>#{car.idMensaje}"</pre>
+            <pre>#{car.fechaHora}</pre>
+            <h:commandButton value="Atender" action="#{controladorMensaje.atender(car.idMensaje)}"></h:commandButton> 
             </h:column>
-        </h:dataTable>
-        <!-- Mostrar Mensaje-->
+        </h:dataTable><br></br>
+        <h5>Novedades Atendidas</h5>
+        <h:dataTable value="#{controladorMensaje.atendido}" var="car">
+            <h:column>
+                <pre>#{car.idEmisor}</pre>
+            <pre>#{car.asunto}</pre>
+            <pre>#{car.texto}"</pre>
+            #{car.fechaHora}
+            </h:column>
+        </h:dataTable><br></br>
         
               <h:form>
             <h:outputLabel value="Para"></h:outputLabel>

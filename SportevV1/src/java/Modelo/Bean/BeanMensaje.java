@@ -10,16 +10,26 @@ package Modelo.Bean;
  * @author Capera
  */
 public class BeanMensaje {
-    private String idMensaje;
+   private String idMensaje;
     private String idEmisor;
     private String idReceptor;
     private String asunto;
     private String texto;
     private String fechaHora;
+    private int desatendido;
 
     private String nombreusuario;
     private String nombrerol;
 
+    public int getDesatendido() {
+        return desatendido;
+    }
+
+    public void setDesatendido(int desatendido) {
+        this.desatendido = desatendido;
+    }
+
+    
     public String getNombreusuario() {
         return nombreusuario;
     }
@@ -84,7 +94,6 @@ public class BeanMensaje {
     public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
-    
     
     
 }

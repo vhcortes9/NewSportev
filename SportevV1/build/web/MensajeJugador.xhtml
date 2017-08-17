@@ -11,6 +11,29 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
+    <h:form>
+         <!-- Mostrar Mensaje-->
+        <h5>Novedades sin Atender</h5>
+        <h:dataTable value="#{controladorMensaje.menn}" var="car">
+            <h:column>
+                <pre>#{car.idEmisor}</pre>
+            <pre>#{car.asunto}</pre>
+            <pre>#{car.texto}"</pre>
+            <pre>#{car.idMensaje}"</pre>
+            <pre>#{car.fechaHora}</pre>
+            <h:commandButton value="Atender" action="#{controladorMensaje.atender(car.idMensaje)}"></h:commandButton> 
+            </h:column>
+        </h:dataTable><br></br>
+        <h5>Novedades Atendidas</h5>
+        <h:dataTable value="#{controladorMensaje.atendido}" var="car">
+            <h:column>
+                <pre>#{car.idEmisor}</pre>
+            <pre>#{car.asunto}</pre>
+            <pre>#{car.texto}"</pre>
+            #{car.fechaHora}
+            </h:column>
+        </h:dataTable><br></br>
+    </h:form>
     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'formRedactar'}">
         <h:panelGroup layout="block" class="x_panel">
             <h:panelGroup layout="block" class="x_content">
