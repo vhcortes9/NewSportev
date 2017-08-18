@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'formModificar' || controladorForms.seleccion eq 'formRegistrar'}">
+        <div class="x_panel">
+            <div class="x_content">
+                <h:form id="formMod" class="form-horizontal form-label-left">
+                    <h:panelGroup layout="block" rendered="#{controladorForms.seleccion eq 'formModificar'}">
+                    <span  class="section">Modificar Campeonato</span>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" rendered="#{controladorForms.seleccion eq 'formRegistrar'}">
+                    <span  class="section">Registrar Campeonato</span>
+                    </h:panelGroup>
+                    <h:inputHidden value="#{controladorCampeonato.BCamp.idCampeonato}"></h:inputHidden>
+                    <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel value="Categoria" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                        <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                            <h:selectOneMenu class="form-control col-md-7 col-xs-12" id="categoria" value="#{controladorCampeonato.BCamp.idCategoria}" required="true">
+                                <f:selectItems value="#{controladorListas.consultarCat()}"/>
+                            </h:selectOneMenu>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    
+                    <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel value="Nombres" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                        <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                            <h:inputText value="#{controladorPerfil.personaselecionada.nombre}" class="form-control col-md-7 col-xs-12" required="true" />
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel class="control-label col-md-3 col-sm-3 col-xs-12 " value="Apellidos"/>
+                        <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                            <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorPerfil.personaselecionada.apellido}" required="true" />
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel value="Fecha de nacimiento" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                        <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                            <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorCampeonato.BCamp.fechaFin}" required="true" />
+                        </h:panelGroup>
+                    </h:panelGroup>
+                     <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel value="Numero de documento" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                        <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                            <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorPerfil.personaselecionada.identificacion}" required="true" />
+                            <f:validateLength for="numDoc" minimum="4" maximum="11"></f:validateLength>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                     <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel value="Direccion" class="control-label col-md-3 col-sm-3 col-xs-12"/>
+                        <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
+                            <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorPerfil.personaselecionada.identificacion}" required="true" />
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <div class="ln_solid"></div>
+                    <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'formModificar'}">
+                        <h:panelGroup layout="block" class="col-md-6 col-md-offset-3">
+                            <h:commandButton class="btn btn-success" id="formCampeonatos"  value="Modificar" actionListener="#{controladorForms.xxx()}" action="#{controladorCampeonato.modificar()}" >
+                            </h:commandButton>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'formRegistrar'}">
+                        <h:panelGroup layout="block" class="col-md-6 col-md-offset-3">
+                            <h:commandButton class="btn btn-success" value="Registrar" actionListener="#{controladorCampeonato.registrarCampeonato()}" />
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                </h:form>
+            </div>
+        </div>
+    </h:panelGroup>
+    
+    
+</html>
+

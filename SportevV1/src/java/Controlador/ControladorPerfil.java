@@ -42,6 +42,8 @@ public class ControladorPerfil {
     private BeanDatosPersona personaselecionada;
     private BeanDatosPersona administradoreditar;
     private BeanDatosPersona usuarioPerfil;
+    private boolean deshabilitado;
+    private boolean habilitado;
 
     private Part fotoguardar;
 
@@ -60,6 +62,24 @@ public class ControladorPerfil {
     public String getNomb() {
         return nomb;
     }
+
+    public boolean isDeshabilitado() {
+        return deshabilitado;
+    }
+
+    public void setDeshabilitado(boolean deshabilitado) {
+        this.deshabilitado = deshabilitado;
+    }
+
+    public boolean isHabilitado() {
+        return habilitado;
+    }
+
+    public void setHabilitado(boolean habilitado) {
+        this.habilitado = habilitado;
+    }
+
+   
 
     public void setNomb(String nomb) {
         this.nomb = nomb;
@@ -204,10 +224,13 @@ public class ControladorPerfil {
             FacesMessage mensaje = new FacesMessage("Usuario Desabilitado");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
+            deshabilitado = true;
+            
         } else {
             FacesMessage mensaje = new FacesMessage("Error");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
+
         }
     }
     public void habilitarUsuario(int id) {
@@ -216,11 +239,14 @@ public class ControladorPerfil {
             FacesMessage mensaje = new FacesMessage("Usuario Habilitado");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
+            habilitado = true;
         } else {
             FacesMessage mensaje = new FacesMessage("Usuario Error");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
+
         }
+
     }
 
     public String modificarcontraseña() {
