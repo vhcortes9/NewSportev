@@ -4,17 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
-    <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <body>
+
+
+    <h:panelGroup class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'validarPerfilForm'}">
         <h:form enctype="multipart/form-data">
             <img src="#{request.contextPath}/Imagenes/#{controladorPerfil.imagen.imagen}"/>
             <h:inputHidden value="#{controladorPerfil.usuario.idUsuario}"></h:inputHidden>
             <h:inputFile value="#{controladorPerfil.file}" ></h:inputFile><br></br>
-       
+
             <h:commandButton value="Modificar" action="#{controladorPerfil.upload(controladorPerfil.usuario.idUsuario)}"></h:commandButton>
         </h:form><br></br>
         <h:form>
@@ -22,15 +19,16 @@
             <h:inputSecret value="#{controladorPerfil.usuarioPerfil.contraseña}"></h:inputSecret><br></br>
             <h:outputLabel value="Contraseña Nueva"></h:outputLabel><br></br>
             <h:inputSecret value="#{controladorPerfil.contraseña.contrasenia}"></h:inputSecret><br></br>
-                    <h:outputLabel value=" Repita Contraseña"></h:outputLabel><br></br>
-                    <h:inputSecret value="#{controladorPerfil.imagen.contrasenia}"></h:inputSecret><br></br>
+            <h:outputLabel value=" Repita Contraseña"></h:outputLabel><br></br>
+            <h:inputSecret value="#{controladorPerfil.imagen.contrasenia}"></h:inputSecret><br></br>
             <h:commandButton value="Modificar" action="#{controladorPerfil.modificarcontraseña()}"></h:commandButton>
-            </h:form><br></br>
+        </h:form><br></br>
         <h:form>
             <h:outputLabel value="Nombre"></h:outputLabel><br></br>
             <h:inputText value="#{controladorPerfil.nombre.usuarioNombre}"></h:inputText><br></br>
-                    <h:commandButton value="Modificar" action="#{controladorPerfil.modificarnombre()}"></h:commandButton>
+            <h:commandButton value="Modificar" action="#{controladorPerfil.modificarnombre()}"></h:commandButton>
         </h:form>
-       
-    </body>
+
+    </h:panelGroup>
+
 </html>

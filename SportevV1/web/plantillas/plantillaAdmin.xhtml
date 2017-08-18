@@ -130,19 +130,18 @@
                                     </li>
                                     <!--===================== NOVEDADES ======================-->
                                     <li><a><i class="fa fa-paper-plane"></i> Novedades <span class="fa fa-chevron-down"></span></a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="chartjs.html">Chart JS</a></li>
-                                            <li><a href="chartjs2.html">Chart JS2</a></li>
-                                            <li><a href="morisjs.html">Moris JS</a></li>
-                                            <li><a href="echarts.html">ECharts</a></li>
-                                            <li><a href="other_charts.html">Other Charts</a></li>
-                                        </ul>
+                                        <h:form>
+                                            <ul class="nav child_menu">
+                                                <li><h:commandLink id="formRecibido" value="Recibidos" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
+                                                <li><h:commandLink id="formRedactar" value="Redactar" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
+                                            </ul>
+                                        </h:form>
                                     </li>
                                     <!--===================== MIS USUARIOS ======================-->
                                     <li><a><i class="fa fa-users"></i> Mis Usuarios <span class="fa fa-chevron-down"></span></a>
                                         <h:form>
                                         <ul class="nav child_menu">
-                                            <li><h:commandLink id="formUsuCampeonatos" value="Preinscritos" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
+                                            <li><h:commandLink id="formUsuCampeonatos" value="Usuarios" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
                                         </ul>
                                         </h:form>
                                     </li>

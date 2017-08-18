@@ -145,7 +145,7 @@ public boolean elimanar(Object obj) throws SQLException{
         List<BeanUsuariosLogin> verJugador = new ArrayList();
         try {
             puente = obtenerConexion().createStatement();
-            rs = puente.executeQuery("SELECT u.Usuario as Usuario, r.NombreRol as NombreRol FROM participantes_has_equipo pe INNER JOIN "
+            rs = puente.executeQuery("SELECT  u.Usuario as Usuario, r.NombreRol as NombreRol FROM participantes_has_equipo pe INNER JOIN "
                     + "usuario u on pe.idJParticipante = u.Idpersona INNER JOIN rolusuario ru ON "
                     + "ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol WHERE pe.idEquipo in "
                     + "(SELECT pe.idEquipo FROM participantes_has_equipo pe INNER JOIN "
@@ -169,7 +169,7 @@ public boolean elimanar(Object obj) throws SQLException{
         List<BeanUsuariosLogin> veradmin = new ArrayList();
         try {
             puente = obtenerConexion().createStatement();
-            rs = puente.executeQuery("SELECT u.Usuario, r.NombreRol, c.Nombre FROM  usuario u  INNER JOIN rolusuario ru "
+            rs = puente.executeQuery("SELECT distinct u.Usuario, r.NombreRol, c.Nombre FROM  usuario u  INNER JOIN rolusuario ru "
                     + "ON ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol INNER JOIN"
                     + " campeonato c on c.idpersona = u.Idpersona WHERE r.NombreRol = \"Administrador\"");
             while (rs.next()) {                
@@ -189,7 +189,7 @@ public boolean elimanar(Object obj) throws SQLException{
         List<BeanUsuariosLogin> veradmin = new ArrayList();
         try {
             puente = obtenerConexion().createStatement();
-            rs = puente.executeQuery("SELECT u.Usuario, r.NombreRol, c.Nombre, e.NombreEquipo FROM  usuario u "
+            rs = puente.executeQuery("SELECT distinct u.Usuario, r.NombreRol, c.Nombre, e.NombreEquipo FROM  usuario u "
                     + " INNER JOIN rolusuario ru ON ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol "
                     + "INNER JOIN participantes_has_equipo pe on pe.idJParticipante = u.Idpersona INNER JOIN equipo e "
                     + "on e.idEquipo = pe.idEquipo INNER JOIN equipo_has_campeonato ec on ec.idEquipo =e.idEquipo "

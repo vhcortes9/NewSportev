@@ -51,6 +51,14 @@
                         <h:form>
                         <h:commandLink class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</h:commandLink>
                         </h:form>
+                         <h:panelGrid border="1">
+            <h:form>
+                <h:inputSecret value="#{controladorPerfil.usuarioPerfil.contraseña}"></h:inputSecret>
+
+                <h:commandButton id="validarPerfilForm" value="Validar" action="#{controladorPerfil.validarPerfil()}" actionListener="#{controladorForms.cambiarForm}"></h:commandButton>
+            </h:form>
+            
+        </h:panelGrid><br></br>
                         <br />
 
                         <!-- start skills -->

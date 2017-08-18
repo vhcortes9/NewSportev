@@ -10,102 +10,194 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
+    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'formRecibido'}">
+        <h:form>
 
-    <h:form>
-        <!-- Mostrar Mensaje-->
-         <!-- Mostrar Mensaje-->
-          <h5>Novedades sin Atender</h5>
-        <h:dataTable value="#{controladorMensaje.menn}" var="car">
-            <h:column>
-                <pre>#{car.idEmisor}</pre>
-            <pre>#{car.asunto}</pre>
-            <pre>#{car.texto}"</pre>
-            <pre>#{car.idMensaje}"</pre>
-            <pre>#{car.fechaHora}</pre>
-            <h:commandButton value="Atender" action="#{controladorMensaje.atender(car.idMensaje)}"></h:commandButton> 
-            </h:column>
-        </h:dataTable><br></br>
-        <h5>Novedades Atendidas</h5>
-        <h:dataTable value="#{controladorMensaje.atendido}" var="car">
-            <h:column>
-                <pre>#{car.idEmisor}</pre>
-            <pre>#{car.asunto}</pre>
-            <pre>#{car.texto}"</pre>
-            #{car.fechaHora}
-            </h:column>
-        </h:dataTable><br></br>
-              <h:form>
-            <h:outputLabel value="Para"></h:outputLabel>
-            <h:inputText value="#{controladorMensaje.mesanje.idReceptor}"></h:inputText><br></br>
-            <h:outputLabel value="Asunto"></h:outputLabel>
-            <h:inputText value="#{controladorMensaje.mesanje.asunto}"></h:inputText><br></br>
-            <h:outputLabel value="Texto"></h:outputLabel>
-            <h:inputTextarea value="#{controladorMensaje.mesanje.texto}"></h:inputTextarea><br></br>
-            <h:commandButton value="Enviar" action="#{controladorMensaje.enviarMensaje()}"></h:commandButton>
+            <h:panelGroup layout="block" class="x_panel">
+                <h5>Mensajes Nuevos</h5>
+                <h:panelGroup layout="block" class="x_content">
+                    <h:panelGroup layout="block" class="table-responsive">
+                        <!-- Mostrar Mensaje-->
+                        <!-- Mostrar Mensaje-->
+                        <h:dataTable value="#{controladorMensaje.menn}" var="car" class="table table-striped jambo_table bulk-action">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="De" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.idEmisor}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Asunto" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.asunto}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Mensaje" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.texto}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    <h:outputText value="fecha de Envio" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.fechaHora}" class="even pointer"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Acción" class="column-title"></h:outputText>
+
+                                </f:facet>
+                                    <h:commandButton value="Atender" action="#{controladorMensaje.atender(car.idMensaje)}" class="btn btn-primary"></h:commandButton>
+                            </h:column>
+                            <h:inputHidden>#{car.idMensaje}</h:inputHidden>
+                            
+                        </h:dataTable><br></br>
+                        <h5>Novedades Atendidas</h5>
+                        <h:dataTable value="#{controladorMensaje.menn}" var="car" class="table table-striped jambo_table bulk-action">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="De" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.idEmisor}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Asunto" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.asunto}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Mensaje" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.texto}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    <h:outputText value="fecha de Envio" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.fechaHora}" class="even pointer"/>
+                            </h:column>
+
+                            
+                        </h:dataTable><br></br>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
         </h:form>
-            <h:form>
-                <label> Contactos Disponibles</label>
-                <h:dataTable value="#{controladorMensaje.user}" var="ju" border="1">
-                   <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre"></h:outputText>
-                    </f:facet>
-                       <h:outputText value="#{ju.usuarioNombre}"></h:outputText>
-                </h:column>
-                   <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Usuario"></h:outputText>
-                    </f:facet>
-                       <h:outputText value="#{ju.nombreRol}"></h:outputText>
-                </h:column>
-                   <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Campeonato"></h:outputText>
-                    </f:facet>
-                       <h:outputText value="#{ju.nombrecampeonato}"></h:outputText>
-                </h:column>
-            </h:dataTable>
+    </h:panelGroup>
+
+
+    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'formRedactar'}">
+        <h:panelGroup layout="block" class="x_panel">
+            <h:panelGroup layout="block" class="x_content">
+
+
+                <h:form class="form-horizontal form-label-left">
+                    <!-- Mostrar Mensaje-->
+                    <span class="section">Nuevo Mensaje</span>
+                    <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel value="Para" class="control-label"></h:outputLabel>
+                        <h:inputText value="#{controladorMensaje.mesanje.idReceptor}" class="form-control col-md-7 col-xs-12"></h:inputText>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel value="Asunto" class="control-label "></h:outputLabel>
+                        <h:inputText value="#{controladorMensaje.mesanje.asunto}" class="form-control col-md-7 col-xs-12"></h:inputText><br></br>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="item form-group">
+                        <h:outputLabel value="Texto" class="control-label"></h:outputLabel>
+                        <h:inputTextarea value="#{controladorMensaje.mesanje.texto}" class="form-control col-md-7 col-xs-12"></h:inputTextarea><br></br>
+                    </h:panelGroup>
+                    <h:commandButton value="Enviar" action="#{controladorMensaje.enviarMensaje()}" class="btn btn-primary"></h:commandButton>
+                </h:form>
+            </h:panelGroup>
+
+        </h:panelGroup>
+        <h:form>
+            <h:panelGroup layout="block" class="x_panel">
+                <h:panelGroup layout="block" class="x_title">
+                    <label> Contactos Disponibles</label>
+                    <h:panelGroup layout="block" class="x_content">
+                        <h:dataTable value="#{controladorMensaje.user}" var="ju"  class="table table-bordered">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{ju.usuarioNombre}"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Usuario"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{ju.nombreRol}"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Campeonato"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{ju.nombrecampeonato}"></h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
         </h:form>
-            <h:form>
-                <label> Contactos Disponibles</label>
-                <h:dataTable value="#{controladorMensaje.entrnador}" var="ju" border="1">
-                   <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre"></h:outputText>
-                    </f:facet>
-                       <h:outputText value="#{ju.usuarioNombre}"></h:outputText>
-                </h:column>
-                   <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Usuario"></h:outputText>
-                    </f:facet>
-                       <h:outputText value="#{ju.nombreRol}"></h:outputText>
-                </h:column>
-                   <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Campeonato"></h:outputText>
-                    </f:facet>
-                       <h:outputText value="#{ju.nombrecampeonato}"></h:outputText>
-                </h:column>
-            </h:dataTable>
+        <h:form>
+            <h:panelGroup layout="block" class="x_panel">
+                <h:panelGroup layout="block" class="x_title">
+                    <label> Contactos Disponibles</label>
+                    <h:panelGroup layout="block" class="x_content">
+                        <h:dataTable value="#{controladorMensaje.entrnador}" var="ju"  class="table table-bordered">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{ju.usuarioNombre}"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Usuario"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{ju.nombreRol}"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Campeonato"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{ju.nombrecampeonato}"></h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
         </h:form>
+
+        <h:form>
+            <h:panelGroup layout="block" class="x_panel">
+                <h:panelGroup layout="block" class="x_title">
+                    <label> Contactos Disponibles</label>
+                    <h:panelGroup layout="block" class="x_content">
+                        <h:dataTable value="#{controladorMensaje.us}" var="ju"  class="table table-bordered">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{ju.usuarioNombre}"></h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Usuario"></h:outputText>
+                                </f:facet>
+                                <h:outputText value="#{ju.nombreRol}"></h:outputText>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
         </h:form>
-            <h:form>
-                <label> Contactos Disponibles</label>
-                <h:dataTable value="#{controladorMensaje.us}" var="ju" border="1">
-                   <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre"></h:outputText>
-                    </f:facet>
-                       <h:outputText value="#{ju.usuarioNombre}"></h:outputText>
-                </h:column>
-                   <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Usuario"></h:outputText>
-                    </f:facet>
-                       <h:outputText value="#{ju.nombreRol}"></h:outputText>
-                </h:column>
-            </h:dataTable>
-        </h:form>
+    </h:panelGroup>
 
 </html>

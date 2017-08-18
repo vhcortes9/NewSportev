@@ -10,29 +10,84 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    
     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'formRecibido'}">
         <h:form>
-            <!-- Mostrar Mensaje-->
-            <h5>Novedades sin Atender</h5>
-            <h:dataTable value="#{controladorMensaje.menn}" var="car">
-                <h:column>
-                    <pre>#{car.idEmisor}</pre>
-                    <pre>#{car.asunto}</pre>
-                    <pre>#{car.texto}"</pre>
-                    <pre>#{car.idMensaje}"</pre>
-                    <pre>#{car.fechaHora}</pre>
-                    <h:commandButton value="Atender" action="#{controladorMensaje.atender(car.idMensaje)}"></h:commandButton> 
-                </h:column>
-            </h:dataTable><br></br>
-            <h5>Novedades Atendidas</h5>
-            <h:dataTable value="#{controladorMensaje.atendido}" var="car">
-                <h:column>
-                    <pre>#{car.idEmisor}</pre>
-                    <pre>#{car.asunto}</pre>
-                    <pre>#{car.texto}"</pre>
-                    #{car.fechaHora}
-                </h:column>
-            </h:dataTable><br></br>
+
+            <h:panelGroup layout="block" class="x_panel">
+                <h5>Mensajes Nuevos</h5>
+                <h:panelGroup layout="block" class="x_content">
+                    <h:panelGroup layout="block" class="table-responsive">
+                        <!-- Mostrar Mensaje-->
+                        <!-- Mostrar Mensaje-->
+                        <h:dataTable value="#{controladorMensaje.menn}" var="car" class="table table-striped jambo_table bulk-action">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="De" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.idEmisor}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Asunto" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.asunto}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Mensaje" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.texto}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    <h:outputText value="fecha de Envio" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.fechaHora}" class="even pointer"/>
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Acción" class="column-title"></h:outputText>
+
+                                </f:facet>
+                                    <h:commandButton value="Atender" action="#{controladorMensaje.atender(car.idMensaje)}" class="btn btn-primary"></h:commandButton>
+                            </h:column>
+                            <h:inputHidden>#{car.idMensaje}</h:inputHidden>
+                            
+                        </h:dataTable><br></br>
+                        <h5>Novedades Atendidas</h5>
+                        <h:dataTable value="#{controladorMensaje.menn}" var="car" class="table table-striped jambo_table bulk-action">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="De" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.idEmisor}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Asunto" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.asunto}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Mensaje" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.texto}" class="even pointer"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header" >
+                                    <h:outputText value="fecha de Envio" class="column-title"/>
+                                </f:facet>
+                                <h:outputText value="#{car.fechaHora}" class="even pointer"/>
+                            </h:column>
+
+                            
+                        </h:dataTable><br></br>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
         </h:form>
     </h:panelGroup>
     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'formRedactar'}">

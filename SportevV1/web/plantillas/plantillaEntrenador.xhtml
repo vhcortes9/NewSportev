@@ -124,6 +124,16 @@
                                             <li><a href="other_charts.html">Other Charts</a></li>
                                         </ul>
                                     </li>
+                                    
+                                    <li><a><i class="fa fa-paper-plane"></i> Novedad <span class="fa fa-chevron-down"></span></a>
+                                        <h:form>
+                                            <ul class="nav child_menu">
+                                                <li><h:commandLink id="formRecibido" value="Recibidos" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
+                                                <li><h:commandLink id="formRedactar" value="Redactar" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
+                                            </ul>
+                                        </h:form>
+                                    </li>
+                                    
                                     <li><a><i class="fa fa-paper-plane"></i> Plantilla <span class="fa fa-chevron-down"></span></a>
                                         <h:form>
                                         <ul class="nav child_menu">
