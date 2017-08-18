@@ -44,6 +44,7 @@
                     </f:facet>
                     <h:outputText value="#{camp.fechaFin}"></h:outputText>
                 </h:column>
+                
                 <h:column rendered="#{controladorForms.seleccion eq 'preinscritos'}">
                     <h:commandLink value="Ver Equipos" id="EquiposPreinscritos" action="#{controladorPreinscripcion.consultarSegCamp(camp.idCampeonato)}" actionListener="#{controladorForms.cambiarForm}">
                     </h:commandLink>

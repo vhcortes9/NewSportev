@@ -31,7 +31,8 @@
                         <div class="profile_img">
                             <div id="crop-avatar">
                                 <!-- Current avatar -->
-                                <img class="img-responsive avatar-view" src="#{request.contextPath}/Imagenes/#{controladorPerfil.usuario.imagen}" alt="Avatar" title="Change the avatar"></img>
+                                <img class="img-responsive avatar-view" src="#{request.contextPath}/Imagenes/#{controladorPerfil.usuario.imagen}" alt="No hay imagen" title="Change the avatar"></img>
+                                
                             </div>
                         </div>
                         <h3><h:outputText value="#{controladorPerfil.usuar.nombre} #{controladorPerfil.usuar.apellido}"/></h3>
@@ -47,8 +48,9 @@
                                 <i class="fa fa-envelope"></i><h:outputText value="#{controladorPerfil.usuar.email}"/>
                             </li>
                         </ul>
-
-                        <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                        <h:form>
+                        <h:commandLink class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</h:commandLink>
+                        </h:form>
                         <br />
 
                         <!-- start skills -->
