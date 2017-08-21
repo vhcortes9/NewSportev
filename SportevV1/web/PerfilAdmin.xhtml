@@ -32,7 +32,7 @@
                             <div id="crop-avatar">
                                 <!-- Current avatar -->
                                 <img class="img-responsive avatar-view" src="#{request.contextPath}/Imagenes/#{controladorPerfil.usuario.imagen}" alt="No hay imagen" title="Change the avatar"></img>
-                                
+
                             </div>
                         </div>
                         <h3><h:outputText value="#{controladorPerfil.usuar.nombre} #{controladorPerfil.usuar.apellido}"/></h3>
@@ -49,16 +49,17 @@
                             </li>
                         </ul>
                         <h:form>
-                        <h:commandLink class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</h:commandLink>
+                            <!--<a href="#openmodal" class="open">Abrir Ventana</a>-->
+                            <a href="" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                         </h:form>
-                         <h:panelGrid border="1">
-            <h:form>
-                <h:inputSecret value="#{controladorPerfil.usuarioPerfil.contraseña}"></h:inputSecret>
+                        <h:panelGrid border="1">
+                            <h:form>
+                                <h:inputSecret value="#{controladorPerfil.usuarioPerfil.contraseña}"></h:inputSecret>
 
-                <h:commandButton id="validarPerfilForm" value="Validar" action="#{controladorPerfil.validarPerfil()}" actionListener="#{controladorForms.cambiarForm}"></h:commandButton>
-            </h:form>
-            
-        </h:panelGrid><br></br>
+                                <h:commandButton id="validarPerfilForm" value="Validar" action="#{controladorPerfil.validarPerfil()}" actionListener="#{controladorForms.cambiarForm}"></h:commandButton>
+                            </h:form>
+
+                        </h:panelGrid><br></br>
                         <br />
 
                         <!-- start skills -->
@@ -80,12 +81,12 @@
                                 <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Actividad Reciente</a>
                                 </li>
                                 <h:panelGroup rendered="#{controladorForms.seleccion eq 'formPerfilAdmin'}">
-                                <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Campeonatos</a>
-                                </li>
+                                    <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Campeonatos</a>
+                                    </li>
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{controladorForms.seleccion eq 'formPerfilEntre'}">
-                                <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Equipos</a>
-                                </li>
+                                    <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Equipos</a>
+                                    </li>
                                 </h:panelGroup>
                             </ul>
                             <div id="myTabContent" class="tab-content">
@@ -93,29 +94,29 @@
 
                                     <!-- start recent activity -->
                                     <ul class="messages">
-                                        
+
                                         <h:panelGroup>
                                             <h:dataTable value="#{controladorMensaje.menn}" var="men">
                                                 <h:column>
-                                        <li>
-                                            <img src="resources/images/img.jpg" class="avatar" alt="Avatar"></img>
-                                            <h:panelGroup class="message_date" layout="block">
-                                                 <h3 class="date text-error"><h:outputText value="27"/></h3>
-                                                <p class="month">May</p>
-                                            </h:panelGroup>
-                                            <h:panelGroup class="message_wrapper" layout="block">
-                                                <h4 class="heading"><h:outputText value="#{men.idEmisor}"/></h4>
-                                                <blockquote class="message"><h:outputText value="#{men.texto}"/></blockquote>
-                                                <br />
-                                                <p class="url">
-                                                    <span class="fs1" aria-hidden="true" data-icon=""></span>
-                                                </p>
-                                            </h:panelGroup>
-                                                
-                                        </li>
-                                                  </h:column>
+                                                    <li>
+                                                        <img src="resources/images/img.jpg" class="avatar" alt="Avatar"></img>
+                                                        <h:panelGroup class="message_date" layout="block">
+                                                            <h3 class="date text-error"><h:outputText value="27"/></h3>
+                                                            <p class="month">May</p>
+                                                        </h:panelGroup>
+                                                        <h:panelGroup class="message_wrapper" layout="block">
+                                                            <h4 class="heading"><h:outputText value="#{men.idEmisor}"/></h4>
+                                                            <blockquote class="message"><h:outputText value="#{men.texto}"/></blockquote>
+                                                            <br />
+                                                            <p class="url">
+                                                                <span class="fs1" aria-hidden="true" data-icon=""></span>
+                                                            </p>
+                                                        </h:panelGroup>
+
+                                                    </li>
+                                                </h:column>
                                             </h:dataTable>
-                                            </h:panelGroup>
+                                        </h:panelGroup>
                                         <li>
                                             <img src="resources/images/img.jpg" class="avatar" alt="Avatar"></img>
                                             <div class="message_date">

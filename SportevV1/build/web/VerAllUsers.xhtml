@@ -84,7 +84,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Herramientas"></h:outputText>
                             </f:facet>
-                            <h:commandButton  class="btn btn-default" value="Editar" id="btnIngresar" action="#{controladorPerfil.asignareditar(per)}"/>
+                            <h:commandButton id="formEditarPerson" class="btn btn-default" value="Editar" action="#{controladorPerfil.asignareditar(per)}" actionListener="#{controladorForms.cambiarForm}" />
                             <h:commandButton  class="btn btn-default"  value="Hablitar" id="estadoUsuario" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.habilitarUsuario(per.id)}"/>
                             <h:commandButton  class="btn btn-default"  value="Desabilitar" id="estadoUsuario1" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.desabilitarUsuario(per.id)}"/>
                         </h:column>
