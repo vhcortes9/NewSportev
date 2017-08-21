@@ -66,7 +66,7 @@ and open the template in the editor.
 
                     <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'crearpartidos'}">
                         <h:panelGroup layout="block" class="col-md-6 col-md-offset-3">
-                            <h:commandButton class="btn btn-success" value="Registrar" action="#{controladorPartido.registrarPart()}"/>
+                            <h:commandButton class="btn btn-success" value="Registrar" action="#{controladorPartido.registrarPart(controladorPartido.bpar.equipo1, controladorPartido.bpar.equipo2)}"/>
                         </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'btnEditar'}">
