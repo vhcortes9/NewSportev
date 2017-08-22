@@ -2,11 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-
-    <h:panelGroup class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'validarPerfilForm'}">
+    <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'validarPerfilForm'}">
         <h:form enctype="multipart/form-data">
             <img src="#{request.contextPath}/Imagenes/#{controladorPerfil.imagen.imagen}"/>
             <h:inputHidden value="#{controladorPerfil.usuario.idUsuario}"></h:inputHidden>
