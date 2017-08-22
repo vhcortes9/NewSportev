@@ -51,9 +51,9 @@
                         </ul>
                         <h:form>
                             <!--<a href="#openmodal" class="open">Abrir Ventana</a>-->
-                            <a href="" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
-                            <h:commandLink value="Show Modal" 
+                            <h:commandLink styleClass="btn btn-success"
                                            onclick="$('#myModal').modal('show');" immediate="true">
+                                <i class="fa fa-edit m-right-xs"></i>Editar mi Perfíl
                                 <f:ajax execute="@this" render=":myForm"/>
                             </h:commandLink>
                         </h:form>
@@ -62,7 +62,7 @@
                                 <div class="modal-content">
                                    <h:form id="myForm">
                                         <div class="modal-header">
-                                            
+                                            Validación de contraseña.
                                         </div>
                                         <div class="modal-body">
                                             <form>
@@ -72,7 +72,7 @@
                                             </form>
                                         </div>
 
-                                        <p:commandLink value="Close" immediate="true" styleClass="btn btn-default" oncomplete="$('#myModal').modal('hide');" />
+                                        <p:commandLink value="Cerrar" immediate="true" styleClass="btn btn-danger" oncomplete="$('#myModal').modal('hide');" />
 
                                     </h:form>
                                 </div>
