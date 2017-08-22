@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.Bean.BeanCampeonato;
+import Modelo.Bean.BeanDatosPersona;
 import Modelo.Bean.BeanEquipo;
 import Modelo.Bean.BeanPartido;
 import Modelo.Bean.BeanUsuariosLogin;
@@ -35,6 +36,7 @@ public class ControladorPartido {
     private BeanPartido BPar = new BeanPartido();
     private List<BeanPartido> consPar;
     private List<BeanPartido> consEqui;
+    private List<BeanDatosPersona> consultarCorreos;
     private BeanPartido partidoselecionado;
     BeanUsuariosLogin usuario;
     private boolean deshabilitarvistapartido;
@@ -54,7 +56,7 @@ public class ControladorPartido {
 
     }
 
-    public String registrarPart() {
+    public String registrarPart(int id , int id1) {
         String respuesta = "";
         DaoPartido DPar = new DaoPartido();
         if (BPar.getEquipo1().equals(BPar.getEquipo2())) {
@@ -66,6 +68,7 @@ public class ControladorPartido {
             if (DPar.registrarPartido(this.BPar)) {
                 DaoPartido Dpa = new DaoPartido();
                 consPar = Dpa.listarpartido();
+                consultarCorreos(id, id1);
 
             } else {
                 FacesMessage mensaje = new FacesMessage("No Se pudo Registrar");
@@ -75,6 +78,17 @@ public class ControladorPartido {
         }
 
         return respuesta;
+    }
+
+    public void consultarCorreos(int id, int id1) {
+        
+        DaoPartido dpart = new DaoPartido();
+        consultarCorreos = dpart.consultarCorreos(id, id1);
+        if (consultarCorreos.isEmpty()) {
+            System.out.println("Error de lista");
+        }else{
+            System.out.println("lista");
+        }
     }
 
     public String modificar() {

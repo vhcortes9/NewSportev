@@ -12,8 +12,9 @@ and open the template in the editor.
 
 
     <h:body>
+        
            <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'crearpartidos' || controladorForms.seleccion eq 'btnEditar'}">
-            <h:form class="form-horizontal form-label-left">
+            <h:form class="form-horizontal form-label-left" >
                 <h:panelGroup layout="block" class="item form-group">
                     <h:outputLabel value="Campeonato" class="control-label col-md-3 col-sm-3 col-xs-12"/>
                     <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
@@ -66,7 +67,7 @@ and open the template in the editor.
 
                     <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'crearpartidos'}">
                         <h:panelGroup layout="block" class="col-md-6 col-md-offset-3">
-                            <h:commandButton class="btn btn-success" value="Registrar" action="#{controladorPartido.registrarPart()}"/>
+                            <h:commandButton class="btn btn-success" value="Registrar" action="#{controladorPartido.registrarPart(controladorPartido.bpar.equipo1, controladorPartido.bpar.equipo2)}"/>
                         </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'btnEditar'}">
@@ -74,7 +75,6 @@ and open the template in the editor.
                             <h:commandButton class="btn btn-success" value="Modificar"   actionListener="#{controladorPartido.modificar()}"/>
                         </h:panelGroup>
                     </h:panelGroup>
-                    
                     
             </h:form>
         </h:panelGroup>

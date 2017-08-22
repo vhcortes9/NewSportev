@@ -9,6 +9,7 @@ import Conexion.Conexion;
 import static Conexion.Conexion.desconectarBD;
 import static Conexion.Conexion.obtenerConexion;
 import static Conexion.Conexion.reversarBD;
+import Modelo.Bean.BeanDatosPersona;
 import Modelo.Bean.BeanPartido;
 import Modelo.Bean.BeanUsuariosLogin;
 import java.sql.Connection;
@@ -42,6 +43,28 @@ public class DaoPartido {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         BLog = (BeanUsuariosLogin) session.getAttribute("user");
 
+    }
+
+    public List<BeanDatosPersona> consultarCorreos(int id, int id1) {
+        List<BeanDatosPersona> listarCorreos = new ArrayList();
+        try {
+            conn = obtenerConexion();
+            puente = conn.createStatement();
+            rs = puente.executeQuery("SELECT DISTINCT per.Email FROM persona"
+                    + " per INNER JOIN participantes_has_equipo pq on pq.idJParticipante = per.Id"
+                    + " INNER JOIN partido par on par.Equipo1 = pq.idEquipo or par.Equipo2 = pq.idEquipo "
+                    + "WHERE par.Equipo1 = '"+id+"' and par.Equipo2 = '"+id1+"'");
+            while (rs.next()) {
+                BeanDatosPersona corr = new BeanDatosPersona();
+                corr.setEmail("Email");
+                listarCorreos.add(corr);
+
+            }
+            desconectarBD(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listarCorreos;
     }
 
     public List<BeanPartido> consultarEquiPorPartido(String Equi1, String Equi2) {
