@@ -86,32 +86,6 @@ public class DaoPreinscripcion extends Conexion {
             System.out.println("Mail fail"+ex.getMessage());
             ex.printStackTrace();
         }
-//        try {
-//
-//            Properties props = new Properties();
-//            props.put("mail.smtp.host", "smtp.gmail.com");
-//            props.put("mail.smtp.socketFactory.port", "465");
-//            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-//            props.put("mail.smtp.auth", "true");
-//            props.put("mail.smtp.port", "465");
-//            props.put("mail.smtp.starttls.enable", "true"); 
-//
-//            Session sesion = Session.getDefaultInstance(props, null);
-//            MimeMessage message = new MimeMessage(sesion);
-//            message.setFrom(new InternetAddress(de));
-//            message.setRecipient(Message.RecipientType.TO, new InternetAddress(para));
-//            message.setSubject(asunto);
-//            message.setText(mensaje);
-//
-//            Transport transport = sesion.getTransport("smtp");
-//            transport.connect("smtp.gmail.com", de, clave);
-//            transport.sendMessage(message, message.getAllRecipients());
-//            transport.close();
-//            enviado = true;
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("enviado:" + enviado);
 
         return enviado;
     }
@@ -194,7 +168,8 @@ public class DaoPreinscripcion extends Conexion {
 
         List<BeanPreinscripcion> listarPreinscritos = new ArrayList();
         try {
-            puente = Conexion.obtenerConexion().createStatement();
+            conn = obtenerConexion();
+            puente = conn.createStatement();
             rs = puente.executeQuery("select distinct persona.`Nombre`, persona.`Apellido`, equipo.`NombreEquipo`, \n"
                     + "tipodocumento.`NombreTipoDoc`, persona.`Identificacion`, persona.`Telefono`, persona.`Email`, persona.`Id`, participantes_has_equipo.`idEquipo` \n"
                     + "from dbsportev.participantes_has_equipo inner join dbsportev.persona on `persona`.`Id` = \n"

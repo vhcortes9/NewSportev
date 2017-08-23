@@ -40,14 +40,20 @@ public class DaoEquipo extends Conexion {
     public List<BeanEquipo> listarEquipo() {
         List<BeanEquipo> listaEqui = new ArrayList();
         try {
-            puente = Conexion.obtenerConexion().createStatement();
+            conn = obtenerConexion();
+            puente = conn.createStatement();
             rs = puente.executeQuery("select idEquipo,NombreEquipo from equipo ");
             while (rs.next()) {
                 listaEqui.add(new BeanEquipo(rs.getInt("idEquipo"), rs.getString("NombreEquipo")));
             }
-            Conexion.reversarBD(conn);
             Conexion.desconectarBD(conn);
         } catch (Exception e) {
+            try {
+                Conexion.reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(DaoEquipo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            e.printStackTrace();
         }
 
         return listaEqui;

@@ -11,6 +11,7 @@ import Modelo.Bean.BeanDatosPersona;
 import Modelo.Bean.BeanUsuariosLogin;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,11 @@ public class Daoperfil extends Conexion {
             listo = true;
 
         } catch (Exception e) {
+            try {
+                reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
             e.printStackTrace();
         }
         return listo;
@@ -112,6 +118,11 @@ public class Daoperfil extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception e) {
+            try {
+                reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
             e.printStackTrace();
         }
         return imag;
@@ -144,6 +155,11 @@ public class Daoperfil extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception e) {
+            try {
+                reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
             e.printStackTrace();
         }
         return Bper;
@@ -184,6 +200,11 @@ public class Daoperfil extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception e) {
+            try {
+                reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
             e.printStackTrace();
         }
         return listarPersona;
@@ -196,6 +217,11 @@ public class Daoperfil extends Conexion {
             desconectarBD(conn);
             listo = true;
         } catch (Exception e) {
+            try {
+                reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
             e.printStackTrace();
         }
         return listo;
@@ -204,12 +230,18 @@ public class Daoperfil extends Conexion {
 
     public boolean desabilitarUsuario(int id) {
         try {
-            puente = obtenerConexion().createStatement();
+            conn = obtenerConexion();
+            puente = conn.createStatement();
             puente.executeUpdate("Update usuario Set habilitado = '" + desabilitado + "' where Idpersona = '" + id + "'");
             desconectarBD(conn);
             listo = true;
 
         } catch (Exception e) {
+            try {
+                reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
             e.printStackTrace();
         }
         return  listo;
@@ -217,12 +249,18 @@ public class Daoperfil extends Conexion {
     int habilitado = 0;
     public boolean habilitarUsuario(int id) {
         try {
-            puente = obtenerConexion().createStatement();
+            conn = obtenerConexion();
+            puente = conn.createStatement();
             puente.executeUpdate("Update usuario Set habilitado = '" + habilitado + "' where Idpersona = '" + id + "'");
             desconectarBD(conn);
             listo = true;
 
         } catch (Exception e) {
+            try {
+                reversarBD(conn);
+            } catch (SQLException ex) {
+                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
             e.printStackTrace();
         }
         return  listo;

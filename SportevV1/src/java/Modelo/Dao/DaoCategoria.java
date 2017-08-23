@@ -33,7 +33,8 @@ public class DaoCategoria extends Conexion {
         List<BeanCategoria> listCat = new ArrayList();
 
         try {
-            puente = Conexion.obtenerConexion().createStatement();
+            conn = obtenerConexion();
+            puente = conn.createStatement();
             rs = puente.executeQuery("select  idCategoria, Nombre from categoria");
 
             while (rs.next()) {
