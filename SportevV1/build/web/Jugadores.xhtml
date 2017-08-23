@@ -9,8 +9,7 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:panelGroup layout="block" rendered="#{controladorForms.seleccion eq 'listaJugadores'}" >
-        
+    <h:panelGroup layout="block" rendered="#{controladorForms.seleccion eq 'listaJugadores' || controladorForms.seleccion eq 'JugsEquipo'}" >
             <h:form>
                 <h:dataTable class="table table-striped table-bordered" value="#{controladorJugador.consJug}" var="cj" border="1">
                     <h:column>
@@ -25,49 +24,49 @@ and open the template in the editor.
                         </f:facet>
                         <h:outputText value="#{cj.apellidosJugador}"/>
                     </h:column>
-                    <h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'listaJugadores'}">
                         <f:facet name="header">
                             <h:outputText value="Tipo Documento"/>
                         </f:facet>
                         <h:outputText value="#{cj.tipoDoc}"/>
                     </h:column>
-                    <h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'listaJugadores'}">
                         <f:facet name="header">
                             <h:outputText value="Genero"/>
                         </f:facet>
                         <h:outputText value="#{cj.genero}"/>
                     </h:column>
-                    <h:column>
+                    <h:column  rendered="#{controladorForms.seleccion eq 'listaJugadores'}">
                         <f:facet name="header">
                             <h:outputText value="Identificacion"/>
                         </f:facet>
                         <h:outputText value="#{cj.numDoc}"/>
                     </h:column>
-                    <h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'listaJugadores'}">
                         <f:facet name="header">
                             <h:outputText value="Rh"/>
                         </f:facet>
                         <h:outputText value="#{cj.RH}"/>
                     </h:column>
-                    <h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'listaJugadores'}">
                         <f:facet name="header">
                             <h:outputText value="E_Mail"/>
                         </f:facet>
                         <h:outputText value="#{cj.correoElec}"/>
                     </h:column>
-                    <h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'listaJugadores'}">
                         <f:facet name="header">
                             <h:outputText value="Telefono"/>
                         </f:facet>
                         <h:outputText value="#{cj.telefono}"/>
                     </h:column>
-                    <h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'listaJugadores'}">
                         <f:facet name="header">
                             <h:outputText value="Eps"/>
                         </f:facet>
                         <h:outputText value="#{cj.eps}"/>
                     </h:column>
-                    <h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'listaJugadores'}">
                         <f:facet name="header">
                             <h:outputText value="Edad"/>
                         </f:facet>
@@ -85,8 +84,40 @@ and open the template in the editor.
                         </f:facet>
                         <h:commandButton id="registrarJugador" value="Modificar" actionListener="#{controladorForms.cambiarForm}" action="#{controladorJugador.consultar(cj.idParticipante)}"/>
                     </h:column>
+                    
                     <h:column rendered="#{controladorForms.seleccion eq 'JugsEquipo'}">
-                        <h:commandButton id="AgregarAcciones" value="Agregar Acciones" actionListener="#{controladorForms.cambiarForm}" action="#{controladorJugador.consultar(cj.idParticipante)}"/>
+                        <f:facet name="header">
+                            <h:outputText value="Goles"/>
+                        </f:facet>
+                        <h:inputText value="#{controladorEstadisticas.BEst.goles}"></h:inputText>
+                    </h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'JugsEquipo'}">
+                         <f:facet name="header">
+                            <h:outputText value="Tarjetas Amarillas"/>
+                        </f:facet>
+                        <h:inputText value="#{controladorEstadisticas.BEst.tarjAmarilla}"></h:inputText>
+                    </h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'JugsEquipo'}">
+                         <f:facet name="header">
+                            <h:outputText value="Tarjetas Rojas"/>
+                        </f:facet>
+                        <h:inputText value="#{controladorEstadisticas.BEst.tarjRoja}"></h:inputText>
+                    </h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'JugsEquipo'}">
+                         <f:facet name="header">
+                            <h:outputText value="Tarjetas Azules"/>
+                        </f:facet>
+                        <h:inputText value="#{controladorEstadisticas.BEst.tarjAzul}"></h:inputText>
+                    </h:column>
+                    <h:column rendered="#{controladorForms.seleccion eq 'JugsEquipo'}">
+                         <f:facet name="header">
+                            <h:outputText value="Autogoles"/>
+                        </f:facet>
+                        <h:inputText value="#{controladorEstadisticas.BEst.autogoles}"></h:inputText>
+                    </h:column>
+                    
+                    <h:column rendered="#{controladorForms.seleccion eq 'JugsEquipo'}">
+                        <h:commandButton id="AgregarAcciones" value="Agregar Acciones" actionListener="#{controladorForms.cambiarForm}" action="#{controladorEstadisticas.registrarAcciones(cj.idParticipante)}"/>
                     </h:column>
                 </h:dataTable>
                 <h:commandButton id="volver" value="Volver" action="#{controladorJugador.cerrarEqui()}" actionListener="#{controladorForms.cambiarForm}"></h:commandButton>

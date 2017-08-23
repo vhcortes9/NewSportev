@@ -40,12 +40,17 @@ public class ControladorPartido {
     private BeanPartido partidoselecionado;
     BeanUsuariosLogin usuario;
     private boolean deshabilitarvistapartido;
+    public HttpSession idpartido = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
-    public void listarPorPart(String Equi1, String Equi2) {
+    public void listarPorPart(String Equi1, String Equi2, int id) {
+        idpartido.setAttribute("idPartido", id);
         DaoPartido DPart = new DaoPartido();
         consEqui = DPart.consultarEquiPorPartido(Equi1, Equi2);
     }
-
+    public void cerrarPartido(){
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        session.removeAttribute("idPartido");
+    }
     public void eliminar(int id) {
         DaoPartido dapartido = new DaoPartido();
         if (dapartido.Eliminar(id)) {
