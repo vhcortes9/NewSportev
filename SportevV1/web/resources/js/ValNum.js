@@ -1,55 +1,49 @@
 
 function validarNumeros(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
-    if (tecla == 8)
-        return true; //Backspace
-    if (tecla == 109)
-        return true; //menos
-    if (tecla == 110)
-        return true; //punto
-    if (tecla == 189)
-        return true; //guion
-    if (e.ctrlkey && tecla == 86) {
-        return true
+    key=e.keyCode || e.which;
+    teclado=String.fromCharCode(key);
+    numero="0123456789-";
+    especiales="8-9-37-38-46";
+    teclado_especial=false;
+    for (var i in especiales) {
+        if (key==especiales[i]) {
+            teclado_especial=true;
+           
+        }
     }
-    ; //ctrl V
-    if (e.ctrlkey && tecla == 67) {
-        return true
+    if (numero.indexOf(teclado)==-1 && !teclado_especial) {
+        return false;
     }
-    ; //ctrl c
-    if (e.ctrlkey && tecla == 88) {
-        return true
-    }
-    ; //ctrl x
-    if (tecla>=96 && tecla<=105) {
-        return true;
-    } //numpad
-
-    patron = /[0-9]/; //patron
-    te = String.fromCharCode(tecla);
-    return patron.test(te); //prueba
 
 }
-function validarLetras(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
-    if (tecla == 8)
-        return true; //Backspace
-    if (tecla == 32)
-        return true; //space
-    if(tecla === 164 && 165)return true;
-    if (e.ctrlkey && tecla == 86) {
-        return true;
-    } //ctrl V
-    if (e.ctrlkey && tecla == 67) {
-        return true;
-    } //ctrl c
-    if (e.ctrlkey && tecla == 88) {
-        return true;
-    } //ctrl x
-    patron = /[a-zA-Z]/;
 
-    te = String.fromCharCode(tecla);
-    return patron.test(te);
+
+function soloLetras(e) {
+    key = e.keyCode || e.which;
+    tecla = String.fromCharCode(key).toLowerCase();
+    letras = " áéíóúñabcdefghijklmnñopqrstuvwxyzñx";
+    especiales = [8, 37, 39, 46, 241];
+
+    tecla_especial = false
+    for(var i in especiales) {
+        if(key == especiales[i]) {
+            tecla_especial = true;
+           
+        }
+    }
+
+    if(letras.indexOf(tecla) == -1 && !tecla_especial)
+        return false;
+}
+
+
+function limpia() {
+    var val = document.getElementById("miInput").value;
+    var tam = val.length;
+    for(i = 0; i < tam; i++) {
+        if(!isNaN(val[i]))
+            document.getElementById("miInput").value = '';
+    }
 }
 function validarEmail(e) {
     tecla = (document.all) ? e.keyCode : e.which;

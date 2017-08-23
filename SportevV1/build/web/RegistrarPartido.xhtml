@@ -9,6 +9,43 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link href="resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+        <script src="resources/js/jquery-1.12.4.js" type="text/javascript"></script>
+        <script src="resources/js/jquery-ui.js" type="text/javascript"></script>
+        
+        <script>
+
+            $.datepicker.regional['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Ant',
+                nextText: 'Sig',
+                currentText: 'Hoy',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Juv', 'Vie', 'Sáb'],
+                dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+                weekHeader: 'Sm',
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1935:2017",
+                //minDate: "-1",
+                //maxDate: "+3y",
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+            $(document).ready(function () {
+                $(".fecha").datepicker();
+            });
+        </script>
+        
+    </h:head>
 
 
     <h:body>
@@ -60,7 +97,7 @@ and open the template in the editor.
                 <h:panelGroup layout="block" class="item form-group">
                     <h:outputLabel value="Fecha" class="control-label col-md-3 col-sm-3 col-xs-12"/>
                     <h:panelGroup class="col-md-6 col-sm-6 col-xs-12" layout="block">
-                        <h:inputText class="form-control col-md-7 col-xs-12" value="#{controladorPartido.bpar.fecha}"/>
+                        <h:inputText class="form-control col-md-7 col-xs-12 fecha" value="#{controladorPartido.bpar.fecha}"/>
                     </h:panelGroup>
                 </h:panelGroup>
                     <h:inputHidden value="#{controladorPartido.bpar.idPartido}"/>

@@ -18,10 +18,10 @@
                 <h:panelGrid columns="2" >
 
                     <h:outputLabel value="Nombre Entrenador" />
-                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.nombreEntre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeydown="return validarLetras(event)"/>
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.nombreEntre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeydown="return soloLetras(event)"/>
 
                     <h:outputLabel value="Apellidos" />
-                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.apellidosEntre}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeydown="return validarLetras(event)"/>
+                    <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.apellidosEntre}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeydown="return soloLetras(event)"/>
                     <h:outputLabel value="Fecha Nacimiento" />
                     <h:inputText class="form-control" value="#{controladorPreinscripcion.preinscripcion.fechaNac}" id="fechanac" required="true" label="FechaNac"/>
 

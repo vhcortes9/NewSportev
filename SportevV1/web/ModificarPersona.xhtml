@@ -18,16 +18,16 @@
                 <h:panelGrid columns="2" >
 
                     <h:outputLabel value="Nombres" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.nombre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeydown="return validarLetras(event)"/>
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.nombre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeypress="return soloLetras(event)"/>
 
                     <h:outputLabel value="Apellidos" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.apellido}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeydown="return validarLetras(event)"/>
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.apellido}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeypress="return soloLetras(event)"/>
                     <h:outputLabel value="Fecha Nacimiento" />
                     <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.fechaNacimiento}" id="fechanac" required="true" label="FechaNac"/>
                     
 
                     <h:outputLabel value="Numero de Documento" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.identificacion}" id="numDoc" required="true" label="Se requiere Este Campo" onkeydown="return validarNumeros(event)">
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.identificacion}" id="numDoc" required="true" label="Se requiere Este Campo" onkeypress="return validarNumeros(event)">
                         <f:validateLength for="numDoc" minimum="4" maximum="11"></f:validateLength>
                     </h:inputText>
 
@@ -35,7 +35,7 @@
                     <h:outputLabel value="Direccion" />
                     <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.direccion}" id="direccion" required="true" label="Direccion"/>
                     <h:outputLabel value="Telefono" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.telefono}" id="telefono" required="true" requiredMessage="Se Requiere un Telefono" onkeydown="return validarNumeros(event)">
+                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.telefono}" id="telefono" required="true" requiredMessage="Se Requiere un Telefono" onkeypress="return validarNumeros(event)">
                         <f:validateLength for="telefono" minimum="7" maximum="10"></f:validateLength>
                     </h:inputText>
 
