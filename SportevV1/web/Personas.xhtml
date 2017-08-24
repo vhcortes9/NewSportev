@@ -11,59 +11,7 @@
     </h:head>
     <h:body>
         <center>
-           
-            <h:form>
-                <h:panelGrid columns="2" >
-
-                    <h:outputLabel value="Nombres" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.nombre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeypress="return soloLetras(event)"/>
-
-                    <h:outputLabel value="Apellidos" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.apellido}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeypress="return soloLetras(event)"/>
-                    <h:outputLabel value="Fecha Nacimiento" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.fechaNacimiento}" id="fechanac" required="true" label="FechaNac"/>
-                    
-
-                    <h:outputLabel value="Numero de Documento" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.identificacion}" id="numDoc" required="true" label="Se requiere Este Campo" onkeypress="return validarNumeros(event)">
-                        <f:validateLength for="numDoc" minimum="4" maximum="11"></f:validateLength>
-                    </h:inputText>
-
-
-                    <h:outputLabel value="Direccion" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.direccion}" id="direccion" required="true" label="Direccion"/>
-                    <h:outputLabel value="Telefono" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.telefono}" id="telefono" required="true" requiredMessage="Se Requiere un Telefono" onkeypress="return validarNumeros(event)">
-                        <f:validateLength for="telefono" minimum="7" maximum="10"></f:validateLength>
-                    </h:inputText>
-
-                    <h:outputLabel value="E-Mail" />
-                    <h:inputText class="form-control" value="#{controladorPerfil.personaselecionada.email}" id="correoElec" required="true" label="CorreoElec" onkeydown="return validarEmail(event)"/>
-
-                 
-                    <h:outputLabel value="Tipo Documento" />
-                    <h:selectOneMenu class="form-control" id="idg" value="#{controladorPerfil.personaselecionada.tipoIdentificacion}">
-                        <f:selectItems value="#{controladorListas.consultarTipoDoc()}"/>
-                    </h:selectOneMenu>                    
-                    <h:outputLabel value="Genero" />
-                    <h:selectOneMenu class="form-control" id="idgen" value="#{controladorPerfil.personaselecionada.genero}">
-                        <f:selectItems value="#{controladorListas.consultarGenero()}"/>
-                    </h:selectOneMenu>                    
-                    <h:outputLabel  value="Rh" />
-                    <h:selectOneMenu class="form-control" id="id" value="#{controladorPerfil.personaselecionada.idRH}">
-                        <f:selectItems value="#{controladorListas.consRh()}"/>
-                    </h:selectOneMenu> 
-                    <h:outputLabel value="Eps" />
-                    <h:selectOneMenu class="form-control" id="idge" value="#{controladorPerfil.personaselecionada.idEps}">
-                        <f:selectItems value="#{controladorListas.consEps()}"/>
-                    </h:selectOneMenu> 
-                    <h:inputHidden value="#{controladorPerfil.personaselecionada.id}"></h:inputHidden>
-                    <h:commandButton  class="btn btn-default" value="Modificar" id="btnIngresar" action="#{controladorPerfil.modificarpersona()}"/>
-
-
-                </h:panelGrid>
-            </h:form>
-            <h:form>
+            <h:form id="personas">
                 <h:panelGrid border="1">
 
                     <h:dataTable value="#{controladorPerfil.personas}" var="per" border="1">
@@ -132,6 +80,7 @@
                                 <h:outputText value="Tipo de sangre"></h:outputText>
                             </f:facet>
                             <h:outputText value="#{per.idRH}"></h:outputText>
+                            <h:outputText value="#{per.estado}"></h:outputText>
                         </h:column>
                         <h:column>
                             <h:inputHidden value="#{per.id}"></h:inputHidden>
@@ -139,8 +88,12 @@
                                 <h:outputText value="Herramientas"></h:outputText>
                             </f:facet>
                             <h:commandButton  class="btn btn-default" value="Editar" id="btnIngresar" action="#{controladorPerfil.asignareditar(per)}"/>
-                            <h:commandButton  class="btn btn-default" rendered="#{controladorForms.seleccion eq 'estadoUsuario1' }" value="Hablitar" id="estadoUsuario" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.habilitarUsuario(per.id)}"/>
-                            <h:commandButton  class="btn btn-default" rendered="true" value="Desabilitar" id="estadoUsuario1" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPerfil.desabilitarUsuario(per.id)}"/>
+                            <h:commandButton  class="btn btn-default" disabled="#{per.estado==0}"  value="Hablitar" id="estadoUsuario" actionListener="Persona.xhtml" action="#{controladorPerfil.habilitarUsuario(per.id)}">
+                                <f:ajax render="personas" execute="personas"></f:ajax>
+                            </h:commandButton>
+                            <h:commandButton  class="btn btn-default" disabled="#{per.estado==1}" value="Desabilitar" id="estadoUsuario1" actionListener="Persona.xhtml"  action="#{controladorPerfil.desabilitarUsuario(per.id)}">
+                             <f:ajax render="personas" execute="personas"></f:ajax>
+                            </h:commandButton>
                         </h:column>
                     </h:dataTable>
                 </h:panelGrid>

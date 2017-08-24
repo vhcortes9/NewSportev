@@ -43,8 +43,7 @@ public class ControladorPerfil {
     private BeanDatosPersona personaselecionada;
     private BeanDatosPersona administradoreditar;
     private BeanDatosPersona usuarioPerfil;
-    private boolean deshabilitado;
-    private boolean habilitado;
+    private boolean deshabilitarBotonEstado;
 
     private Part fotoguardar;
 
@@ -63,24 +62,6 @@ public class ControladorPerfil {
     public String getNomb() {
         return nomb;
     }
-
-    public boolean isDeshabilitado() {
-        return deshabilitado;
-    }
-
-    public void setDeshabilitado(boolean deshabilitado) {
-        this.deshabilitado = deshabilitado;
-    }
-
-    public boolean isHabilitado() {
-        return habilitado;
-    }
-
-    public void setHabilitado(boolean habilitado) {
-        this.habilitado = habilitado;
-    }
-
-   
 
     public void setNomb(String nomb) {
         this.nomb = nomb;
@@ -211,6 +192,17 @@ public class ControladorPerfil {
 
     }
 
+    public void listaDePersonas() {
+        Daoperfil dp = new Daoperfil();
+        personas = dp.listaPersonas();
+        if (personas.isEmpty()) {
+            System.out.println("Lista vacia");
+        } else {
+            System.out.println("Lista con datos");
+        }
+
+    }
+
     public void asignareditar(BeanDatosPersona persona) {
         this.personaselecionada = persona;
     }
@@ -225,8 +217,10 @@ public class ControladorPerfil {
             FacesMessage mensaje = new FacesMessage("Usuario Desabilitado");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
-            deshabilitado = true;
             
+            Daoperfil dp = new Daoperfil();
+            personas = daperfil.listaPersonas();
+
         } else {
             FacesMessage mensaje = new FacesMessage("Error");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
@@ -234,13 +228,16 @@ public class ControladorPerfil {
 
         }
     }
+
     public void habilitarUsuario(int id) {
         Daoperfil daperfil = new Daoperfil();
         if (daperfil.habilitarUsuario(id)) {
             FacesMessage mensaje = new FacesMessage("Usuario Habilitado");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
-            habilitado = true;
+            Daoperfil dp = new Daoperfil();
+            personas = daperfil.listaPersonas();
+
         } else {
             FacesMessage mensaje = new FacesMessage("Usuario Error");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
@@ -422,6 +419,14 @@ public class ControladorPerfil {
 
     public void setAdministradoreditar(BeanDatosPersona administradoreditar) {
         this.administradoreditar = administradoreditar;
+    }
+
+    public boolean isDeshabilitarBotonEstado() {
+        return deshabilitarBotonEstado;
+    }
+
+    public void setDeshabilitarBotonEstado(boolean deshabilitarBotonEstado) {
+        this.deshabilitarBotonEstado = deshabilitarBotonEstado;
     }
 
 }

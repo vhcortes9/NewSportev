@@ -40,8 +40,7 @@ public class DaoCampeonato extends Conexion {
     public boolean registrarCampeonato(Object obj) {
         BeanCampeonato BCamp = (BeanCampeonato) obj;
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             puente.executeUpdate("insert into campeonato (`idpersona`, `idCategoria`, "
                     + "`Nombre`, `FechaInicio`, `FechaFin`) "
                     + "values('" + BLog.getIdparticipante() + "', "
@@ -52,11 +51,6 @@ public class DaoCampeonato extends Conexion {
             desconectarBD(conn);
             listo = true;
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoCampeonato.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return listo;
@@ -65,19 +59,13 @@ public class DaoCampeonato extends Conexion {
     public List<BeanCampeonato> listacampe() {
         List<BeanCampeonato> listc = new ArrayList();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = Conexion.obtenerConexion().createStatement();
             rs = puente.executeQuery("Select idCampeonato, Nombre From campeonato WHERE Idpersona = '"+BLog.getIdparticipante()+"' ");
             while (rs.next()) {                
                 listc.add(new BeanCampeonato(rs.getInt("idCampeonato"),rs.getString("Nombre")));
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoCampeonato.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return  listc;
@@ -87,8 +75,7 @@ public class DaoCampeonato extends Conexion {
         //falta crear el procedimiento almacenado para esta lista
         List<BeanCampeonato> listarCampeonatos = new ArrayList();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             rs = puente.executeQuery("select cam.`idCampeonato`,  per.`Nombre`, cat.`Nombre`, cam.`Nombre`, cam.`FechaInicio`, cam.`FechaFin`, cam.`idpersona` from campeonato as cam inner join categoria as cat on cat.`idCategoria` = cam.`idCategoria` inner join persona as per on cam.`idpersona` = per.`Id` where per.`Id` = '" + BLog.getIdparticipante() + "'");
             while (rs.next()) {
                 BeanCampeonato BCampeonato = new BeanCampeonato();
@@ -105,11 +92,6 @@ public class DaoCampeonato extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception ex) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex1) {
-                Logger.getLogger(DaoCampeonato.class.getName()).log(Level.SEVERE, null, ex1);
-            }
             ex.printStackTrace();
         }
         return listarCampeonatos;
@@ -118,13 +100,11 @@ public class DaoCampeonato extends Conexion {
     public boolean eliminar(Object obj) throws SQLException {
         BeanCampeonato BCampeonato = (BeanCampeonato) obj;
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             puente.executeUpdate("DELETE FROM campeonato WHERE idCampeonato = '" + BCampeonato.getIdCampeonato() + "'");
             desconectarBD(conn);
             listo = true;
         } catch (Exception e) {
-            reversarBD(conn);
             e.printStackTrace();
         }
         return listo;
@@ -134,8 +114,7 @@ public class DaoCampeonato extends Conexion {
         List<BeanCampeonato> lisXIdCamp = new ArrayList();
         BeanCampeonato BCamp = new BeanCampeonato();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             rs = puente.executeQuery("select cam.`idCampeonato`,  per.`Nombre`, cat.`Nombre`, cam.`Nombre`, cam.`FechaInicio`, cam.`FechaFin` from campeonato as cam i"
                     + "nner join categoria as cat on cat.`idCategoria` = cam.`idCategoria` "
                     + "inner join persona as per on cam.`idpersona` = per.`Id` where cam.`idCampeonato` = '" + id + "'");
@@ -152,11 +131,6 @@ public class DaoCampeonato extends Conexion {
             desconectarBD(conn);
 
         } catch (Exception ex) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex1) {
-                Logger.getLogger(DaoCampeonato.class.getName()).log(Level.SEVERE, null, ex1);
-            }
             ex.printStackTrace();
         }
         return lisXIdCamp;

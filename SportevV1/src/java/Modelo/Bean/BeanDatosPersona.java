@@ -23,6 +23,7 @@ public class BeanDatosPersona {
    private String Telefono;
    private String Email;
    private String tipoIdentificacion;
+   private String estado;
    
    private String contraseña;
 
@@ -30,6 +31,14 @@ public class BeanDatosPersona {
         return contraseña;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }

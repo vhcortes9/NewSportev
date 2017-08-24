@@ -20,51 +20,6 @@ public class BeanEstadisticas {
     private int idJug;
     private int idEquipo;
     private int idPartido;
-    private int TarjAmarilla;
-    private int TarjRoja;
-    private int TarjAzul;
-    private int Goles;
-    private int Autogoles;
-
-    public int getTarjAmarilla() {
-        return TarjAmarilla;
-    }
-
-    public void setTarjAmarilla(int TarjAmarilla) {
-        this.TarjAmarilla = TarjAmarilla;
-    }
-
-    public int getTarjRoja() {
-        return TarjRoja;
-    }
-
-    public void setTarjRoja(int TarjRoja) {
-        this.TarjRoja = TarjRoja;
-    }
-
-    public int getTarjAzul() {
-        return TarjAzul;
-    }
-
-    public void setTarjAzul(int TarjAzul) {
-        this.TarjAzul = TarjAzul;
-    }
-
-    public int getGoles() {
-        return Goles;
-    }
-
-    public void setGoles(int Goles) {
-        this.Goles = Goles;
-    }
-
-    public int getAutogoles() {
-        return Autogoles;
-    }
-
-    public void setAutogoles(int Autogoles) {
-        this.Autogoles = Autogoles;
-    }
 
     public int getIdAccion() {
         return idAccion;

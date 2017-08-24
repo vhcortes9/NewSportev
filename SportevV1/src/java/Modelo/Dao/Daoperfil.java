@@ -11,7 +11,6 @@ import Modelo.Bean.BeanDatosPersona;
 import Modelo.Bean.BeanUsuariosLogin;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,11 +58,6 @@ public class Daoperfil extends Conexion {
             listo = true;
 
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return listo;
@@ -118,11 +112,6 @@ public class Daoperfil extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return imag;
@@ -155,11 +144,6 @@ public class Daoperfil extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return Bper;
@@ -171,7 +155,7 @@ public class Daoperfil extends Conexion {
             conn = Conexion.obtenerConexion();
             puente = conn.createStatement();
             rs = puente.executeQuery("SELECT distinct p.Id, p.Nombre, p.Apellido,p.Telefono,p.Direccion,p.Email,"
-                    + "p.FechaNacimiento, cc.NombreTipoDoc, p.Identificacion,h.Tipo, es.Nombre, gn.Nombre "
+                    + "p.FechaNacimiento, cc.NombreTipoDoc, p.Identificacion,h.Tipo, es.Nombre, gn.Nombre, u.habilitado "
                     + "FROM rh h INNER JOIN persona p on p.IdRH = h.idRh INNER JOIN eps es on es.idEps = p.IdEps"
                     + " INNER JOIN Genero gn on gn.IdGenero = p.Genero INNER JOIN tipodocumento cc on "
                     + "cc.idTipoDocumento = p.IdTipodocumento INNER JOIN participantes_has_equipo pe on"
@@ -194,17 +178,13 @@ public class Daoperfil extends Conexion {
                 Bper.setIdRH(rs.getString("Tipo"));
                 Bper.setIdEps(rs.getString("Nombre"));
                 Bper.setGenero(rs.getString(11));
+                Bper.setEstado(rs.getString("habilitado"));
 
                 listarPersona.add(Bper);
 
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return listarPersona;
@@ -217,11 +197,6 @@ public class Daoperfil extends Conexion {
             desconectarBD(conn);
             listo = true;
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return listo;
@@ -230,18 +205,12 @@ public class Daoperfil extends Conexion {
 
     public boolean desabilitarUsuario(int id) {
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             puente.executeUpdate("Update usuario Set habilitado = '" + desabilitado + "' where Idpersona = '" + id + "'");
             desconectarBD(conn);
             listo = true;
 
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return  listo;
@@ -249,18 +218,12 @@ public class Daoperfil extends Conexion {
     int habilitado = 0;
     public boolean habilitarUsuario(int id) {
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             puente.executeUpdate("Update usuario Set habilitado = '" + habilitado + "' where Idpersona = '" + id + "'");
             desconectarBD(conn);
             listo = true;
 
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(Daoperfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return  listo;

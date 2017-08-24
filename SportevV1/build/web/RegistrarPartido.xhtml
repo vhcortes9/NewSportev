@@ -170,9 +170,9 @@ and open the template in the editor.
 
                     <h:column rendered="#{controladorForms.seleccion eq 'RegEstadisticas'}">
                         <f:facet name="header">
-                            <h:outputText value="Accion"/>
+                            <h:outputText value="Ver Jugadores"/>
                         </f:facet>
-                        <h:commandButton id="equiXPart" value="Ver Equipos" action="#{controladorPartido.listarPorPart(cp.equipo1, cp.equipo2, cp.idPartido)}" actionListener="#{controladorForms.cambiarForm}" class="btn btn-primary">
+                        <h:commandButton id="equiXPart" value="Ver Equipos" action="#{controladorPartido.listarPorPart(cp.equipo1, cp.equipo2)}" actionListener="#{controladorForms.cambiarForm}" class="btn btn-primary">
 
                         </h:commandButton>
                     </h:column>
@@ -204,7 +204,6 @@ and open the template in the editor.
                         <h:commandButton class="btn btn-primary" id="JugsEquipo" value="Registrar Acciones" action="#{controladorJugador.consultarjug(consEqui.idEquipo)}" actionListener="#{controladorForms.cambiarForm}"/>
                     </h:column>
                 </h:dataTable>
-                <h:commandButton value="volver"  id="RegEstadisticas" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPartido.cerrarPartido()}"></h:commandButton>
             </h:form>
         </h:panelGroup>
 

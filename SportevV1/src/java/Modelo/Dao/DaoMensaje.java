@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
  */
 public class DaoMensaje extends Conexion {
 
+   
     private Statement puente = null;
     private ResultSet rs = null;
     private Connection conn = null;
@@ -46,48 +47,35 @@ public class DaoMensaje extends Conexion {
     public boolean enviarMen(Object obj) {
         BeanMensaje BeMssje = (BeanMensaje) obj;
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             puente.executeUpdate("INSERT INTO `mensaje` ( `emisor`,`reseptor`, `asunto`, `texto`) "
                     + "VALUES ('" + BLog.getUsuarioNombre() + "',"
                     + "'" + BeMssje.getIdReceptor() + "',"
                     + "'" + BeMssje.getAsunto() + "',"
                     + "'" + BeMssje.getTexto() + "')");
+            desconectarBD(conn);
             listo = true;
-            desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoMensaje.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return listo;
     }
-
-    public boolean elimanar(Object obj) throws SQLException {
-        BeanMensaje Bmss = (BeanMensaje) obj;
-        try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
-            puente.executeLargeUpdate("Delete From mensaje where id='" + Bmss.getIdMensaje() + "'");
-            desconectarBD(conn);
-        } catch (Exception e) {
-            reversarBD(conn);
-            e.printStackTrace();
-        }
-        return listo;
+public boolean elimanar(Object obj) throws SQLException{
+    BeanMensaje Bmss = (BeanMensaje) obj;
+    try {
+        puente = obtenerConexion().createStatement();
+        puente.executeLargeUpdate("Delete From mensaje where id='"+Bmss.getIdMensaje()+"'");
+    } catch (Exception e) {
     }
-
-    public List<BeanMensaje> verMensje() throws SQLException {
+    return listo;
+}
+    public List<BeanMensaje> verMensje() {
         List<BeanMensaje> vermensaje = new ArrayList();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, "
                     + "m.id FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r "
-                    + "on r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario WHERE u.Usuario = '" + BLog.getUsuarioNombre() + "'"
+                    + "on r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario WHERE u.Usuario = '"+BLog.getUsuarioNombre()+"'"
                     + "and m.desatendido = 0;");
             while (rs.next()) {
                 BeanMensaje BeaMess = new BeanMensaje();
@@ -103,17 +91,14 @@ public class DaoMensaje extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            reversarBD(conn);
             e.printStackTrace();
         }
         return vermensaje;
     }
-
-    public List<BeanMensaje> verMensjeAtendidos() throws SQLException {
+    public List<BeanMensaje> verMensjeAtendidos() {
         List<BeanMensaje> vermensaje = new ArrayList();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, m.id\n"
                     + "FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r on"
                     + " r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario "
@@ -132,21 +117,19 @@ public class DaoMensaje extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            reversarBD(conn);
             e.printStackTrace();
         }
         return vermensaje;
     }
     int a = 1;
-
-    public boolean atender(int id) {
+     public boolean atender(int id) {
         try {
             conn = obtenerConexion();
             puente = conn.createStatement();
-            puente.executeUpdate(" UPDATE `mensaje` set `desatendido` = '" + a + "' where id = '" + id + "' ;");
+            puente.executeUpdate(" UPDATE `mensaje` set `desatendido` = '"+a+"' where id = '"+id+"' ;");
 
-            listo = true;
             desconectarBD(conn);
+            listo = true;
 
         } catch (Exception e) {
             try {
@@ -158,116 +141,89 @@ public class DaoMensaje extends Conexion {
         }
         return listo;
     }
-
     public List<BeanUsuariosLogin> listaJugador() {
         List<BeanUsuariosLogin> verJugador = new ArrayList();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             rs = puente.executeQuery("SELECT  u.Usuario as Usuario, r.NombreRol as NombreRol FROM participantes_has_equipo pe INNER JOIN "
                     + "usuario u on pe.idJParticipante = u.Idpersona INNER JOIN rolusuario ru ON "
                     + "ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol WHERE pe.idEquipo in "
                     + "(SELECT pe.idEquipo FROM participantes_has_equipo pe INNER JOIN "
-                    + "usuario u on pe.idJParticipante = u.Idpersona WHERE u.Idpersona = " + BLog.getIdparticipante() + ");");
+                    + "usuario u on pe.idJParticipante = u.Idpersona WHERE u.Idpersona = " + BLog.getIdparticipante()+ ");");
             while (rs.next()) {
                 BeanUsuariosLogin Bequipo = new BeanUsuariosLogin();
 
                 Bequipo.setUsuarioNombre(rs.getString("Usuario"));
                 Bequipo.setNombreRol(rs.getString("NombreRol"));
+                
 
                 verJugador.add(Bequipo);
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoMensaje.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return verJugador;
     }
-
-    public List<BeanUsuariosLogin> administradores() {
+    public List<BeanUsuariosLogin>administradores(){
         List<BeanUsuariosLogin> veradmin = new ArrayList();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             rs = puente.executeQuery("SELECT distinct u.Usuario, r.NombreRol, c.Nombre FROM  usuario u  INNER JOIN rolusuario ru "
                     + "ON ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol INNER JOIN"
                     + " campeonato c on c.idpersona = u.Idpersona WHERE r.NombreRol = \"Administrador\"");
-            while (rs.next()) {
-                BeanUsuariosLogin Buser = new BeanUsuariosLogin();
-                Buser.setUsuarioNombre(rs.getString("Usuario"));
-                Buser.setNombreRol(rs.getString("NombreRol"));
-                Buser.setNombrecampeonato(rs.getString("Nombre"));
-                veradmin.add(Buser);
+            while (rs.next()) {                
+                BeanUsuariosLogin  Buser = new BeanUsuariosLogin();
+                 Buser.setUsuarioNombre(rs.getString("Usuario"));
+                 Buser.setNombreRol(rs.getString("NombreRol"));
+                 Buser.setNombrecampeonato(rs.getString("Nombre"));
+                 veradmin.add(Buser);
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoMensaje.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return veradmin;
     }
-
-    public List<BeanUsuariosLogin> entrenadores() {
+    public List<BeanUsuariosLogin>entrenadores(){
         List<BeanUsuariosLogin> veradmin = new ArrayList();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             rs = puente.executeQuery("SELECT distinct u.Usuario, r.NombreRol, c.Nombre, e.NombreEquipo FROM  usuario u "
                     + " INNER JOIN rolusuario ru ON ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol "
                     + "INNER JOIN participantes_has_equipo pe on pe.idJParticipante = u.Idpersona INNER JOIN equipo e "
                     + "on e.idEquipo = pe.idEquipo INNER JOIN equipo_has_campeonato ec on ec.idEquipo =e.idEquipo "
                     + "INNER JOIN campeonato c on c.idCampeonato = ec.idCampeonato   WHERE r.NombreRol = \"Entrenador\"");
-            while (rs.next()) {
-                BeanUsuariosLogin Buser = new BeanUsuariosLogin();
-                Buser.setUsuarioNombre(rs.getString("Usuario"));
-                Buser.setNombreRol(rs.getString("NombreRol"));
-                Buser.setNombrecampeonato(rs.getString("Nombre"));
-                Buser.setNombreequipo(rs.getString("NombreEquipo"));
-                veradmin.add(Buser);
+            while (rs.next()) {                
+                BeanUsuariosLogin  Buser = new BeanUsuariosLogin();
+                 Buser.setUsuarioNombre(rs.getString("Usuario"));
+                 Buser.setNombreRol(rs.getString("NombreRol"));
+                 Buser.setNombrecampeonato(rs.getString("Nombre"));
+                 Buser.setNombreequipo(rs.getString("NombreEquipo"));
+                 veradmin.add(Buser);
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoMensaje.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return veradmin;
     }
-
-    public boolean eliminar(int id) {
+    public boolean eliminar(int id){
         try {
             conn = Conexion.obtenerConexion();
             puente = conn.createStatement();
-            puente.executeUpdate("DELETE FROM mensaje WHERE id = '" + id + "'");
+            puente.executeUpdate("DELETE FROM mensaje WHERE id = '"+id+"'");
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoMensaje.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
-        return listo;
+    return listo;
     }
 
     public List<BeanMensaje> verMensje(BeanMensaje mesanje) {
         List<BeanMensaje> vermensaje = new ArrayList();
         try {
-            conn = obtenerConexion();
-            puente = conn.createStatement();
+            puente = obtenerConexion().createStatement();
             rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, m.id\n"
                     + "FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r on"
                     + " r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario "
@@ -286,13 +242,7 @@ public class DaoMensaje extends Conexion {
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoMensaje.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
-        return vermensaje;
-    }
+        return vermensaje; }
 }

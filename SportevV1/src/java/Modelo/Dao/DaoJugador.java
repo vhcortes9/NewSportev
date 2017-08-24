@@ -101,14 +101,9 @@ public class DaoJugador extends Conexion {
                 
                 listarJug.add(BJug);
             }
-            
-            desconectarBD(conn);
+            /*reversarBD(conn);
+            desconectarBD(conn);*/
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoJugador.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return listarJug;
@@ -119,13 +114,7 @@ public class DaoJugador extends Conexion {
             puente = conn.createStatement();
             puente.executeUpdate("DELETE FROM `persona` WHERE Id = '"+id+"'");
             listo = true;
-            desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoJugador.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return listo;
@@ -163,13 +152,7 @@ public class DaoJugador extends Conexion {
                 
                 listarJug.add(BJug);
             }
-            desconectarBD(conn);
         } catch (Exception e) {
-                try {
-                    reversarBD(conn);
-                } catch (SQLException ex) {
-                    Logger.getLogger(DaoJugador.class.getName()).log(Level.SEVERE, null, ex);
-                }
             e.printStackTrace();
         }
         return listarJug;

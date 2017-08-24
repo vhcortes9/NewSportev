@@ -56,17 +56,12 @@ public class DaoPartido {
                     + "WHERE par.Equipo1 = '"+id+"' and par.Equipo2 = '"+id1+"'");
             while (rs.next()) {
                 BeanDatosPersona corr = new BeanDatosPersona();
-                corr.setEmail("Email");
+                corr.setEmail(rs.getString("Email"));
                 listarCorreos.add(corr);
 
             }
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoPartido.class.getName()).log(Level.SEVERE, null, ex);
-            }
             e.printStackTrace();
         }
         return listarCorreos;
@@ -112,11 +107,6 @@ public class DaoPartido {
             desconectarBD(conn);
             listo = true;
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoPartido.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return listo;
     }
@@ -169,8 +159,8 @@ public class DaoPartido {
                     + "pt.`Fecha`='" + Bepar.getFecha() + "'"
                     + "where pt.idPartido = '" + Bepar.getIdPartido() + "';");
 
-            listo = true;
             desconectarBD(conn);
+            listo = true;
 
         } catch (Exception e) {
             try {
@@ -207,14 +197,9 @@ public class DaoPartido {
                 Bepartido.setFecha(rs.getString(8));
 
                 listarPartidos.add(Bepartido);
-            }
                 desconectarBD(conn);
-        } catch (Exception ex) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex1) {
-                Logger.getLogger(DaoPartido.class.getName()).log(Level.SEVERE, null, ex1);
             }
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return listarPartidos;
@@ -249,11 +234,6 @@ public class DaoPartido {
             }
             desconectarBD(conn);
         } catch (Exception ex) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex1) {
-                Logger.getLogger(DaoPartido.class.getName()).log(Level.SEVERE, null, ex1);
-            }
             ex.printStackTrace();
         }
         return listarPartidos;
@@ -266,12 +246,6 @@ public class DaoPartido {
             puente.executeUpdate("DELETE FROM `partido` WHERE idPartido = '" + id + "'");
             desconectarBD(conn);
         } catch (Exception e) {
-            try {
-                reversarBD(conn);
-            } catch (SQLException ex) {
-                Logger.getLogger(DaoPartido.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            e.printStackTrace();
         }
         return listo;
     }

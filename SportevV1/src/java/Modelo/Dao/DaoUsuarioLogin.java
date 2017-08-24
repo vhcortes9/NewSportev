@@ -46,6 +46,7 @@ public class DaoUsuarioLogin extends Conexion {
             vo.setUsuarioNombre(resultado.getString("Usuario"));
             vo.setContrasenia(resultado.getString("Contrasenia"));
             vo.setImagen(resultado.getString("imagen"));
+            vo.setEstado(resultado.getString("habilitado"));
 
             return vo;
         }

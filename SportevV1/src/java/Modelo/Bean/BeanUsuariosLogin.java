@@ -30,11 +30,20 @@ public class BeanUsuariosLogin {
     private String nombrecampeonato;
     private String nombreequipo;
     private String imagen;
+    private String Estado;
    
 
     public BeanUsuariosLogin(String nombreRol, String usuarioNombre) {
         this.nombreRol = nombreRol;
         this.usuarioNombre = usuarioNombre;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
     }
     
     

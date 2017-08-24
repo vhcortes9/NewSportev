@@ -15,11 +15,25 @@ import Modelo.Dao.DaoEquipo;
 import Modelo.Dao.DaoPartido;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -61,7 +75,7 @@ public class ControladorPartido {
 
     }
 
-    public String registrarPart(int id , int id1) {
+    public String registrarPart(int id, int id1) {
         String respuesta = "";
         DaoPartido DPar = new DaoPartido();
         if (BPar.getEquipo1().equals(BPar.getEquipo2())) {
@@ -86,14 +100,95 @@ public class ControladorPartido {
     }
 
     public void consultarCorreos(int id, int id1) {
-        
+
         DaoPartido dpart = new DaoPartido();
         consultarCorreos = dpart.consultarCorreos(id, id1);
         if (consultarCorreos.isEmpty()) {
             System.out.println("Error de lista");
-        }else{
+        } else {
             System.out.println("lista");
+            String [] stockArr = (String[]) consultarCorreos.toArray();
+            mandarCorreo();
         }
+    }
+
+    
+
+    public void mandarCorreo() {
+        // El correo gmail de envío
+        String correoEnvia = "andres1515@gmail.com";
+        String claveCorreo = "roberthyjudith";
+
+        // La configuración para enviar correo
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.user", correoEnvia);
+        properties.put("mail.password", claveCorreo);
+
+        Authenticator auth = new Authenticator() {
+            //override the getPasswordAuthentication method
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(correoEnvia, claveCorreo);
+            }
+        };
+        
+        // Obtener la sesion
+        Session session = Session.getInstance(properties, auth);
+
+        try {
+            // Crear el cuerpo del mensaje
+            MimeMessage mimeMessage = new MimeMessage(session);
+
+            // Agregar quien envía el correo
+            mimeMessage.setFrom(new InternetAddress(correoEnvia, "Dato Java"));
+            
+            String recipient = "pruebaandres@yopmail.com,pruebaandres@yopmail.com ";   //aqui haces el metodo que traiga los correo , lo retornas como una lista de email separados con ,
+            String[] recipientList = recipient.split(",");
+            InternetAddress[] recipientAddress = new InternetAddress[recipientList.length];
+            int counter = 0;
+            for (String lista : recipientList) {
+                recipientAddress[counter] = new InternetAddress(lista.trim());
+                counter++;
+            }
+ 
+          // Agregar los destinatarios al mensaje
+            mimeMessage.addRecipients(Message.RecipientType.TO,
+                    recipientAddress);
+
+            // Agregar el asunto al correo
+            mimeMessage.setSubject("Dato Java Enviando Correo.");
+           // mimeMessage.setText("Siguiendo el Tutorial de datojava.blogspot.com envío el correo.");
+
+            // Creo la parte del mensaje
+            MimeBodyPart mimeBodyPart = new MimeBodyPart();
+            mimeBodyPart.setText("Siguiendo el Tutorial de datojava.blogspot.com envío el correo.");
+
+            // Crear el multipart para agregar la parte del mensaje anterior
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(mimeBodyPart);
+
+            // Agregar el multipart al cuerpo del mensaje
+            mimeMessage.setContent(multipart);
+
+            // Enviar el mensaje
+            Transport transport = session.getTransport("smtp");
+            transport.connect(correoEnvia, claveCorreo);
+            transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+            transport.close();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("Correo enviado");
+    }
+
+    public static void main(String[] args) {
+    	ControladorPartido correoTexto = new ControladorPartido();
+        correoTexto.mandarCorreo();
+
     }
 
     public String modificar() {
