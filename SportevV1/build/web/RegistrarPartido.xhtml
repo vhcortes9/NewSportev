@@ -172,7 +172,7 @@ and open the template in the editor.
                         <f:facet name="header">
                             <h:outputText value="Ver Jugadores"/>
                         </f:facet>
-                        <h:commandButton id="equiXPart" value="Ver Equipos" action="#{controladorPartido.listarPorPart(cp.equipo1, cp.equipo2)}" actionListener="#{controladorForms.cambiarForm}" class="btn btn-primary">
+                        <h:commandButton id="equiXPart" value="Ver Equipos" action="#{controladorPartido.listarPorPart(cp.equipo1, cp.equipo2,cp.idPartido)}" actionListener="#{controladorForms.cambiarForm}" class="btn btn-primary">
 
                         </h:commandButton>
                     </h:column>
