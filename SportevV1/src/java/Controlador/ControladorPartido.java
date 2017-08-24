@@ -61,10 +61,12 @@ public class ControladorPartido {
         DaoPartido DPart = new DaoPartido();
         consEqui = DPart.consultarEquiPorPartido(Equi1, Equi2);
     }
-    public void cerrarPartido(){
+
+    public void cerrarPartido() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.removeAttribute("idPartido");
     }
+ // Eliminar partido
     public void eliminar(int id) {
         DaoPartido dapartido = new DaoPartido();
         if (dapartido.Eliminar(id)) {
@@ -74,6 +76,7 @@ public class ControladorPartido {
         }
 
     }
+// registrar partido
 
     public String registrarPart(int id, int id1) {
         String respuesta = "";
@@ -107,12 +110,10 @@ public class ControladorPartido {
             System.out.println("Error de lista");
         } else {
             System.out.println("lista");
-            String [] stockArr = (String[]) consultarCorreos.toArray();
+            String[] stockArr = (String[]) consultarCorreos.toArray();
             mandarCorreo();
         }
     }
-
-    
 
     public void mandarCorreo() {
         // El correo gmail de envío
@@ -134,7 +135,7 @@ public class ControladorPartido {
                 return new PasswordAuthentication(correoEnvia, claveCorreo);
             }
         };
-        
+
         // Obtener la sesion
         Session session = Session.getInstance(properties, auth);
 
@@ -144,7 +145,7 @@ public class ControladorPartido {
 
             // Agregar quien envía el correo
             mimeMessage.setFrom(new InternetAddress(correoEnvia, "Dato Java"));
-            
+
             String recipient = "pruebaandres@yopmail.com,pruebaandres@yopmail.com ";   //aqui haces el metodo que traiga los correo , lo retornas como una lista de email separados con ,
             String[] recipientList = recipient.split(",");
             InternetAddress[] recipientAddress = new InternetAddress[recipientList.length];
@@ -153,8 +154,8 @@ public class ControladorPartido {
                 recipientAddress[counter] = new InternetAddress(lista.trim());
                 counter++;
             }
- 
-          // Agregar los destinatarios al mensaje
+
+            // Agregar los destinatarios al mensaje
             mimeMessage.addRecipients(Message.RecipientType.TO,
                     recipientAddress);
 
@@ -186,11 +187,11 @@ public class ControladorPartido {
     }
 
     public static void main(String[] args) {
-    	ControladorPartido correoTexto = new ControladorPartido();
+        ControladorPartido correoTexto = new ControladorPartido();
         correoTexto.mandarCorreo();
 
     }
-
+ // modifico El Partido
     public String modificar() {
         String respuesta = "";
         DaoPartido DPar = new DaoPartido();
@@ -227,7 +228,7 @@ public class ControladorPartido {
         });
         return listarcap;
     }
-
+     // Edito los datos de la tabla partido para llenar el formulario par hacer la modificacion 
     public void asignarEditar(BeanPartido usu) {
         deshabilitarvistapartido = true;
         System.out.println("Asignar Editar");
