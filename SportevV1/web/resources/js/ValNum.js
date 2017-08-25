@@ -37,14 +37,7 @@ function soloLetras(e) {
 }
 
 
-function limpia() {
-    var val = document.getElementById("miInput").value;
-    var tam = val.length;
-    for(i = 0; i < tam; i++) {
-        if(!isNaN(val[i]))
-            document.getElementById("miInput").value = '';
-    }
-}
+
 function validarEmail(e) {
     tecla = (document.all) ? e.keyCode : e.which;
     if (tecla == 109)

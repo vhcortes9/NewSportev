@@ -27,6 +27,8 @@ public class BeanJugador {
     private String Telefono;
     private String CorreoElec; 
     private String Equipo;
+
+    private String estado;
     
     private int idEquipo;
     private int idTipoDoc;
@@ -41,6 +43,13 @@ public class BeanJugador {
 
     public void setIdParticipante(int idParticipante) {
         this.idParticipante = idParticipante;
+    }
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     

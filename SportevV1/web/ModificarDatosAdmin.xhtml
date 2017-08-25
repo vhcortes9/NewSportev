@@ -13,10 +13,10 @@
         <h:panelGrid columns="2" >
 
             <h:outputLabel value="Nombres" />
-            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.nombre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeydown="return validarLetras(event)"/>
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.nombre}" id="NombreEntre" required="true" label="Se Requiere Un Nombre" onkeydown="return soloLetras(event)"/>
 
             <h:outputLabel value="Apellidos" />
-            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.apellido}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeydown="return validarLetras(event)"/>
+            <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.apellido}" id="apellidos" required="true" label="Se Requieren Apellidos" onkeydown="return soloLetras(event)"/>
             <h:outputLabel value="Fecha Nacimiento" />
             <h:inputText class="form-control" value="#{controladorPerfil.administradoreditar.fechaNacimiento}" id="fechanac" required="true" label="FechaNac"/>
 

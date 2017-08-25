@@ -101,3 +101,5 @@ public class Controladorlogin {
     }
 
 }
+// <h:panelGroup layout="block" rendered="#{controladorForms.seleccion eq 'listaJugadores'}" >
+

@@ -31,12 +31,12 @@ public class DaoJugador extends Conexion {
     private int id;
     public BeanJugador Bjug = new BeanJugador();
     public BeanUsuariosLogin BLog = new BeanUsuariosLogin();
-    
-    public DaoJugador(){
+
+    public DaoJugador() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         BLog = (BeanUsuariosLogin) session.getAttribute("user");
     //HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-    //Bjug = (BeanJugador) session.getAttribute("user");
+        //Bjug = (BeanJugador) session.getAttribute("user");
     }
     public boolean listo = false;
 
@@ -58,7 +58,7 @@ public class DaoJugador extends Conexion {
                     + "'" + BJ.getTelefono() + "', "
                     + "'" + BJ.getCorreoElec() + "', "
                     + "'" + BJ.getIdEquipo() + "');");
-            
+
             cs.executeUpdate();
             desconectarBD(conn);
             listo = true;
@@ -79,14 +79,14 @@ public class DaoJugador extends Conexion {
             conn = obtenerConexion();
             puente = conn.createStatement();
             rs = puente.executeQuery("select td.`NombreTipoDoc`, r.`Tipo`, e.`Nombre`, TIMESTAMPDIFF(YEAR, `FechaNacimiento`, CURDATE()) as Edad,"
-                    + " par.`Nombre`, par.`Apellido`, par.`Identificacion`, g.`Nombre`, par.`Telefono`, par.`Email`, par.`Id` "
+                    + " par.`Nombre`, par.`Apellido`, par.`Identificacion`, g.`Nombre`, par.`Telefono`, par.`Email`, par.`Id`, u.`habilitado` "
                     + "from persona as par inner join tipodocumento as td on par.`idTipoDocumento` = td.`idTipoDocumento` "
                     + "inner join rh as r on par.`idRh` = r.`idRh` inner join eps as e on e.`idEps` = par.`idEps` inner join "
                     + "genero as g on g.`IdGenero` = par.`Genero` inner join participantes_has_equipo as pe on "
-                    + "pe.`idJParticipante` = par.`Id` where pe.`idEquipo` = '"+id+"' and pe.`Jugador` = 1" );
-            while (rs.next()) {                
+                    + "pe.`idJParticipante` = par.`Id` inner join usuario u on par.`Id` = u.`Idpersona` where pe.`idEquipo` = '" + id + "' and pe.`Jugador` = 1");
+            while (rs.next()) {
                 BeanJugador BJug = new BeanJugador();
-                
+
                 BJug.setNombreJugador(rs.getString(5));
                 BJug.setApellidosJugador(rs.getString("Apellido"));
                 BJug.setGenero(rs.getString(8));
@@ -98,29 +98,70 @@ public class DaoJugador extends Conexion {
                 BJug.setEps(rs.getString("Nombre"));
                 BJug.setFechaNac(rs.getString(4));
                 BJug.setIdParticipante(rs.getInt("Id"));
-                
+                BJug.setEstado(rs.getString("habilitado")); // algo esta fallando toca mirar ya reviso
+
                 listarJug.add(BJug);
             }
             /*reversarBD(conn);
-            desconectarBD(conn);*/
+             desconectarBD(conn);*/
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listarJug;
     }
-    public boolean Eliminar(int id){
+//conreol de jugadores  consultando los jugadores
+    public List<BeanJugador> controlListarJugadores() {
+        List<BeanJugador> listarJug = new ArrayList();
         try {
             conn = obtenerConexion();
             puente = conn.createStatement();
-            puente.executeUpdate("DELETE FROM `persona` WHERE Id = '"+id+"'");
+            rs = puente.executeQuery("SELECT distinct per.Id, per.Nombre, per.Apellido, doc.NombreTipoDoc, per.Identificacion, per.Telefono, per.Email,"
+                    + " e.Nombre,  h.Tipo, gn.Nombre, TIMESTAMPDIFF(YEAR, `FechaNacimiento`, CURDATE()) as Edad, u.habilitado FROM participantes_has_equipo pe "
+                    + "INNER JOIN persona per INNER JOIN usuario u on pe.idJParticipante = per.id INNER JOIN rolusuario ru ON ru.IdUsuario = u.idUsuario "
+                    + "INNER JOIN rol r on r.idRol = ru.IdRol INNER JOIN eps e on e.idEps = per.IdEps INNER JOIN rh h on h.idRh = per.IdRH INNER JOIN"
+                    + " tipodocumento doc on doc.idTipoDocumento = per.IdTipodocumento INNER JOIN genero gn on gn.IdGenero = per.Genero WHERE pe.idEquipo "
+                    + "in (SELECT pe.idEquipo FROM participantes_has_equipo pe INNER JOIN usuario u on pe.idJParticipante = u.Idpersona WHERE u.Idpersona = '"+BLog.getIdparticipante()+"' "
+                    + "and r.NombreRol = \"Jugador\")");
+            while (rs.next()) {
+                BeanJugador BJug = new BeanJugador();
+
+                BJug.setIdParticipante(rs.getInt("Id"));
+                BJug.setNombreJugador(rs.getString(2));
+                BJug.setApellidosJugador(rs.getString("Apellido"));
+                BJug.setTipoDoc(rs.getString("NombreTipoDoc"));
+                BJug.setNumDoc(rs.getString("Identificacion"));
+                BJug.setRH(rs.getString("Tipo"));
+                BJug.setCorreoElec(rs.getString("Email"));
+                BJug.setTelefono(rs.getString("Telefono"));
+                BJug.setEps(rs.getString("Nombre"));
+                BJug.setFechaNac(rs.getString(4));
+                BJug.setGenero(rs.getString(11));
+                BJug.setEstado(rs.getString("habilitado")); // algo esta fallando toca mirar ya reviso
+
+                listarJug.add(BJug);
+            }
+            /*reversarBD(conn);
+             desconectarBD(conn);*/
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listarJug;
+    }
+
+    public boolean Eliminar(int id) {
+        try {
+            conn = obtenerConexion();
+            puente = conn.createStatement();
+            puente.executeUpdate("DELETE FROM `persona` WHERE Id = '" + id + "'");
             listo = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return listo;
     }
-    public List<BeanJugador> consJugadorXId(int id){
-            List<BeanJugador> listarJug = new ArrayList(); 
+
+    public List<BeanJugador> consJugadorXId(int id) {
+        List<BeanJugador> listarJug = new ArrayList();
         try {
             conn = obtenerConexion();
             puente = conn.createStatement();
@@ -130,12 +171,11 @@ public class DaoJugador extends Conexion {
                     + "inner join tipodocumento as td on par.`idTipoDocumento` = td.`idTipoDocumento` "
                     + "inner join rh as r on par.`idRh` = r.`idRh` inner join eps as e on e.`idEps` = par.`idEps` inner join "
                     + "genero as g on g.`IdGenero` = par.`Genero` inner join participantes_has_equipo as pe on "
-                    + "pe.`idJParticipante` = par.`Id` where par.`Id` = '"+id+"' ");
+                    + "pe.`idJParticipante` = par.`Id` where par.`Id` = '" + id + "' ");
 
-           
-            while (rs.next()) {                
+            while (rs.next()) {
                 BeanJugador BJug = new BeanJugador();
-                
+
                 BJug.setNombreJugador(rs.getString(5));
                 BJug.setApellidosJugador(rs.getString("Apellido"));
                 BJug.setGenero(rs.getString(8));
@@ -149,7 +189,7 @@ public class DaoJugador extends Conexion {
                 BJug.setIdParticipante(rs.getInt("Id"));
                 BJug.setDireccion(rs.getString("Direccion"));
                 BJug.setIdEquipo(rs.getInt("idEquipo"));
-                
+
                 listarJug.add(BJug);
             }
         } catch (Exception e) {
@@ -157,25 +197,26 @@ public class DaoJugador extends Conexion {
         }
         return listarJug;
     }
-    public boolean modificar(Object obj){
-        BeanJugador BJug = (BeanJugador)obj;
+
+    public boolean modificar(Object obj) {
+        BeanJugador BJug = (BeanJugador) obj;
         try {
             conn = obtenerConexion();
-            cs = conn.prepareCall("call dbsportev.sp_updateJugador('"+BJug.getIdTipoDoc()+"', "
-                    + "'"+BJug.getIdRh()+"', "
-                    + "'"+BJug.getIdEps()+"', "
-                    + "'"+BJug.getFechaNac()+"', "
-                    + "'"+BJug.getNombreJugador()+"', "
-                    + "'"+BJug.getApellidosJugador()+"', "
-                    + "'"+BJug.getNumDoc()+"', "
-                    + "'"+BJug.getIdGenero()+"', "
-                    + "'"+BJug.getDireccion()+"', "
-                    + "'"+BJug.getTelefono()+"', "
-                    + "'"+BJug.getCorreoElec()+"',"
-                    + "'"+BJug.getIdEquipo()+"', "
-                    + "'"+BLog.getIdparticipante()+"');");
+            cs = conn.prepareCall("call dbsportev.sp_updateJugador('" + BJug.getIdTipoDoc() + "', "
+                    + "'" + BJug.getIdRh() + "', "
+                    + "'" + BJug.getIdEps() + "', "
+                    + "'" + BJug.getFechaNac() + "', "
+                    + "'" + BJug.getNombreJugador() + "', "
+                    + "'" + BJug.getApellidosJugador() + "', "
+                    + "'" + BJug.getNumDoc() + "', "
+                    + "'" + BJug.getIdGenero() + "', "
+                    + "'" + BJug.getDireccion() + "', "
+                    + "'" + BJug.getTelefono() + "', "
+                    + "'" + BJug.getCorreoElec() + "',"
+                    + "'" + BJug.getIdEquipo() + "', "
+                    + "'" + BLog.getIdparticipante() + "');");
             cs.executeUpdate();
-           listo = true;
+            listo = true;
             desconectarBD(conn);
         } catch (Exception e) {
             try {
@@ -187,7 +228,4 @@ public class DaoJugador extends Conexion {
         }
         return listo;
     }
-}   
-
-
-
+}

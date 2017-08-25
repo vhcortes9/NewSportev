@@ -53,13 +53,13 @@
 			var output, length, split, last;
 			switch(key) {
 				case "name":
-					output = "en-US";
+					output = "es-ES";
 					break;
 				case "englishName":
-					output = "English (United States)";
+					output = "Español (Colombia)";
 					break;
 				case "nativeName":
-					output = "English (United States)";
+					output = "Español (Colmbia)";
 					break;
 				case "twoDigitYearMax":
 					output = 2049;
@@ -242,26 +242,26 @@
 			return data.timezones;
 		},
 		days: function () {
-			return __(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]);
+			return __(["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"]);
 		},
 		dayAbbr: function () {
-			return __(["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
+			return __(["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"]);
 		},
 		dayShortNames: function () {
-			return __(["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]);
+			return __(["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"]);
 		},
 		dayFirstLetters: function () {
-			return __(["S_Sun_Initial", "M_Mon_Initial", "T_Tues_Initial", "W_Wed_Initial", "T_Thu_Initial", "F_Fri_Initial", "S_Sat_Initial"]);
+			return __(["D_Dom_Initial", "L_Lun_Initial", "M_Mar_Initial", "M_Mie_Initial", "J_Jue_Initial", "V_Vie_Initial", "S_Sab_Initial"]);
 		},
 		months: function () {
-			return __(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]);
+			return __(["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembere", "Diciembre"]);
 		},
 		monthAbbr: function () {
-			return __(["Jan_Abbr", "Feb_Abbr", "Mar_Abbr", "Apr_Abbr", "May_Abbr", "Jun_Abbr", "Jul_Abbr", "Aug_Abbr", "Sep_Abbr", "Oct_Abbr", "Nov_Abbr", "Dec_Abbr"]);
+			return __(["Ene_Abbr", "Feb_Abbr", "Mar_Abbr", "Abr_Abbr", "May_Abbr", "Jun_Abbr", "Jul_Abbr", "Ago_Abbr", "Sep_Abbr", "Oct_Abbr", "Nov_Abbr", "Dic_Abbr"]);
 		},
 		formatPatterns: function () {
 			return getText.getFromObjectValues({
-				shortDate: "M/d/yyyy",
+				shortDate: "YYYY-MM-dd",
 				longDate: "dddd, MMMM dd, yyyy",
 				shortTime: "h:mm tt",
 				longTime: "h:mm:ss tt",
