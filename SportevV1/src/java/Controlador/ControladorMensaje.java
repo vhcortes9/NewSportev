@@ -5,15 +5,19 @@
  */
 package Controlador;
 
-
+import Conexion.Conexion;
 import Modelo.Bean.BeanMensaje;
 import Modelo.Bean.BeanUsuariosLogin;
 import Modelo.Dao.DaoMensaje;
+import Modelo.Dao.DaoUsuarioLogin;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,7 +31,7 @@ public class ControladorMensaje {
     /**
      * Creates a new instance of ControladorMensaje
      */
-       private List<BeanMensaje> Menn;
+    private List<BeanMensaje> Menn;
     private List<BeanMensaje> atendido;
     private BeanMensaje mesanje = new BeanMensaje();
 
@@ -67,7 +71,7 @@ public class ControladorMensaje {
 
     }
 
-    public void atender(int id) {
+    public void atender(int id) throws SQLException {
         DaoMensaje Dmjs = new DaoMensaje();
         if (Dmjs.atender(id)) {
             DaoMensaje mens = new DaoMensaje();
@@ -85,7 +89,7 @@ public class ControladorMensaje {
         }
     }
 
-    public void eliminar(int id) {
+    public void eliminar(int id) throws SQLException {
         String respuesta = "";
         DaoMensaje de = new DaoMensaje();
         if (de.eliminar(id)) {
@@ -171,4 +175,5 @@ public class ControladorMensaje {
     public void setAtendido(List<BeanMensaje> atendido) {
         this.atendido = atendido;
     }
+
 }
