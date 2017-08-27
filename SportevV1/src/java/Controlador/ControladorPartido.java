@@ -3,8 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
-
 import Modelo.Bean.BeanCampeonato;
 import Modelo.Bean.BeanDatosPersona;
 import Modelo.Bean.BeanEquipo;
@@ -66,7 +64,9 @@ public class ControladorPartido {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         session.removeAttribute("idPartido");
     }
- // Eliminar partido
+
+    // Eliminar partido
+
     public void eliminar(int id) {
         DaoPartido dapartido = new DaoPartido();
         if (dapartido.Eliminar(id)) {
@@ -106,19 +106,23 @@ public class ControladorPartido {
 
         DaoPartido dpart = new DaoPartido();
         consultarCorreos = dpart.consultarCorreos(id, id1);
+        String[] correos = new String[consultarCorreos.size()];
         if (consultarCorreos.isEmpty()) {
             System.out.println("Error de lista");
         } else {
-            System.out.println("lista");
-            String[] stockArr = (String[]) consultarCorreos.toArray();
-            mandarCorreo();
+            int count = 0;
+            for (BeanDatosPersona datos : consultarCorreos) {
+                correos[count] = datos.getEmail();
+                count++;
+            }
+            mandarCorreo(correos);
         }
     }
 
-    public void mandarCorreo() {
+    public void mandarCorreo(String[] correos) {
         // El correo gmail de envío
-        String correoEnvia = "andres1515@gmail.com";
-        String claveCorreo = "roberthyjudith";
+        String correoEnvia = "sportev2017@gmail.com";
+        String claveCorreo = "vajy2017sportev";
 
         // La configuración para enviar correo
         Properties properties = new Properties();
@@ -146,12 +150,10 @@ public class ControladorPartido {
             // Agregar quien envía el correo
             mimeMessage.setFrom(new InternetAddress(correoEnvia, "Dato Java"));
 
-            String recipient = "pruebaandres@yopmail.com,pruebaandres@yopmail.com ";   //aqui haces el metodo que traiga los correo , lo retornas como una lista de email separados con ,
-            String[] recipientList = recipient.split(",");
-            InternetAddress[] recipientAddress = new InternetAddress[recipientList.length];
+            InternetAddress[] recipientAddress = new InternetAddress[correos.length];
             int counter = 0;
-            for (String lista : recipientList) {
-                recipientAddress[counter] = new InternetAddress(lista.trim());
+            for (String lista : correos) {
+                recipientAddress[counter] = new InternetAddress(lista);
                 counter++;
             }
 
@@ -160,12 +162,12 @@ public class ControladorPartido {
                     recipientAddress);
 
             // Agregar el asunto al correo
-            mimeMessage.setSubject("Dato Java Enviando Correo.");
+            mimeMessage.setSubject("Sportev Enviando Correo.");
            // mimeMessage.setText("Siguiendo el Tutorial de datojava.blogspot.com envío el correo.");
 
             // Creo la parte del mensaje
             MimeBodyPart mimeBodyPart = new MimeBodyPart();
-            mimeBodyPart.setText("Siguiendo el Tutorial de datojava.blogspot.com envío el correo.");
+            mimeBodyPart.setText(" Usted Tiene Partido Revice la pagina http://localhost:8080/SportevV1/ ");
 
             // Crear el multipart para agregar la parte del mensaje anterior
             Multipart multipart = new MimeMultipart();
@@ -186,12 +188,8 @@ public class ControladorPartido {
         System.out.println("Correo enviado");
     }
 
-    public static void main(String[] args) {
-        ControladorPartido correoTexto = new ControladorPartido();
-        correoTexto.mandarCorreo();
+    // modifico El Partido
 
-    }
- // modifico El Partido
     public String modificar() {
         String respuesta = "";
         DaoPartido DPar = new DaoPartido();
@@ -228,7 +226,9 @@ public class ControladorPartido {
         });
         return listarcap;
     }
-     // Edito los datos de la tabla partido para llenar el formulario par hacer la modificacion 
+
+    // Edito los datos de la tabla partido para llenar el formulario par hacer la modificacion 
+
     public void asignarEditar(BeanPartido usu) {
         deshabilitarvistapartido = true;
         System.out.println("Asignar Editar");
