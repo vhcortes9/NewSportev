@@ -13,13 +13,28 @@ import java.sql.*;
  *
  * @author victorhugo
  */
-public class DaoEstadisticas extends Conexion{
-private Statement puente; 
-private ResultSet rs;
-private CallableStatement cs;
-private Connection conn;
+public class DaoEstadisticas extends Conexion {
 
-public boolean listo = false;
+    private Statement puente;
+    private ResultSet rs;
+    private CallableStatement cs;
+    private Connection conn;
+
+    public boolean listo = false;
+
+    public boolean regAcciones(Object obj, int id) {
+        try {
+            BeanEstadisticas BEstadisticas = (BeanEstadisticas) obj;
+            conn = obtenerConexion();
+            cs = conn.prepareCall("call Sp_RegAcciones('" + BEstadisticas.getIdPartido() + "', '" + id + "', '" + BEstadisticas.getIdEquipo() + "', '" + BEstadisticas.getGoles() + "', '" + BEstadisticas.getTarjAmarilla() + "', '" + BEstadisticas.getTarjRoja() + "', '" + BEstadisticas.getTarjAzul() + "', '" + BEstadisticas.getAutogoles() + "')");
+            cs.executeQuery();
+            listo = true;
+            desconectarBD(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listo;
+    }
 
 //public boolean regAcciones(){
 //    try {
