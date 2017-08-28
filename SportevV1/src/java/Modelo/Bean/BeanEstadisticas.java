@@ -15,7 +15,8 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class BeanEstadisticas {
-
+    
+    private int idAccion;
     private int idJug;
     private int idEquipo;
     private int idPartido;
@@ -24,31 +25,6 @@ public class BeanEstadisticas {
     private int TarjAzul;
     private int Goles;
     private int Autogoles;
-    private int idAccion;
-
-    public int getIdJug() {
-        return idJug;
-    }
-
-    public void setIdJug(int idJug) {
-        this.idJug = idJug;
-    }
-
-    public int getIdEquipo() {
-        return idEquipo;
-    }
-
-    public void setIdEquipo(int idEquipo) {
-        this.idEquipo = idEquipo;
-    }
-
-    public int getIdPartido() {
-        return idPartido;
-    }
-
-    public void setIdPartido(int idPartido) {
-        this.idPartido = idPartido;
-    }
 
     public int getTarjAmarilla() {
         return TarjAmarilla;
@@ -97,13 +73,37 @@ public class BeanEstadisticas {
     public void setIdAccion(int idAccion) {
         this.idAccion = idAccion;
     }
-   
+
+    public int getIdJug() {
+        return idJug;
+    }
+
+    public void setIdJug(int idJug) {
+        this.idJug = idJug;
+    }
+
+    public int getIdEquipo() {
+        return idEquipo;
+    }
+
+    public void setIdEquipo(int idEquipo) {
+        this.idEquipo = idEquipo;
+    }
+
+    public int getIdPartido() {
+        return idPartido;
+    }
+
+    public void setIdPartido(int idPartido) {
+        this.idPartido = idPartido;
+    }
+    
+    
+
     /**
      * Creates a new instance of BeanEstadisticas
      */
-    
-    
     public BeanEstadisticas() {
     }
-
+    
 }
