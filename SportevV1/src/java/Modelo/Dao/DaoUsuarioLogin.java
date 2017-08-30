@@ -53,23 +53,16 @@ public class DaoUsuarioLogin extends Conexion {
         desconectarBD(cnn);
         return null;
     }
-    public BeanUsuariosLogin estadoUsuario(BeanUsuariosLogin vo) throws SQLException {
-        PreparedStatement sentencia = cnn.prepareStatement("SELECT * FROM usuario WHERE Usuario = ? "
-                + "and Contrasenia = ? and habilitado = 0");
+    public boolean estadoUsuario(BeanUsuariosLogin vo) throws SQLException {
+        boolean rta=false;
+        PreparedStatement sentencia = cnn.prepareStatement("SELECT * FROM usuario WHERE Usuario = ? and habilitado = 0");
         sentencia.setString(1, vo.getUsuarioNombre());
-        sentencia.setString(2, vo.getContrasenia());
         ResultSet resultado = sentencia.executeQuery();
         if (resultado.next()) {
-            vo.setIdUsuario(resultado.getInt("idUsuario"));
-            vo.setIdparticipante(resultado.getInt("Idpersona"));
-            vo.setUsuarioNombre(resultado.getString("Usuario"));
-            vo.setContrasenia(resultado.getString("Contrasenia"));
-            vo.setImagen(resultado.getString("imagen"));
-
-            return vo;
+            rta=true;
         }
         desconectarBD(cnn);
-        return null;
+        return rta;
     }
     
 

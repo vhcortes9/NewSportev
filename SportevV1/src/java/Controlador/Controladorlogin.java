@@ -46,52 +46,54 @@ public class Controladorlogin {
     private Connection conn = null;
 
     Conexion cnn = new Conexion();
+    String mensajes = "";
 
     public String validarUsuario() {
         try {
             Connection c = Conexion.obtenerConexion();
             DaoUsuarioLogin control = new DaoUsuarioLogin(c);
-            BeanUsuariosLogin validarUsuario = control.consultar(this.usuario);
-            BeanUsuariosLogin estadoUsuario = control.estadoUsuario(this.usuario);
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            BeanUsuariosLogin validarUsuario = control.consultar(this.usuario);
             session.setAttribute("user", validarUsuario);
-            if (estadoUsuario == null) {
-                FacesMessage mensaje = new FacesMessage("usuario desabilitado ");
-                mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
-                FacesContext.getCurrentInstance().addMessage(null, mensaje);
-                
-                return "";
-            }
-            if (validarUsuario == null) {
-                FacesMessage mensaje = new FacesMessage("Contraseña o Nombre incorrectos ");
-                mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
-                FacesContext.getCurrentInstance().addMessage(null, mensaje);
-                Conexion.desconectarBD(c);
-                return "";
+
+            if ( validarUsuario== null) {
+                mensajes = "Usuario o Contraseña Incorrectas";
+                return mensajes;
             } else {
-                String nombreRol = control.consultarRol(this.usuario);
-                String retorno = "";
-                if (nombreRol != null && nombreRol.equals("Administrador")) {
-                    retorno = "rolAdministradorIni";
-                }
+            boolean estadoUsuario = control.estadoUsuario(this.usuario);
+                if ( estadoUsuario == false) {
+                    mensajes = " Usuario desabilitado ";
+                    Conexion.desconectarBD(c);
 
-                if (nombreRol != null && nombreRol.equals("Entrenador")) {
-                    retorno = "rolEntrenadorIni";
-                }
+                    return mensajes;
+                } else {
 
-                if (nombreRol != null && nombreRol.equals("Jugador")) {
-                    retorno = "rolJugadorIni";
+                    String nombreRol = control.consultarRol(this.usuario);
+                    String retorno = "";
+                    if (nombreRol != null && nombreRol.equals("Administrador")) {
+                        retorno = "rolAdministradorIni";
+                    }
+
+                    if (nombreRol != null && nombreRol.equals("Entrenador")) {
+                        retorno = "rolEntrenadorIni";
+                    }
+
+                    if (nombreRol != null && nombreRol.equals("Jugador")) {
+                        retorno = "rolJugadorIni";
+                    }
+
+                    Conexion.desconectarBD(c);
+                    return retorno;
                 }
-                Conexion.desconectarBD(c);
-                return retorno;
             }
 
         } catch (NamingException ex) {
-            return "";
+            return mensajes;
         } catch (SQLException ex) {
-            return "";
+            return mensajes;
         }
     }
+  
 
     public String cerrarSession() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -100,6 +102,14 @@ public class Controladorlogin {
 
     }
 
+    public String getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(String mensajes) {
+        this.mensajes = mensajes;
+    }
+    
 }
 // <h:panelGroup layout="block" rendered="#{controladorForms.seleccion eq 'listaJugadores'}" >
 

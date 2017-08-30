@@ -25,6 +25,7 @@
                             </svg>
                             <h:inputText value="#{controladorlogin.usuario.usuarioNombre}" id="usuario" pt:placeholder="Usuario" class="login__input name" required="true" requiredMessage="Se necesita un Usuario!" />
                             <h:message for="usuario" class="msj"/>
+                            <h:outputLabel value="#{controladorlogin.mensajes}"></h:outputLabel>
                         </div>
                         <div class="login__row">
                             <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
