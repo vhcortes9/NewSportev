@@ -52,15 +52,15 @@ public class Controladorlogin {
         try {
             Connection c = Conexion.obtenerConexion();
             DaoUsuarioLogin control = new DaoUsuarioLogin(c);
-            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            boolean estadoUsuario = control.estadoUsuario(this.usuario);
             BeanUsuariosLogin validarUsuario = control.consultar(this.usuario);
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.setAttribute("user", validarUsuario);
 
             if ( validarUsuario== null) {
                 mensajes = "Usuario o Contraseña Incorrectas";
                 return mensajes;
             } else {
-            boolean estadoUsuario = control.estadoUsuario(this.usuario);
                 if ( estadoUsuario == false) {
                     mensajes = " Usuario desabilitado ";
                     Conexion.desconectarBD(c);
@@ -93,7 +93,6 @@ public class Controladorlogin {
             return mensajes;
         }
     }
-  
 
     public String cerrarSession() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
