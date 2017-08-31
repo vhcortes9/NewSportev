@@ -47,7 +47,8 @@ public class DaoMensaje extends Conexion {
     public boolean enviarMen(Object obj) {
         BeanMensaje BeMssje = (BeanMensaje) obj;
         try {
-            puente = obtenerConexion().createStatement();
+             conn = obtenerConexion();
+            puente = conn.createStatement();
             puente.executeUpdate("INSERT INTO `mensaje` ( `emisor`,`reseptor`, `asunto`, `texto`) "
                     + "VALUES ('" + BLog.getUsuarioNombre() + "',"
                     + "'" + BeMssje.getIdReceptor() + "',"
@@ -63,7 +64,8 @@ public class DaoMensaje extends Conexion {
 public boolean elimanar(Object obj) throws SQLException{
     BeanMensaje Bmss = (BeanMensaje) obj;
     try {
-        puente = obtenerConexion().createStatement();
+         conn = obtenerConexion();
+            puente = conn.createStatement();
         puente.executeLargeUpdate("Delete From mensaje where id='"+Bmss.getIdMensaje()+"'");
     } catch (Exception e) {
     }
@@ -72,7 +74,8 @@ public boolean elimanar(Object obj) throws SQLException{
     public List<BeanMensaje> verMensje() {
         List<BeanMensaje> vermensaje = new ArrayList();
         try {
-            puente = obtenerConexion().createStatement();
+           conn = obtenerConexion();
+            puente = conn.createStatement();
             rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, "
                     + "m.id FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r "
                     + "on r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario WHERE u.Usuario = '"+BLog.getUsuarioNombre()+"'"
@@ -98,7 +101,8 @@ public boolean elimanar(Object obj) throws SQLException{
     public List<BeanMensaje> verMensjeAtendidos() {
         List<BeanMensaje> vermensaje = new ArrayList();
         try {
-            puente = obtenerConexion().createStatement();
+             conn = obtenerConexion();
+            puente = conn.createStatement();
             rs = puente.executeQuery("SELECT r.NombreRol, m.reseptor, m.emisor, m.asunto, m.texto, m.FechaHora, m.id\n"
                     + "FROM usuario u INNER JOIN rolusuario rl  on rl.IdUsuario = u.idUsuario INNER JOIN rol r on"
                     + " r.idRol = rl.IdRol INNER JOIN mensaje m on m.reseptor = u.Usuario "
@@ -144,7 +148,8 @@ public boolean elimanar(Object obj) throws SQLException{
     public List<BeanUsuariosLogin> listaJugador() {
         List<BeanUsuariosLogin> verJugador = new ArrayList();
         try {
-            puente = obtenerConexion().createStatement();
+             conn = obtenerConexion();
+            puente = conn.createStatement();
             rs = puente.executeQuery("SELECT  u.Usuario as Usuario, r.NombreRol as NombreRol FROM participantes_has_equipo pe INNER JOIN "
                     + "usuario u on pe.idJParticipante = u.Idpersona INNER JOIN rolusuario ru ON "
                     + "ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol WHERE pe.idEquipo in "
@@ -168,7 +173,8 @@ public boolean elimanar(Object obj) throws SQLException{
     public List<BeanUsuariosLogin>administradores(){
         List<BeanUsuariosLogin> veradmin = new ArrayList();
         try {
-            puente = obtenerConexion().createStatement();
+             conn = obtenerConexion();
+            puente = conn.createStatement();
             rs = puente.executeQuery("SELECT distinct u.Usuario, r.NombreRol, c.Nombre FROM  usuario u  INNER JOIN rolusuario ru "
                     + "ON ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol INNER JOIN"
                     + " campeonato c on c.idpersona = u.Idpersona WHERE r.NombreRol = \"Administrador\"");
@@ -188,7 +194,8 @@ public boolean elimanar(Object obj) throws SQLException{
     public List<BeanUsuariosLogin>entrenadores(){
         List<BeanUsuariosLogin> veradmin = new ArrayList();
         try {
-            puente = obtenerConexion().createStatement();
+            conn = obtenerConexion();
+            puente = conn.createStatement();
             rs = puente.executeQuery("SELECT distinct u.Usuario, r.NombreRol, c.Nombre, e.NombreEquipo FROM  usuario u "
                     + " INNER JOIN rolusuario ru ON ru.IdUsuario = u.idUsuario INNER JOIN rol r on r.idRol = ru.IdRol "
                     + "INNER JOIN participantes_has_equipo pe on pe.idJParticipante = u.Idpersona INNER JOIN equipo e "

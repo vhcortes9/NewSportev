@@ -51,16 +51,9 @@ public class Controladorlogin {
             Connection c = Conexion.obtenerConexion();
             DaoUsuarioLogin control = new DaoUsuarioLogin(c);
             BeanUsuariosLogin validarUsuario = control.consultar(this.usuario);
-            BeanUsuariosLogin estadoUsuario = control.estadoUsuario(this.usuario);
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.setAttribute("user", validarUsuario);
-            if (estadoUsuario == null) {
-                FacesMessage mensaje = new FacesMessage("usuario desabilitado ");
-                mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
-                FacesContext.getCurrentInstance().addMessage(null, mensaje);
-                
-                return "";
-            }
+          
             if (validarUsuario == null) {
                 FacesMessage mensaje = new FacesMessage("Contraseña o Nombre incorrectos ");
                 mensaje.setSeverity(FacesMessage.SEVERITY_INFO);

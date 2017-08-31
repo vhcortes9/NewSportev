@@ -192,7 +192,8 @@ public class Daoperfil extends Conexion {
 
     public boolean registrarimagen(int id, String i) {
         try {
-            puente = obtenerConexion().createStatement();
+            conn = Conexion.obtenerConexion();
+            puente = conn.createStatement();
             puente.executeUpdate("Update usuario SET imagen = '" + i + "' WHERE `idUsuario` = '" + id + "'");
             desconectarBD(conn);
             listo = true;
@@ -205,7 +206,8 @@ public class Daoperfil extends Conexion {
 
     public boolean desabilitarUsuario(int id) {
         try {
-            puente = obtenerConexion().createStatement();
+            conn = Conexion.obtenerConexion();
+            puente = conn.createStatement();
             puente.executeUpdate("Update usuario Set habilitado = '" + desabilitado + "' where Idpersona = '" + id + "'");
             desconectarBD(conn);
             listo = true;
@@ -213,12 +215,14 @@ public class Daoperfil extends Conexion {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  listo;
+        return listo;
     }
     int habilitado = 0;
+
     public boolean habilitarUsuario(int id) {
         try {
-            puente = obtenerConexion().createStatement();
+            conn = Conexion.obtenerConexion();
+            puente = conn.createStatement();
             puente.executeUpdate("Update usuario Set habilitado = '" + habilitado + "' where Idpersona = '" + id + "'");
             desconectarBD(conn);
             listo = true;
@@ -226,7 +230,7 @@ public class Daoperfil extends Conexion {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return  listo;
+        return listo;
     }
 
 }

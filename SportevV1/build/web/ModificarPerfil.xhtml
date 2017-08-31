@@ -4,12 +4,14 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:panelGroup layout="block" class="col-md-12 col-sm-12 col-xs-12" rendered="#{controladorForms.seleccion eq 'validarPerfilForm'}">
-        <h:form enctype="multipart/form-data">
+        <h:form enctype="multipart/form-data" id="imagen">
             <img src="#{request.contextPath}/Imagenes/#{controladorPerfil.imagen.imagen}"/>
             <h:inputHidden value="#{controladorPerfil.usuario.idUsuario}"></h:inputHidden>
             <h:inputFile value="#{controladorPerfil.file}" ></h:inputFile><br></br>
 
-            <h:commandButton value="Modificar" action="#{controladorPerfil.upload(controladorPerfil.usuario.idUsuario)}"></h:commandButton>
+            <h:commandButton value="Modificar"  action="#{controladorPerfil.upload(controladorPerfil.usuario.idUsuario)}">
+             <f:ajax render="imagen" execute="imagen"></f:ajax>
+            </h:commandButton>
         </h:form><br></br>
         <h:form>
             <h:outputLabel value="Contraseña"></h:outputLabel><br></br>

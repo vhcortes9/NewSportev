@@ -33,7 +33,7 @@ public class ControladorPerfil {
     /**
      * Creates a new instance of LoginAppBean
      */
-    private BeanUsuariosLogin nombre;
+   private BeanUsuariosLogin nombre;
     private BeanUsuariosLogin imagen;
     private BeanUsuariosLogin contraseña;
     private BeanUsuariosLogin usuario;
