@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -32,15 +33,16 @@ public class DaoCampeonato extends Conexion {
 
     public boolean listo = false;
 
-    public DaoCampeonato() {
+    public DaoCampeonato() throws NamingException, SQLException {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         BLog = (BeanUsuariosLogin) session.getAttribute("user");
+        conn=obtenerConexion();
     }
 
     public boolean registrarCampeonato(Object obj) {
         BeanCampeonato BCamp = (BeanCampeonato) obj;
         try {
-            puente = obtenerConexion().createStatement();
+            puente = conn.createStatement();
             puente.executeUpdate("insert into campeonato (`idpersona`, `idCategoria`, "
                     + "`Nombre`, `FechaInicio`, `FechaFin`) "
                     + "values('" + BLog.getIdparticipante() + "', "
@@ -59,7 +61,7 @@ public class DaoCampeonato extends Conexion {
     public List<BeanCampeonato> listacampe() {
         List<BeanCampeonato> listc = new ArrayList();
         try {
-            puente = Conexion.obtenerConexion().createStatement();
+            puente = conn.createStatement();
             rs = puente.executeQuery("Select idCampeonato, Nombre From campeonato WHERE Idpersona = '"+BLog.getIdparticipante()+"' ");
             while (rs.next()) {                
                 listc.add(new BeanCampeonato(rs.getInt("idCampeonato"),rs.getString("Nombre")));
@@ -75,7 +77,7 @@ public class DaoCampeonato extends Conexion {
         //falta crear el procedimiento almacenado para esta lista
         List<BeanCampeonato> listarCampeonatos = new ArrayList();
         try {
-            puente = obtenerConexion().createStatement();
+            puente = conn.createStatement();
             rs = puente.executeQuery("select cam.`idCampeonato`,  per.`Nombre`, cat.`Nombre`, cam.`Nombre`, cam.`FechaInicio`, cam.`FechaFin`, cam.`idpersona` from campeonato as cam inner join categoria as cat on cat.`idCategoria` = cam.`idCategoria` inner join persona as per on cam.`idpersona` = per.`Id` where per.`Id` = '" + BLog.getIdparticipante() + "'");
             while (rs.next()) {
                 BeanCampeonato BCampeonato = new BeanCampeonato();
@@ -100,7 +102,7 @@ public class DaoCampeonato extends Conexion {
     public boolean eliminar(Object obj) throws SQLException {
         BeanCampeonato BCampeonato = (BeanCampeonato) obj;
         try {
-            puente = obtenerConexion().createStatement();
+            puente = conn.createStatement();
             puente.executeUpdate("DELETE FROM campeonato WHERE idCampeonato = '" + BCampeonato.getIdCampeonato() + "'");
             desconectarBD(conn);
             listo = true;
@@ -114,7 +116,7 @@ public class DaoCampeonato extends Conexion {
         List<BeanCampeonato> lisXIdCamp = new ArrayList();
         BeanCampeonato BCamp = new BeanCampeonato();
         try {
-            puente = obtenerConexion().createStatement();
+            puente =conn.createStatement();
             rs = puente.executeQuery("select cam.`idCampeonato`,  per.`Nombre`, cat.`Nombre`, cam.`Nombre`, cam.`FechaInicio`, cam.`FechaFin` from campeonato as cam i"
                     + "nner join categoria as cat on cat.`idCategoria` = cam.`idCategoria` "
                     + "inner join persona as per on cam.`idpersona` = per.`Id` where cam.`idCampeonato` = '" + id + "'");

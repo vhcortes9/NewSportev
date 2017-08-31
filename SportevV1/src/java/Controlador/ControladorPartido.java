@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package Controlador;
+
 import Modelo.Bean.BeanCampeonato;
 import Modelo.Bean.BeanDatosPersona;
 import Modelo.Bean.BeanEquipo;
@@ -11,6 +8,7 @@ import Modelo.Bean.BeanUsuariosLogin;
 import Modelo.Dao.DaoCampeonato;
 import Modelo.Dao.DaoEquipo;
 import Modelo.Dao.DaoPartido;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -32,6 +30,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -216,7 +215,7 @@ public class ControladorPartido {
         return listarpa;
     }
 
-    public List<SelectItem> consultarCamponatos() {
+    public List<SelectItem> consultarCamponatos() throws NamingException, SQLException {
         DaoCampeonato dec = new DaoCampeonato();
         List<BeanCampeonato> listar;
         List<SelectItem> listarcap = new ArrayList();

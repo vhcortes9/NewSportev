@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controlador;
 
 import Modelo.Bean.BeanCampeonato;
@@ -23,6 +19,7 @@ import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.StyleConstants;
 import javax.faces.event.ActionEvent;
+import javax.naming.NamingException;
 
 /**
  *
@@ -55,28 +52,19 @@ public class ControladorCampeonato {
 	}
 
 
-    public String registrarCampeonato() {
+    public void registrarCampeonato() throws NamingException, SQLException {
         DaoCampeonato DCamp = new DaoCampeonato();
-        if (DCamp.registrarCampeonato(this.BCamp)) {
-            respuesta = "rolAdministradorIni.xhtml";
-
-        } else {
-            respuesta = "Error.xhtml";
-        }
-        return respuesta;
+        DCamp.registrarCampeonato(this.BCamp);
+            llenarDatos();
     }
 
-    public String eliminar() throws SQLException {
+    public void eliminar() throws NamingException, SQLException {
         DaoCampeonato DCamp = new DaoCampeonato();
-        if (DCamp.eliminar(this.BCamp)) {
-            respuesta = "CrudCampeonato.xhtml";
-        } else {
-            respuesta = "/Error.xhtml";
-        }
-        return respuesta;
+        DCamp.eliminar(this.BCamp);
+        llenarDatos();
     }
 
-    public void editar(int id) {
+    public void editar(int id) throws NamingException, SQLException {
         DaoCampeonato DCampeonato = new DaoCampeonato();
         List<BeanCampeonato> listar;
         listar = DCampeonato.consultar(id);
@@ -85,14 +73,26 @@ public class ControladorCampeonato {
         }
 
     }
-
-    public void modificar() {
+     public void prueba() throws NamingException, SQLException{
+     registrarCampeonato();
+     llenarDatos();
+     }
+    public void modificar() throws NamingException, SQLException{
         DaoCampeonato DCamp = new DaoCampeonato();
         System.out.println(BCamp.getIdCampeonato());
         DCamp.modificar(this.BCamp);
+        llenarDatos();
           
     }
 
+    public void llenarDatos(){
+    try {
+            DaoCampeonato DCampeonato = new DaoCampeonato();
+            consCamp = DCampeonato.listarCampeonato();
+
+        } catch (Exception e) {
+        }
+    }
     public ControladorCampeonato() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         usuario = (BeanUsuariosLogin) session.getAttribute("user");

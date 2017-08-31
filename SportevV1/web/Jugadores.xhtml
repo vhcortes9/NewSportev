@@ -88,7 +88,7 @@ and open the template in the editor.
                         <f:facet name="header">
                             <h:outputText value="Inscribir"/>
                         </f:facet>
-                        <h:commandButton id="InscribirJugador" value="Inscribir" actionListener="#{controladorForms.cambiarForm}" action="#{controladorPreinscripcion.inscribir(cj.nombreJugador, cj.correoElec, cj.idParticipante, cj.idEquipo)}"/>
+                        <h:commandButton id="InscribirJugador" value="Inscribir" actionListener="#{controladorForms.cambiarForm}" action="#{controladorJugador.inscribirJug(cj.nombreJugador, cj.correoElec, cj.idParticipante)}"/>
                     </h:column>
                     <h:column rendered="#{controladorForms.seleccion eq 'JugsEquipo'}">
                         <f:facet name="header">

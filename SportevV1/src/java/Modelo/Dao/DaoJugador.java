@@ -6,6 +6,9 @@
 package Modelo.Dao;
 
 import Conexion.Conexion;
+import static Conexion.Conexion.desconectarBD;
+import static Conexion.Conexion.obtenerConexion;
+import static Conexion.Conexion.reversarBD;
 import Modelo.Bean.BeanJugador;
 import Modelo.Bean.BeanUsuariosLogin;
 import java.sql.*;

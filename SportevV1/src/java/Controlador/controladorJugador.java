@@ -8,6 +8,8 @@ package Controlador;
 import Modelo.Bean.BeanJugador;
 import Modelo.Bean.BeanUsuariosLogin;
 import Modelo.Dao.DaoJugador;
+import Modelo.Dao.DaoPreinscripcion;
+import Modelo.Dao.DaoUsuarioLogin;
 import Modelo.Dao.Daoperfil;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +33,15 @@ public class controladorJugador {
     private List<BeanJugador> listarjugadores;
     public String respuesta = "";
     private BeanUsuariosLogin usuario;
+    public HttpSession idEq = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 
     public String eliminar(int id) {
         DaoJugador daoJugador = new DaoJugador();
         if (daoJugador.Eliminar(id)) {
-            respuesta = "rolEntrenadorIni.xhtml";
+            respuesta = "Usuario Eliminado";
 
         } else {
-            respuesta = "Error.xhtml";
+            respuesta = "Error";
 
         }
         return respuesta;
@@ -62,9 +65,22 @@ public class controladorJugador {
         }
         return respuesta;
     }
+    
+    public String inscribirJug(String usu, String Correo, int id){
+    DaoPreinscripcion DPreinscripcion = new DaoPreinscripcion();
+    DaoUsuarioLogin DLog = new DaoUsuarioLogin();
+    String usuEnd = "Jugador"+usu;
+    String Pass = "jug"+usu+"5port3v";
+        if (DPreinscripcion.inscribir(usuEnd, Pass, Correo, id, Integer.parseInt(idEq.getAttribute("idEquipo").toString()))) {
+          respuesta = "index.xhtml";
+        }else{
+            respuesta = "Error.xhtml";
+        }
+        return respuesta;
 
+    }
     public String regJugador() {
-        HttpSession idEq = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        
         int idEquipo = Integer.parseInt(idEq.getAttribute("idEquipo").toString());
         DaoJugador DJug = new DaoJugador();
         BJug.setIdEquipo(idEquipo);
@@ -179,4 +195,12 @@ public class controladorJugador {
         this.listarjugadores = listarjugadores;
     }
 
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+    
 }

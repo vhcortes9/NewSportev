@@ -89,13 +89,13 @@ and open the template in the editor.
                     <div class="ln_solid"></div>
                     <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'formModificar'}">
                         <h:panelGroup layout="block" class="col-md-6 col-md-offset-3">
-                            <h:commandButton class="btn btn-success" id="formCampeonatos"  value="Modificar" actionListener="#{controladorForms.xxx()}" action="#{controladorCampeonato.modificar()}" >
+                            <h:commandButton class="btn btn-success" id="formCampeonatos"  value="Modificar" actionListener="#{controladorForms.cambiarForm}" action="#{controladorCampeonato.modificar()}" >
                             </h:commandButton>
                         </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup layout="block" class="form-group" rendered="#{controladorForms.seleccion eq 'formRegistrar'}">
                         <h:panelGroup layout="block" class="col-md-6 col-md-offset-3">
-                            <h:commandButton class="btn btn-success" value="Registrar" actionListener="#{controladorCampeonato.registrarCampeonato()}" />
+                            <h:commandButton class="btn btn-success" value="Registrar" id="formReg" actionListener="#{controladorForms.cambiarForm}"  action="#{controladorCampeonato.registrarCampeonato()}" />
                         </h:panelGroup>
                     </h:panelGroup>
 
