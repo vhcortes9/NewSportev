@@ -43,6 +43,7 @@
         <h:outputStylesheet library="css" name="buttons.bootstrap.min.css"/>
         <h:outputStylesheet library="css" name="dataTables.bootstrap.min.css"/>
         <h:outputStylesheet library="css" name="LogoMenu.css"/>
+         <link href="resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
 
     </h:head>
     <h:body class="nav-md">
@@ -139,6 +140,7 @@
                                         <ul class="nav child_menu">
                                             <li><h:commandLink id="miPlantilla" value="Mi plantilla" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
                                             <li><h:commandLink id="NuevoJugador" value="Nuevo Jugador" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
+                                            <li><h:commandLink id="inscribirJug" value="Inscribir" actionListener="#{controladorForms.cambiarForm}"></h:commandLink></li>
                                             <li><a href="other_charts.html">Other Charts</a></li>
                                         </ul>
                                             </h:form>
@@ -335,6 +337,9 @@
         <script src="../resources/js/vfs_fonts.js" type="text/javascript"></script>
         <script src="../resources/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="../resources/js/responsive.bootstrap.js" type="text/javascript"></script>
+        <script src="resources/js/jquery-1.12.4.js" type="text/javascript"></script>
+        <script src="resources/js/jquery-ui.js" type="text/javascript"></script>
+        <script src="resources/js/calendarioEs.js" type="text/javascript"></script>
     </h:body>
 </html>
 
