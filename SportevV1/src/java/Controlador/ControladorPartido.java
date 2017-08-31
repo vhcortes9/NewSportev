@@ -122,7 +122,7 @@ public class ControladorPartido {
     public void mandarCorreo(String[] correos) {
         // El correo gmail de envío
         String correoEnvia = "sportev2017@gmail.com";
-        String claveCorreo = "vajy2017sportev";
+        String claveCorreo = "sportev2017";
 
         // La configuración para enviar correo
         Properties properties = new Properties();

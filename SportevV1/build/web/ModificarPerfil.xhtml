@@ -27,30 +27,4 @@
         </h:form>
 
     </h:panelGroup>
-    <h:form id="Modificarperfil">
-         
-            <img src="#{request.contextPath}/Imagenes/#{controladorPerfil.imagen.imagen}"/>
-            <h:inputHidden value="#{controladorPerfil.usuario.idUsuario}"></h:inputHidden>
-            <h:inputFile value="#{controladorPerfil.file}" ></h:inputFile><br></br>
-
-            <h:commandButton value="Modificar" actionListener="ModificarPerfil.xhtml" action="#{controladorPerfil.upload(controladorPerfil.usuario.idUsuario)}">
-                 <f:ajax render="Modificarperfil" execute="Modificarperfil"></f:ajax>
-            </h:commandButton>
-       <br></br>
-        
-            <h:outputLabel value="Contraseña"></h:outputLabel><br></br>
-            <h:inputSecret value="#{controladorPerfil.usuarioPerfil.contraseña}"></h:inputSecret><br></br>
-            <h:outputLabel value="Contraseña Nueva"></h:outputLabel><br></br>
-            <h:inputSecret value="#{controladorPerfil.contraseña.contrasenia}"></h:inputSecret><br></br>
-            <h:outputLabel value=" Repita Contraseña"></h:outputLabel><br></br>
-            <h:inputSecret value="#{controladorPerfil.imagen.contrasenia}"></h:inputSecret><br></br>
-            <h:commandButton value="Modificar" action="#{controladorPerfil.modificarcontraseña()}"></h:commandButton>
-        <br></br>
-       
-            <h:outputLabel value="Nombre"></h:outputLabel><br></br>
-            <h:inputText value="#{controladorPerfil.nombre.usuarioNombre}"></h:inputText><br></br>
-            <h:commandButton value="Modificar" action="#{controladorPerfil.modificarnombre()}"></h:commandButton>
-       
-    </h:form>
-
 </html>

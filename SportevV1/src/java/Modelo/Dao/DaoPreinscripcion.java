@@ -37,8 +37,8 @@ public class DaoPreinscripcion extends Conexion {
     public boolean encontrado = false;
     public boolean listo = false;
 
-    public String de = "Sportev2017@gmail.com";
-    public String pass = "vjay2017sportev";
+    public String de = "sportev2017@gmail.com";
+    public String pass = "sportev2017";
     public String asunto = "Preinscripcion";
     public String mensaje = "Utd se encuentra preinscrito en el torneo. "
             + "Cuando page la inscripcion al organizador se le estara enviando una cuenta de nuestro sitio web";
