@@ -34,7 +34,7 @@
                             <h:inputSecret value="#{controladorlogin.usuario.contrasenia}" id="clave" pt:placeholder="Contraseña" class="login__input name" required="true" requiredMessage="Se necesita una Contraseña!"/>
                             <h:message for="clave" class="msj"/>
                         </div>
-                        <h:commandButton value="Ingresar" class="login__submit"  action="#{controladorlogin.validarUsuario()}" actionListener="#{controladorForms.cambiarForm}"/>
+                        <h:commandButton value="Ingresar" class="login__submit"  action="#{controladorlogin.validarUsuario()}"/>
                         </h:form>
                         <h:form>
                         <p class="login__signup">Quieres registrarte? &nbsp;<h:commandLink action="registroLogin.xhtml">Registrate</h:commandLink></p>

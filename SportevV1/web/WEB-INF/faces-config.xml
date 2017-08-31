@@ -4,11 +4,21 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <navigation-rule>
-        <!--
         <navigation-case>
             <from-outcome>Ingresar</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
-        -->
+        <navegation-case>
+            <from-outcom>Administrador</from-outcom>
+            <to-view-id>/rolAdministradorIni.xhtml</to-view-id>
+        </navegation-case>
+        <navegation-case>
+            <from-outcom>Entrenador</from-outcom>
+            <to-view-id>/rolEntrenadorIni.xhtml</to-view-id>
+        </navegation-case>
+        <navegation-case>
+            <from-outcom>Jugador</from-outcom>
+            <to-view-id>/rolJugadorIni.xhtml</to-view-id>
+        </navegation-case>
     </navigation-rule>
 </faces-config>
