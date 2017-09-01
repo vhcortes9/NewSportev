@@ -100,8 +100,8 @@ public class controladorJugador {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         usuario = (BeanUsuariosLogin) session.getAttribute("user");
         //listar jugadores
-        DaoJugador dju = new DaoJugador();
-        listarjugadores = dju.controlListarJugadores();
+        DaoJugador dj = new DaoJugador();
+        listarjugadores = dj.controlListarJugadores();
         if (listarjugadores.isEmpty()) {
             System.out.println("Lista vacia");
         } else {
@@ -117,9 +117,9 @@ public class controladorJugador {
             FacesMessage mensaje = new FacesMessage("Usuario Desabilitado");
             mensaje.setSeverity(FacesMessage.SEVERITY_INFO);
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
-            DaoJugador dju = new DaoJugador();
-            listarjugadores = dju.controlListarJugadores();
-            retorno = "Jugadores.xhtml";
+            DaoJugador dj = new DaoJugador();
+            listarjugadores = dj.controlListarJugadores();
+            retorno = "controlJugadores.xhtml";
 
         } else {
             FacesMessage mensaje = new FacesMessage("Error");
@@ -139,7 +139,7 @@ public class controladorJugador {
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
             DaoJugador dju = new DaoJugador();
             listarjugadores = dju.controlListarJugadores();
-            retorno = "Jugadores.xhtml";// tengo otra idea 
+            retorno = "controlJugadores.xhtml";// tengo otra idea 
 
         } else {
             FacesMessage mensaje = new FacesMessage("Usuario Error");
